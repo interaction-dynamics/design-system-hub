@@ -1,0 +1,22 @@
+{
+  "error": false,
+  "status": 200,
+  "meta": {
+    "key": "839dd2723ace0b9e6dd926a3d3b9d803858e7102",
+    "file_key": "ICwWZglMh0T3hvcMxag3t7",
+    "node_id": "128:5",
+    "thumbnail_url": "https://s3-alpha.figma.com/checkpoints/J2k/99O/aeS13wvIosaGEXpi/128_5.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQ4GOSFWCYUZSDOWS%2F20240523%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20240523T000000Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=4feffbd2932077ed3575e44de0bf77f3f9693db4fab7b55c546706e695bd46f9",
+    "name": "Button",
+    "description": "A description about the button",
+    "description_rt": "<p>A description about the button</p>",
+    "created_at": "2024-05-23T13:42:56.235Z",
+    "updated_at": "2024-05-23T13:49:19.770Z",
+    "containing_frame": { "pageId": "8:2", "pageName": "Components" },
+    "user": {
+      "id": "839986785033185383",
+      "handle": "Thibault Friedrich",
+      "img_url": "https://www.gravatar.com/avatar/0357de635420d011f745142e5fd06bc5?size=240&default=https%3A%2F%2Fs3-alpha.figma.com%2Fstatic%2Fuser_t_v2.png"
+    }
+  },
+  "i18n": null
+}

@@ -54,9 +54,6 @@ jobs:
         run: pnpm build
   global:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: packages/documentation-portal
     steps:
       - uses: actions/checkout@v4
         with:

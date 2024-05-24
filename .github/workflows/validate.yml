@@ -15,9 +15,6 @@ concurrency:
 jobs:
   documentation-portal:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: packages/documentation-portal
     steps:
       - uses: actions/checkout@v4
         with:
@@ -48,10 +45,13 @@ jobs:
         run: |
           pnpm format
           pnpm lint
+        working-directory: packages/documentation-portal
       - name: Test ✅
         run: pnpm test:ci --coverage
+        working-directory: packages/documentation-portal
       - name: Build ⚙️
         run: pnpm build
+        working-directory: packages/documentation-portal
   global:
     runs-on: ubuntu-latest
     steps:
@@ -75,9 +75,9 @@ jobs:
         name: Setup pnpm cache
         with:
           path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-global${{ hashFiles('**/pnpm-lock.yaml') }}
+          key: ${{ runner.os }}-pnpm-store${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-pnpm-store-global
+            ${{ runner.os }}-pnpm-store
       - name: Format 🔍
         run: |
           pnpm commitlint

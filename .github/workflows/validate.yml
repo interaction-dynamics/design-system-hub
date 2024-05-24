@@ -78,6 +78,8 @@ jobs:
           key: ${{ runner.os }}-pnpm-store${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store
+      - name: Install 🔧
+        run: pnpm install
       - name: Format 🔍
         run: |
           pnpm commitlint

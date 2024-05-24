@@ -24,6 +24,10 @@ pnpm dev
 
 ```
 
+## Roadmap
+
+You can check the roamap [here](https://github.com/orgs/interaction-dynamics/projects/10/views/1).
+
 ## Contributing
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code practices and the process for submitting pull requests.

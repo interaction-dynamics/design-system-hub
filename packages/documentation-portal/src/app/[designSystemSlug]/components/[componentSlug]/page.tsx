@@ -81,7 +81,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
             Variants
           </Typography>
           {component.variants.map((variant) => (
-            <div>
+            <div key={variant.slug}>
               <Typography variant="h3" id={variant.slug}>
                 {variant.name}
               </Typography>

@@ -8,7 +8,9 @@ interface PageProps {
   }
 }
 
-export default async function ({ params }: PageProps) {
+export default async function RedirectToFirstComponentPage({
+  params,
+}: PageProps) {
   const designSystem = await getDesignSystem(params.designSystemSlug)
   redirect(`components/${designSystem.components?.[0].slug}`)
 }

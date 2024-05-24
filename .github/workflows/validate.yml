@@ -49,7 +49,7 @@ jobs:
           pnpm format
           pnpm lint
       - name: Test ✅
-        run: pnpm test:ci  -- --coverage
+        run: pnpm test:ci --coverage
       - name: Build ⚙️
         run: pnpm build
   global:

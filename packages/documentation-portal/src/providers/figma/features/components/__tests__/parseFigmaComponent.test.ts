@@ -1,11 +1,29 @@
 import parseFigmaComponent from '../parseFigmaComponent'
 
 import figmaComponentReponseBasic from '../__fixtures__/figmaComponentResponseBasic.json'
+import PartialComponent from '@/features/component/types/PartialComponent'
 
 describe('parseFigmaComponent', () => {
   describe('Basic', () => {
     it('should parse figma component', () => {
-      const component = parseFigmaComponent(figmaComponentReponseBasic.meta)
+      const partialComponent: PartialComponent = {
+        name: 'Button',
+        slug: 'button',
+        variants: [],
+        origin: {
+          figma: {
+            key: '839dd2723ace0b9e6dd926a3d3b9d803858e7102',
+            nodeId: '128:5',
+            fileKey: 'ICwWZglMh0T3hvcMxag3t7',
+            width: 10,
+            height: 12,
+          },
+        },
+      }
+      const component = parseFigmaComponent(
+        figmaComponentReponseBasic.meta,
+        partialComponent
+      )
 
       expect(component.name).toBe('Button')
       expect(component.slug).toBe('button')
@@ -20,6 +38,9 @@ describe('parseFigmaComponent', () => {
       )
       expect(component.origin.figma?.nodeId).toBe('128:5')
       expect(component.origin.figma?.fileKey).toBe('ICwWZglMh0T3hvcMxag3t7')
+
+      expect(component.origin.figma?.width).toBe(10)
+      expect(component.origin.figma?.height).toBe(12)
     })
   })
 })

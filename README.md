@@ -26,6 +26,14 @@ pnpm dev
 
 ## Roadmap
 
+The project is composed of multiple packages:
+
+- [documentation-portal](./packages/documentation-portal/README.md): the website that will host the design systems
+- a figma plugin that will help check the code from Figma (see development status, etc) [NOT STARTED]
+- a binary to parse the JS code and generate the documentation [NOT STARTED]
+- a binary to run the components in a Storybook-like environment [NOT STARTED]
+- a VS Code plugin to help the developer to use the design system [NOT STARTED]
+
 You can check the roamap [here](https://github.com/orgs/interaction-dynamics/projects/10/views/1).
 
 ## Contributing

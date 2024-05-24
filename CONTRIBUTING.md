@@ -24,6 +24,8 @@ Please consider these guidelines when filing a pull request:
 - Follow the [Coding Rules](#coding-rules)
 - Follow the [Commit Rules](#commit-rules)
 - Make sure you rebased the current master branch when filing the pull request
+- Follow [Clean code](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882)
+- Follow [Clean architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
 - Follow [Test guidelines](#tests)
 - Squash your commits when filing the pull request
 - Provide a short title with a maximum of 100 characters

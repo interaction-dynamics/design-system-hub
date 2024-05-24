@@ -1,4 +1,4 @@
-import PartialPage from './PartialPage'
+import PartialPage from './partial-page'
 
 export default interface Chapter {
   type: 'getting-started' | 'principles' | 'foundations' | 'components'

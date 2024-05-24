@@ -1,6 +1,6 @@
 import Component from '@/features/component/types/Component'
-import DesignSystem from '../../features/designSystem/types/DesignSystem'
-import Section from '@/features/designSystem/types/Chapter'
+import DesignSystem from '../../entities/design-system/design-system'
+import Section from '@/entities/design-system/chapter'
 
 export default function synchronizeFimga(
   designSystem: DesignSystem,

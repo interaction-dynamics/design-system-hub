@@ -1,9 +1,9 @@
-import DesignSystem from '@/features/designSystem/types/DesignSystem'
-import Chapter from '@/features/designSystem/types/Chapter'
+import DesignSystem from '@/entities/design-system/design-system'
+import Chapter from '@/entities/design-system/chapter'
 import { DocumentNode, FigmaFile } from './fetchFigmaFiles'
-import PartialPage from '@/features/designSystem/types/PartialPage'
+import PartialPage from '@/entities/design-system/partial-page'
 import PartialComponent from '@/features/component/types/PartialComponent'
-import generateSlug from '@/lib/generateSlug'
+import generateSlug from '@/lib/generate-slug'
 
 const authorizedChapterTitles = ['Principles', 'Foundations'].map((s) =>
   s.toLowerCase()

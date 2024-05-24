@@ -1,6 +1,6 @@
 import Component from '@/features/component/types/Component'
 import { FigmaComponent } from './fetchFigmaComponent'
-import generateSlug from '@/lib/generateSlug'
+import generateSlug from '@/lib/generate-slug'
 import PartialComponent, {
   PartialComponentVariant,
 } from '@/features/component/types/PartialComponent'

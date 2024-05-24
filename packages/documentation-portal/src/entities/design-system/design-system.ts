@@ -1,4 +1,4 @@
-import Chapter from './Chapter'
+import Chapter from './chapter'
 import PartialComponent from '@/features/component/types/PartialComponent'
 
 export default interface DesignSystem {

@@ -21,7 +21,7 @@ export default function RootLayout({
       <body className={cn('min-h-screen scroll-smooth', inter.className)}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >

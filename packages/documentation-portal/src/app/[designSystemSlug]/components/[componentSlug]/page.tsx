@@ -1,13 +1,13 @@
 import { notFound } from 'next/navigation'
-import Image from 'next/image'
-import getComponent from '@/providers/figma/features/components/getComponent'
-import getDesignSystem from '@/providers/figma/features/files/getDesignSystem'
+import getComponent from '@/adapters/providers/figma/features/components/getComponent'
+import getDesignSystem from '@/adapters/providers/figma/features/files/getDesignSystem'
 import Main from '../../../../components/organisms/main'
-import ComponentLinks from '@/features/component/components/component-links'
-import { getDescription } from '@/providers'
+import ComponentLinks from '@/app/[designSystemSlug]/components/[componentSlug]/_components/component-links'
 import Typography from '@/components/atoms/typography'
-import DemoViewer from '@/features/component/components/demo-viewer'
 import RightSideBar from '@/components/organisms/right-sidebar'
+import { getProvider } from '@/adapters/providers'
+import { getDescription } from '@/domain/use-cases/merge-component'
+import ComponentViewer from './_components/component-viewer'
 
 export interface ComponentPageProps {
   params: any
@@ -18,7 +18,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
 
   const designSystem = await getDesignSystem(designSystemSlug)
 
-  const partialComponent = designSystem.components?.find(
+  const partialComponent = designSystem.partialComponents?.find(
     (c) => c.slug === componentSlug
   )
 
@@ -36,7 +36,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
     <Main
       pageSlug={componentSlug}
       title={component.name}
-      description={getDescription(component)}
+      description={getDescription({ component, getProvider })}
       rightSideBar={
         <RightSideBar>
           {component.variants.length > 0 && (
@@ -74,7 +74,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
       <div className="mt-10 pb-3">
         <ComponentLinks component={component} />
       </div>
-      <DemoViewer component={component} />
+      <ComponentViewer component={component} />
       {component.variants.length > 0 && (
         <div>
           <Typography variant="h2" id="variants">
@@ -85,11 +85,13 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
               <Typography variant="h3" id={variant.slug}>
                 {variant.name}
               </Typography>
-              <Typography variant="p">{getDescription(variant)}</Typography>
+              <Typography variant="p">
+                {getDescription({ component, getProvider })}
+              </Typography>
               <div className="mt-3 pb-3">
                 <ComponentLinks component={variant} />
               </div>
-              <DemoViewer component={variant} />
+              <ComponentViewer component={variant} />
             </div>
           ))}
         </div>

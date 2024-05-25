@@ -2,7 +2,7 @@ import { PropsWithChildren } from 'react'
 import { notFound } from 'next/navigation'
 import Header from '@/components/atoms/header'
 import Footer from '@/components/atoms/footer'
-import getDesignSystem from '../../providers/figma/features/files/getDesignSystem'
+import getDesignSystem from '../../adapters/providers/figma/features/files/getDesignSystem'
 import Typography from '@/components/atoms/typography'
 
 export interface DesignSystemLayoutProps extends PropsWithChildren {

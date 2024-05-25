@@ -1,13 +1,13 @@
 import { Component } from '@/domain/entities/component'
-import { FigmaComponent } from './fetchFigmaComponent'
 import parseFigmaComponent from './parseFigmaComponent'
 import { PartialComponent } from '@/domain/entities/partial-component'
+import { HttpFigmaComponent } from './fetchFigmaComponent'
 
 const cleanVariantName = (name: string) => name.replace(/.*=/, '')
 
 export default function parseFigmaComponentSet(
-  figmaComponent: FigmaComponent,
-  variants: FigmaComponent[],
+  figmaComponent: HttpFigmaComponent,
+  variants: HttpFigmaComponent[],
   partialComponent: PartialComponent
 ): Component {
   return {

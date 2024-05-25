@@ -1,7 +1,7 @@
 import buildMock from '@/__mocks__/buildMock'
-import { FigmaComponent } from '../fetchFigmaComponent'
+import { HttpFigmaComponent } from '../fetchFigmaComponent'
 
-const mockFigmaComponent = buildMock<FigmaComponent>({
+const mockFigmaComponent = buildMock<HttpFigmaComponent>({
   key: 'foo',
   file_key: 'bar',
   node_id: 'baz',

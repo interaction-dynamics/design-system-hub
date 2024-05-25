@@ -86,7 +86,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
                 {variant.name}
               </Typography>
               <Typography variant="p">
-                {getDescription({ component, getProvider })}
+                {getDescription({ component: variant, getProvider })}
               </Typography>
               <div className="mt-3 pb-3">
                 <ComponentLinks component={variant} />

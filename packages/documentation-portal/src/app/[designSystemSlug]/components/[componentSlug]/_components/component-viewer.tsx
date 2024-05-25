@@ -1,7 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Component } from '@/domain/entities/component'
 import { ComponentVariant } from '@/domain/entities/component-variant'
-import { getViewers } from '@/domain/use-cases/merge-component'
+import { getViewers } from '@/domain/use-cases/ui-merge-component'
 import { getProvider } from '@/adapters/providers'
 
 interface ComponentViewerProps {

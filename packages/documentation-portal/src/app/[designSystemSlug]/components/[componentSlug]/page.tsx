@@ -6,7 +6,7 @@ import ComponentLinks from '@/app/[designSystemSlug]/components/[componentSlug]/
 import Typography from '@/components/atoms/typography'
 import RightSideBar from '@/components/organisms/right-sidebar'
 import { getProvider } from '@/adapters/providers'
-import { getDescription } from '@/domain/use-cases/merge-component'
+import { getDescription } from '@/domain/use-cases/ui-merge-component'
 import ComponentViewer from './_components/component-viewer'
 
 export interface ComponentPageProps {

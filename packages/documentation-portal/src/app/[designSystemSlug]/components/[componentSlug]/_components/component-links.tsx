@@ -2,7 +2,7 @@ import { badgeVariants } from '@/components/ui/badge'
 import Link from 'next/link'
 import { Component } from '@/domain/entities/component'
 import { ComponentVariant } from '@/domain/entities/component-variant'
-import { getLinks } from '@/domain/use-cases/merge-component'
+import { getLinks } from '@/domain/use-cases/ui-merge-component'
 import { getProvider } from '@/adapters/providers'
 
 export interface ComponentLinksProps {

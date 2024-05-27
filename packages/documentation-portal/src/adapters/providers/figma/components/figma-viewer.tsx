@@ -10,7 +10,6 @@ export interface FigmaViewerProps {
 }
 
 export function FigmaViewer({ component }: FigmaViewerProps) {
-  console.log('component', component)
   if (!component) return <></>
 
   if ('variants' in component && component.variants.length > 0) {

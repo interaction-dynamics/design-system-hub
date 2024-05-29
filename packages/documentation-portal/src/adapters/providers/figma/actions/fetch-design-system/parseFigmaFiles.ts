@@ -132,9 +132,9 @@ export default function parseFigmaFiles(figmaFiles: HttpFigmaFile[]): {
 
   return {
     designSystem: {
-      id: 'foo',
-      name: 'Design System',
-      slug: 'design-system',
+      id: '',
+      name: '',
+      slug: '',
     },
     chapters: [],
     figmaComponents: [],

@@ -1,18 +1,17 @@
 import { HttpFigmaComponent } from './fetchFigmaComponent'
 import generateSlug from '@/lib/generate-slug'
-import { PartialComponent } from '@/domain/entities/partial-component'
-import { PartialComponentVariant } from '@/domain/entities/partial-component-variant'
-import { Component } from '@/domain/entities/component'
 import { FigmaComponent } from '../../types/figma-component'
+import { PartialHttpFigmaComponent } from './parseFigmaFiles'
 
 export default function parseFigmaComponent(
   figmaComponent: HttpFigmaComponent,
-  partialComponent: PartialComponent | PartialComponentVariant
+  partialComponent: Omit<PartialHttpFigmaComponent, 'variants'>
 ): FigmaComponent {
   return {
     name: figmaComponent.name,
     slug: generateSlug(figmaComponent.name),
     variants: [],
+    properties: [],
     providers: {
       figma: {
         description: figmaComponent.description,

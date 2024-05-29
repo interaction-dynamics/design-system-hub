@@ -1,6 +1,7 @@
-import { PartialComponentVariant } from './partial-component-variant'
+export type ComponentProviders<T> = Record<string, T>
 
-export interface ComponentVariant<T = any> extends PartialComponentVariant<T> {
+export interface ComponentVariant<T = any> {
   name: string
   slug: string
+  providers: ComponentProviders<T>
 }

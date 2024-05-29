@@ -1,10 +1,11 @@
-import { z } from 'zod'
-
 import { Property } from './property'
 import { PartialComponent } from './partial-component'
-import { ComponentVariant } from './component-variant'
+import { ComponentVariant, ComponentProviders } from './component-variant'
 
-export interface Component<T = any> extends PartialComponent<T> {
-  properties?: Property[]
-  variants: ComponentVariant[]
+export interface Component<T = any> {
+  name: string
+  slug: string
+  properties: Property[]
+  variants: ComponentVariant<T>[]
+  providers: ComponentProviders<T>
 }

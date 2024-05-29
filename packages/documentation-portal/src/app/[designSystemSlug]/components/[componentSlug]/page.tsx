@@ -1,13 +1,13 @@
 import { notFound } from 'next/navigation'
-import getComponent from '@/adapters/providers/figma/features/components/getComponent'
-import getDesignSystem from '@/adapters/providers/figma/features/files/getDesignSystem'
 import Main from '../../../../components/organisms/main'
 import ComponentLinks from '@/app/[designSystemSlug]/components/[componentSlug]/_components/component-links'
 import Typography from '@/components/atoms/typography'
 import RightSideBar from '@/components/organisms/right-sidebar'
 import { getProvider } from '@/adapters/providers'
-import { getDescription } from '@/domain/use-cases/ui-merge-component'
+import { getDescription } from '@/domain/use-cases/ui-merge-providers'
 import ComponentViewer from './_components/component-viewer'
+import { findDesignSystemBySlug } from '@/adapters/data-access/design-systems'
+import { findComponent } from '@/adapters/data-access/components'
 
 export interface ComponentPageProps {
   params: any
@@ -16,21 +16,12 @@ export interface ComponentPageProps {
 export default async function ComponentPage({ params }: ComponentPageProps) {
   const { designSystemSlug, componentSlug } = params
 
-  const designSystem = await getDesignSystem(designSystemSlug)
+  const designSystem = await findDesignSystemBySlug(designSystemSlug)
+  if (!designSystem) notFound()
 
-  const partialComponent = designSystem.partialComponents?.find(
-    (c) => c.slug === componentSlug
-  )
+  const component = await findComponent(designSystem, componentSlug)
 
-  if (!partialComponent) {
-    notFound()
-  }
-
-  const component = await getComponent(partialComponent)
-
-  if (!component) {
-    notFound()
-  }
+  if (!component) notFound()
 
   return (
     <Main

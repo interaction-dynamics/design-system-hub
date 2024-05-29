@@ -4,13 +4,11 @@ import { DocumentNode, HttpFigmaFile } from './fetchFigmaFiles'
 import { PartialPage } from '@/domain/entities/partial-page'
 import { PartialComponent } from '@/domain/entities/partial-component'
 import generateSlug from '@/lib/generate-slug'
+import { FigmaPartialComponentProvider } from '../../types/figma-partial-component-provider'
 
 const authorizedChapterTitles = ['Principles', 'Foundations'].map((s) =>
   s.toLowerCase()
 )
-
-const byName = (a: PartialComponent, b: PartialComponent) =>
-  a.name.localeCompare(b.name)
 
 const findNode = (
   node: DocumentNode,
@@ -42,9 +40,18 @@ function findSize(
   }
 }
 
-export default function parseFigmaFiles(
-  figmaFiles: HttpFigmaFile[]
-): DesignSystem {
+export interface PartialHttpFigmaComponent {
+  providers: {
+    figma: FigmaPartialComponentProvider
+  }
+  variants: { providers: { figma: FigmaPartialComponentProvider } }[]
+}
+
+export default function parseFigmaFiles(figmaFiles: HttpFigmaFile[]): {
+  designSystem: DesignSystem
+  chapters: Chapter[]
+  figmaComponents: PartialHttpFigmaComponent[]
+} {
   if (figmaFiles.length === 1) {
     const figmaResponse = figmaFiles[0]
 
@@ -74,6 +81,8 @@ export default function parseFigmaFiles(
         variants: [],
         providers: {
           figma: {
+            nodeId,
+            fileKey: '',
             key: c.key,
             ...findSize(figmaResponse.document, nodeId),
           },
@@ -83,13 +92,13 @@ export default function parseFigmaFiles(
     const componentSetsAndVariants = Object.entries(
       figmaResponse.componentSets ?? {}
     )?.map(([nodeId, componentSet]) => ({
-      name: componentSet.name,
-      slug: generateSlug(componentSet.name),
       variants: Object.entries(figmaResponse.components ?? {})
         .filter(([variantNodeId, c]) => c.componentSetId === nodeId)
         .map(([variantNodeId, c]) => ({
           providers: {
             figma: {
+              nodeId: variantNodeId,
+              fileKey: '',
               key: c.key,
               ...findSize(figmaResponse.document, variantNodeId),
             },
@@ -97,24 +106,37 @@ export default function parseFigmaFiles(
         })),
       providers: {
         figma: {
+          nodeId,
+          fileKey: '',
           key: componentSet.key,
           ...findSize(figmaResponse.document, nodeId),
         },
       },
     }))
 
-    const components: PartialComponent[] = [
+    const figmaComponents: PartialHttpFigmaComponent[] = [
       ...componentsNotInSet,
       ...componentSetsAndVariants,
-    ].sort(byName)
+    ]
 
-    return new DesignSystem(
-      figmaResponse.name,
-      generateSlug(figmaResponse.name),
+    return {
+      designSystem: {
+        id: 'foo',
+        name: figmaResponse.name,
+        slug: generateSlug(figmaResponse.name),
+      },
       chapters,
-      components
-    )
+      figmaComponents,
+    }
   }
 
-  return new DesignSystem('', '', [], [])
+  return {
+    designSystem: {
+      id: 'foo',
+      name: 'Design System',
+      slug: 'design-system',
+    },
+    chapters: [],
+    figmaComponents: [],
+  }
 }

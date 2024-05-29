@@ -1,4 +1,4 @@
-import parseFigma from '../parseFigmaFiles'
+import parseFigma from '../../utils/parseFigmaFiles'
 import figmaResponseBasic from '../__fixtures__/figmaResponseBasic.json'
 import figmaResponseWithVariants from '../__fixtures__/figmaResponseWithVariants.json'
 
@@ -7,7 +7,7 @@ describe('parseFigma', () => {
     it('should set empty design system name', () => {
       const figmaResponse: any[] = []
 
-      const designSystem = parseFigma(figmaResponse)
+      const { designSystem } = parseFigma(figmaResponse)
 
       expect(designSystem.name).toBe('')
     })
@@ -17,7 +17,7 @@ describe('parseFigma', () => {
     it('should set design system name', () => {
       const figmaResponse = [figmaResponseBasic]
 
-      const designSystem = parseFigma(figmaResponse)
+      const { designSystem } = parseFigma(figmaResponse)
 
       expect(designSystem.name).toBe('Example Design System')
     })
@@ -25,7 +25,7 @@ describe('parseFigma', () => {
     it('should set design system slug', () => {
       const figmaResponse = [figmaResponseBasic]
 
-      const designSystem = parseFigma(figmaResponse)
+      const { designSystem } = parseFigma(figmaResponse)
 
       expect(designSystem.slug).toBe('example-design-system')
     })
@@ -33,21 +33,21 @@ describe('parseFigma', () => {
     it('should add section principles', () => {
       const figmaResponse = [figmaResponseBasic]
 
-      const designSystem = parseFigma(figmaResponse)
+      const { chapters } = parseFigma(figmaResponse)
 
-      expect(designSystem.chapters?.[0].type).toEqual('principles')
+      expect(chapters?.[0].type).toEqual('principles')
     })
 
     describe('component', () => {
       it('should add components', () => {
         const figmaResponse = [figmaResponseBasic]
 
-        const designSystem = parseFigma(figmaResponse)
+        const { components } = parseFigma(figmaResponse)
 
-        expect(designSystem.partialComponents).toHaveLength(3)
-        expect(designSystem.partialComponents?.[0].name).toEqual('Button')
-        expect(designSystem.partialComponents?.[1].name).toEqual('Card')
-        expect(designSystem.partialComponents?.[2].name).toEqual('Input')
+        expect(components).toHaveLength(3)
+        expect(components[0].name).toEqual('Button')
+        expect(components[1].name).toEqual('Card')
+        expect(components[2].name).toEqual('Input')
       })
 
       it('should add figma key in component', () => {

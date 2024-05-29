@@ -1,10 +1,12 @@
-import { PartialComponent } from '@/domain/entities/partial-component'
+import { Component } from '@/domain/entities/component'
 import fetchFigmaComponent from './fetchFigmaComponent'
-import parseFigmaComponent from './parseFigmaComponent'
 import fetchFigmaComponentSet from './fetchFigmaComponentSet'
+import parseFigmaComponent from './parseFigmaComponent'
 import parseFigmaComponentSet from './parseFigmaComponentSet'
+import fetchFigmaFiles from './fetchFigmaFiles'
+import parseFigmaFiles, { PartialHttpFigmaComponent } from './parseFigmaFiles'
 
-export default async function getComponent(partialComponent: PartialComponent) {
+async function fetchComponent(partialComponent: PartialHttpFigmaComponent) {
   if (partialComponent.variants.length > 0) {
     const figmaComponentSet = await fetchFigmaComponentSet(
       process.env.FIGMA_TOKEN ?? '',
@@ -35,4 +37,28 @@ export default async function getComponent(partialComponent: PartialComponent) {
   )
 
   return parseFigmaComponent(figmaComponent, partialComponent)
+}
+
+const byName = (a: Component, b: Component) => a.name.localeCompare(b.name)
+
+export async function fetchDesignSystem(fileIds: string[]) {
+  const figmaFiles = await fetchFigmaFiles(
+    process.env.FIGMA_TOKEN ?? '',
+    fileIds
+  )
+
+  const { designSystem, figmaComponents, chapters } =
+    parseFigmaFiles(figmaFiles)
+
+  const unsortedComponents = await Promise.all(
+    figmaComponents.map((p) => fetchComponent(p))
+  )
+
+  const components = unsortedComponents.slice().sort(byName)
+
+  return {
+    designSystem,
+    components,
+    chapters,
+  }
 }

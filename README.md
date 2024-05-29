@@ -10,9 +10,9 @@ The only solution to maintain your design system that is developer-friendly AND 
 
 It can replace Storybook and much more.
 
-It is a work in progress and is not ready for use yet. This is built in public so feel free to check our [wiki](https://github.com/interaction-dynamics/design-system-manager/wiki) for more information.
-
 ![image](https://github.com/interaction-dynamics/design-system-manager/assets/4005226/e8118830-1d55-47ff-b248-8c69634ae384)
+
+> It is a work in progress and is not ready for use yet. This is built in public so feel free to check our [wiki](https://github.com/interaction-dynamics/design-system-manager/wiki) for more information.
 
 ## Getting started
 

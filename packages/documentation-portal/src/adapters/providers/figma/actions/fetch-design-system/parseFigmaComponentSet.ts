@@ -2,13 +2,15 @@ import { Component } from '@/domain/entities/component'
 import parseFigmaComponent from './parseFigmaComponent'
 import { PartialComponent } from '@/domain/entities/partial-component'
 import { HttpFigmaComponent } from './fetchFigmaComponent'
+import { PartialHttpFigmaComponent } from './parseFigmaFiles'
+import generateSlug from '@/lib/generate-slug'
 
 const cleanVariantName = (name: string) => name.replace(/.*=/, '')
 
 export default function parseFigmaComponentSet(
   figmaComponent: HttpFigmaComponent,
   variants: HttpFigmaComponent[],
-  partialComponent: PartialComponent
+  partialComponent: PartialHttpFigmaComponent
 ): Component {
   return {
     ...parseFigmaComponent(figmaComponent, partialComponent),
@@ -19,6 +21,7 @@ export default function parseFigmaComponentSet(
       .map((variant) => ({
         ...variant,
         name: cleanVariantName(variant.name),
+        slug: generateSlug(cleanVariantName(variant.name)),
       })),
   }
 }

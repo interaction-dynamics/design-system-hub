@@ -1,0 +1,56 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mongodb"
+    url      = env("DATABASE_URL")
+}
+
+type Property {
+    type         String
+    name         String
+    description  String
+    defaultValue String
+}
+
+model ComponentVariant {
+    id        String   @id @default(auto()) @map("_id") @db.ObjectId
+    slug      String
+    name      String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    providers Json
+
+    Component   Component? @relation(fields: [componentId], references: [id])
+    componentId String?    @db.ObjectId
+
+    @@unique([componentId, slug], name: "componentVariantSlug")
+}
+
+model Component {
+    id   String @id @default(auto()) @map("_id") @db.ObjectId
+    slug String @unique
+    name String
+
+    properties Property[]
+    providers  Json
+    variants   ComponentVariant[]
+    createdAt  DateTime           @default(now())
+    updatedAt  DateTime           @updatedAt
+
+    DesignSystem   DesignSystem? @relation(fields: [designSystemId], references: [id])
+    designSystemId String?       @db.ObjectId
+}
+
+model DesignSystem {
+    id         String      @id @default(auto()) @map("_id") @db.ObjectId
+    slug       String      @unique
+    name       String
+    components Component[]
+    createdAt  DateTime    @default(now())
+    updatedAt  DateTime    @updatedAt
+}

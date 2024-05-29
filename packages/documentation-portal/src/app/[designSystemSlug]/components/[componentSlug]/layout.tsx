@@ -1,7 +1,9 @@
+import { notFound } from 'next/navigation'
 import { PropsWithChildren } from 'react'
-import Layout3Columns from '../../../../components/organisms/layout-3-columns'
-import getDesignSystem from '../../../../adapters/providers/figma/features/files/getDesignSystem'
+import { LayoutWithLeftSidebar } from '../../../../components/organisms/layout-with-left-sidebar'
 import LeftSideBar from '../../../../components/organisms/left-sidebar'
+import { findDesignSystemBySlug } from '@/adapters/data-access/design-systems'
+import { findPartialComponents } from '@/adapters/data-access/components'
 
 interface ComponentPageProps extends PropsWithChildren {
   params: any
@@ -13,10 +15,13 @@ export default async function ComponentsLayout({
 }: ComponentPageProps) {
   const { designSystemSlug, componentSlug } = params
 
-  const designSystem = await getDesignSystem(params.designSystemSlug)
+  const designSystem = await findDesignSystemBySlug(params.designSystemSlug)
+
+  if (!designSystem) notFound()
+  const partialComponents = await findPartialComponents(designSystem)
 
   const links =
-    designSystem.partialComponents?.map((component) => {
+    partialComponents.map((component) => {
       return {
         label: component.name,
         href: `/${designSystem.slug}/components/${component.slug}`,
@@ -25,13 +30,12 @@ export default async function ComponentsLayout({
     }) ?? []
 
   return (
-    <Layout3Columns
+    <LayoutWithLeftSidebar
       slug={designSystemSlug}
       section="components"
       leftSidebar={<LeftSideBar links={links} />}
-      rightSidebar={<>ffsdfds</>}
     >
       {children}
-    </Layout3Columns>
+    </LayoutWithLeftSidebar>
   )
 }

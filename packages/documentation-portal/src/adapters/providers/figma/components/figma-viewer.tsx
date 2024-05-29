@@ -22,6 +22,7 @@ export function FigmaViewer({ component }: FigmaViewerProps) {
     <div className="relative min-h-20 p-4 flex items-center justify-center">
       <SvgGrid />
       <Image
+        priority
         className="relative z-20"
         src={figmaProvider.thumbnailUrl}
         alt={component.name}

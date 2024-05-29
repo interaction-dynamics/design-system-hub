@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation'
 
-import getDesignSystem from '../../../adapters/providers/figma/features/files/getDesignSystem'
+import { findDesignSystemBySlug } from '@/adapters/data-access/design-systems'
+import { findPartialComponents } from '@/adapters/data-access/components'
 
 interface PageProps {
   params: {
@@ -11,7 +12,9 @@ interface PageProps {
 export default async function RedirectToFirstComponentPage({
   params,
 }: PageProps) {
-  const designSystem = await getDesignSystem(params.designSystemSlug)
+  const designSystem = await findDesignSystemBySlug(params.designSystemSlug)
+  if (!designSystem) redirect('/')
+  const partialComponents = await findPartialComponents(designSystem)
 
-  redirect(`components/${designSystem.partialComponents?.[0].slug}`)
+  redirect(`components/${partialComponents?.[0].slug}`)
 }

@@ -1,6 +1,6 @@
 export interface Property {
   type: string
   name: string
-  description?: string
+  description: string
   defaultValue: any
 }

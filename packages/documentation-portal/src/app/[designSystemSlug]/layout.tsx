@@ -2,8 +2,8 @@ import { PropsWithChildren } from 'react'
 import { notFound } from 'next/navigation'
 import Header from '@/components/atoms/header'
 import Footer from '@/components/atoms/footer'
-import getDesignSystem from '../../adapters/providers/figma/features/files/getDesignSystem'
 import Typography from '@/components/atoms/typography'
+import { findDesignSystemBySlug } from '@/adapters/data-access/design-systems'
 
 export interface DesignSystemLayoutProps extends PropsWithChildren {
   params: any
@@ -13,9 +13,9 @@ export default async function DesignSystemLayout({
   children,
   params,
 }: DesignSystemLayoutProps) {
-  const designSystem = await getDesignSystem(params.designSystemSlug)
+  const designSystem = await findDesignSystemBySlug(params.designSystemSlug)
 
-  if (!designSystem || designSystem.slug !== params.designSystemSlug) {
+  if (!designSystem) {
     notFound()
   }
 

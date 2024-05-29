@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import { PropsWithChildren } from 'react'
-import Layout3Columns from '../../../../components/organisms/layout-3-columns'
+import { LayoutWithLeftSidebar } from '../../../../components/organisms/layout-with-left-sidebar'
 import LeftSideBar from '../../../../components/organisms/left-sidebar'
 import { findDesignSystemBySlug } from '@/adapters/data-access/design-systems'
 import { findPartialComponents } from '@/adapters/data-access/components'
@@ -30,13 +30,12 @@ export default async function ComponentsLayout({
     }) ?? []
 
   return (
-    <Layout3Columns
+    <LayoutWithLeftSidebar
       slug={designSystemSlug}
       section="components"
       leftSidebar={<LeftSideBar links={links} />}
-      rightSidebar={<>ffsdfds</>}
     >
       {children}
-    </Layout3Columns>
+    </LayoutWithLeftSidebar>
   )
 }

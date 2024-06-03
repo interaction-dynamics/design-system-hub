@@ -1,5 +1,5 @@
 import { Component } from '../entities/Component'
-import ts from 'typescript'
+import ts, { TypeChecker } from 'typescript'
 import { Property } from '../entities/Property'
 
 function isJsxElement(node: ts.Node): boolean {
@@ -16,7 +16,10 @@ function isJsxElement(node: ts.Node): boolean {
   return false
 }
 
-export function isReactComponent(declaration: ts.Declaration): boolean {
+export function isReactComponent(
+  declaration: ts.Declaration,
+  checker: TypeChecker,
+): boolean {
   if (!ts.isFunctionDeclaration(declaration)) return false
 
   const componentNameRegex = /[A-Z][A-Za-z]+/
@@ -27,6 +30,8 @@ export function isReactComponent(declaration: ts.Declaration): boolean {
 
   if (statements.length === 0) return false
 
+  // checker.getSignatureFromDeclaration(declaration)?.getReturnType()
+
   const returnStatements = statements.filter(s => ts.isReturnStatement(s))
 
   return returnStatements.some(s => isJsxElement(s))
@@ -34,6 +39,8 @@ export function isReactComponent(declaration: ts.Declaration): boolean {
 
 function getPropertyTypes(
   type: ts.TypeNode,
+  sourceFile: ts.SourceFile,
+  checker: ts.TypeChecker,
 ): Pick<Property, 'name' | 'type' | 'optional'>[] {
   const properties = []
 
@@ -47,6 +54,24 @@ function getPropertyTypes(
       }))
   }
 
+  if (ts.isTypeReferenceNode(type)) {
+    const { symbol } = checker.getTypeFromTypeNode(type)
+
+    return Array.from(symbol.members, ([, value]) => value).map(value => ({
+      name: value.escapedName.toString(),
+      type: (value.valueDeclaration as any)?.type?.getText() || 'string',
+      optional: (value.valueDeclaration as any)?.questionToken !== undefined,
+    }))
+
+    // if (ts.isInterfaceDeclaration(symbol)) {
+    //   return symbol.members.map((m: ts.PropertySignature) => ({
+    //     name: m.name.getText(),
+    //     type: m.type.getText(),
+    //     optional: m.questionToken !== undefined,
+    //   }))
+    // }
+  }
+
   return []
 }
 
@@ -54,23 +79,22 @@ export function getReactComponent(
   filePath: string,
   functionDeclaration: ts.FunctionDeclaration,
   sourceFile: ts.SourceFile,
+  checker: ts.TypeChecker,
 ): Component {
   const parameter = functionDeclaration.parameters?.[0]
 
-  const propertyTypes = getPropertyTypes(parameter.type)
+  const propertyTypes = getPropertyTypes(parameter.type, sourceFile, checker)
 
-  const properties = (parameter.name as ts.ObjectBindingPattern).elements.map(
-    (p: ts.BindingElement): Property => ({
-      name: (p.name as ts.Identifier).escapedText as string,
-      type: 'string',
-      description: '',
-      optional: false,
-      defaultValue: p.initializer?.getText() || undefined,
-      ...(propertyTypes.find(
-        pt => pt.name === (p.name as ts.Identifier).escapedText,
-      ) || {}),
-    }),
-  )
+  const properties = propertyTypes.map(type => ({
+    name: type.name,
+    type: type.type,
+    optional: type.optional,
+    description: '',
+    defaultValue:
+      (parameter.name as ts.ObjectBindingPattern).elements
+        .find((p: ts.BindingElement) => p.name.getText() === type.name)
+        ?.initializer?.getText() || undefined,
+  }))
 
   return {
     name: functionDeclaration.name.text,

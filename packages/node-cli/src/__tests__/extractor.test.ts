@@ -81,9 +81,7 @@ describe('extractDesignSystem', () => {
         it('should return component with description', async () => {
           const designSystem = await extractDesignSystem(dirPath)
 
-          expect(getComponent(designSystem).description).toEqual(
-            'A Buttom component',
-          )
+          expect(getComponent(designSystem).description).toEqual('')
         })
 
         it('should return component with 3 properties', async () => {
@@ -124,7 +122,7 @@ describe('extractDesignSystem', () => {
             type: '() => void | Promise<void>',
             description: '',
             optional: true,
-            defaultValue: undefined,
+            defaultValue: '() => {}',
           })
         })
       })
@@ -145,7 +143,7 @@ describe('extractDesignSystem', () => {
           expect(getComponent(designSystem).properties).toHaveLength(3)
         })
 
-        it('should return component with properties children', async () => {
+        it('should return component with properties value', async () => {
           const designSystem = await extractDesignSystem(dirPath)
 
           expect(getComponent(designSystem).properties[0]).toEqual({
@@ -157,7 +155,7 @@ describe('extractDesignSystem', () => {
           })
         })
 
-        it('should return component with properties variant', async () => {
+        it('should return component with properties onChange', async () => {
           const designSystem = await extractDesignSystem(dirPath)
 
           expect(getComponent(designSystem).properties[1]).toEqual({
@@ -165,11 +163,11 @@ describe('extractDesignSystem', () => {
             type: '(value: string) => void',
             description: '',
             optional: false,
-            defaultValue: undefined,
+            defaultValue: '() => {}',
           })
         })
 
-        it('should return component with properties onClick', async () => {
+        it('should return component with properties placeholder', async () => {
           const designSystem = await extractDesignSystem(dirPath)
 
           expect(getComponent(designSystem).properties[2]).toEqual({

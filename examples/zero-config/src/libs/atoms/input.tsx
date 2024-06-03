@@ -1,6 +1,6 @@
 export function Input({
   value,
-  onChange,
+  onChange = () => {},
   placeholder,
 }: {
   value: string | number

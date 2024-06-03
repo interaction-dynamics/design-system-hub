@@ -62,10 +62,12 @@ describe('extractDesignSystem', () => {
     })
 
     describe('components', () => {
-      it('should return one component', async () => {
+      it('should return 3 component', async () => {
         const designSystem = await extractDesignSystem(dirPath)
 
-        expect(designSystem.components).toHaveLength(2)
+        console.log('designSystem', designSystem.components)
+
+        expect(designSystem.components).toHaveLength(3)
       })
 
       describe('Button', () => {
@@ -78,10 +80,18 @@ describe('extractDesignSystem', () => {
           expect(getComponent(designSystem).name).toEqual('Button')
         })
 
+        it('should return component with path atoms/button.tsx', async () => {
+          const designSystem = await extractDesignSystem(dirPath)
+
+          expect(getComponent(designSystem).path).toEqual('atoms/button.tsx')
+        })
+
         it('should return component with description', async () => {
           const designSystem = await extractDesignSystem(dirPath)
 
-          expect(getComponent(designSystem).description).toEqual('')
+          expect(getComponent(designSystem).description).toEqual(
+            'A Button component',
+          )
         })
 
         it('should return component with 3 properties', async () => {
@@ -96,7 +106,7 @@ describe('extractDesignSystem', () => {
           expect(getComponent(designSystem).properties[0]).toEqual({
             name: 'children',
             type: 'React.ReactNode',
-            description: '',
+            description: 'The content of the button',
             optional: false,
             defaultValue: undefined,
           })
@@ -135,6 +145,12 @@ describe('extractDesignSystem', () => {
           const designSystem = await extractDesignSystem(dirPath)
 
           expect(getComponent(designSystem).name).toEqual('Input')
+        })
+
+        it('should return component with path atoms/input', async () => {
+          const designSystem = await extractDesignSystem(dirPath)
+
+          expect(getComponent(designSystem).path).toEqual('atoms/input.tsx')
         })
 
         it('should return component with 3 properties', async () => {
@@ -177,6 +193,17 @@ describe('extractDesignSystem', () => {
             optional: true,
             defaultValue: undefined,
           })
+        })
+      })
+
+      describe('Card', () => {
+        const getComponent = (designSystem: DesignSystem) =>
+          designSystem.components[2]
+
+        it('should return component with name Card', async () => {
+          const designSystem = await extractDesignSystem(dirPath)
+
+          expect(getComponent(designSystem).name).toEqual('Card')
         })
       })
     })

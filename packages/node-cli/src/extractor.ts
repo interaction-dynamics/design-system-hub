@@ -3,7 +3,7 @@ import { DesignSystem } from './entities/DesignSystem'
 
 import { findRemoteUrl, findRootPath } from './adapters/git'
 import { findPackageConfig } from './adapters/package'
-import { detectComponents } from './adapters/react'
+import { detectComponents } from './adapters/react-ast'
 
 export async function extractDesignSystem(
   targetPath: string,

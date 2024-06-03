@@ -4,23 +4,57 @@ import {
   ObjectBoundParameterDeclaration,
   InterfaceDeclaration,
 } from 'typescript-parser'
+import ts from 'typescript'
+
 import path from 'node:path'
 import { listFiles } from '../utils/list-files'
 import { Component } from '../entities/Component'
 import { Property } from '../entities/Property'
+import { readTsConfigFile } from './tsconfig'
+import { getReactComponent } from './react-ast'
 
-export async function detectComponents(dirPath: string) {
+export async function detectComponents(
+  dirPath: string,
+  projectDirectory: string,
+) {
   // https://buehler.github.io/node-typescript-parser/index.html
   const parser = new TypescriptParser()
 
   const files = (await listFiles(dirPath)).filter(file => file.endsWith('.tsx'))
 
+  const tsConfigFilename = path.join(projectDirectory, './tsconfig.json')
+  const compilerOptions = await readTsConfigFile(tsConfigFilename)
+
+  const host = ts.createCompilerHost(compilerOptions)
+
   const components: Component[] = []
 
   for (const file of files) {
-    const parsed = await parser.parseFile(path.join(dirPath, file), dirPath)
+    const filePath = path.join(dirPath, file)
 
-    console.log(parsed)
+    const parsed = await parser.parseFile(filePath, dirPath)
+
+    const program = ts.createProgram([filePath], compilerOptions, host)
+    const sourceFile = program.getSourceFile(filePath)
+
+    // console.log(sourceFile.statements[1])
+
+    // console.log(ts.isFunctionDeclaration(sourceFile.statements[1]))
+
+    const checker = program.getTypeChecker()
+
+    const sourceFileSymbol = checker.getSymbolAtLocation(sourceFile)!
+    const exports = checker.getExportsOfModule(sourceFileSymbol)
+
+    console.log(
+      'component',
+      // exports[0].declarations,
+      getReactComponent(
+        file,
+        exports[0].declarations[0] as ts.FunctionDeclaration,
+        sourceFile,
+      ),
+    )
 
     const regexComponent = /[A-Z][A-Za-z]+/
 
@@ -57,12 +91,13 @@ export async function detectComponents(dirPath: string) {
           }
         }
 
-        components.push({
-          name: declaration.name,
-          path: file,
-          description: '',
-          properties,
-        })
+        components.push(
+          getReactComponent(
+            file,
+            exports[0].declarations[0] as ts.FunctionDeclaration,
+            sourceFile,
+          ),
+        )
       }
     }
   }

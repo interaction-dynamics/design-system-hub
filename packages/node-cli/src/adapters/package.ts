@@ -20,10 +20,13 @@ async function findPackageConfigPath(targetPath: string): Promise<string> {
 
 export async function findPackageConfig(
   targetPath: string,
-): Promise<{ name: string }> {
+): Promise<{ name: string; path: string }> {
   const packageConfigPath = await findPackageConfigPath(targetPath)
 
   const content = await readFile(packageConfigPath, 'utf8')
 
-  return JSON.parse(content)
+  return {
+    ...JSON.parse(content),
+    path: path.dirname(packageConfigPath),
+  }
 }

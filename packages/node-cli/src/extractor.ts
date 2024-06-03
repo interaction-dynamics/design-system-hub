@@ -10,13 +10,13 @@ export async function extractDesignSystem(
 ): Promise<DesignSystem> {
   const url = await findRemoteUrl(targetPath)
 
-  const { name } = await findPackageConfig(targetPath)
+  const { name, path } = await findPackageConfig(targetPath)
 
   const rootPath = await findRootPath(targetPath)
 
   const relativePath = relative(rootPath, targetPath)
 
-  const components = await detectComponents(targetPath)
+  const components = await detectComponents(targetPath, path)
 
   return {
     components,

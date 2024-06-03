@@ -123,7 +123,7 @@ describe('extractDesignSystem', () => {
             name: 'onClick',
             type: '() => void | Promise<void>',
             description: '',
-            optional: false,
+            optional: true,
             defaultValue: undefined,
           })
         })
@@ -176,7 +176,7 @@ describe('extractDesignSystem', () => {
             name: 'placeholder',
             type: 'string',
             description: '',
-            optional: false,
+            optional: true,
             defaultValue: undefined,
           })
         })

@@ -25,6 +25,7 @@
     "@inquirer/select": "^2.0.0",
     "@root/walk": "^1.1.0",
     "@types/inquirer": "^9.0.7",
+    "typescript": "^5.4.5",
     "typescript-parser": "^2.6.1"
   },
   "devDependencies": {
@@ -38,7 +39,7 @@
     "@tsconfig/node20": "^20.1.2",
     "@tsconfig/strictest": "^2.0.3",
     "@types/jest": "^29.5.12",
-    "@types/node": "^20.11.24",
+    "@types/node": "^20.12.12",
     "@typescript-eslint/parser": "^7.1.1",
     "@vercel/ncc": "^0.38.1",
     "eslint-config-prettier": "^9.1.0",

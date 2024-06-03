@@ -33,6 +33,9 @@ importers:
       '@types/react-dom':
         specifier: ^18
         version: 18.3.0
+      typescript:
+        specifier: ^5.4.5
+        version: 5.4.5
 
   packages/documentation-portal:
     dependencies:
@@ -142,6 +145,9 @@ importers:
       '@types/inquirer':
         specifier: ^9.0.7
         version: 9.0.7
+      typescript:
+        specifier: ^5.4.5
+        version: 5.4.5
       typescript-parser:
         specifier: ^2.6.1
         version: 2.6.1
@@ -177,7 +183,7 @@ importers:
         specifier: ^29.5.12
         version: 29.5.12
       '@types/node':
-        specifier: ^20.11.24
+        specifier: ^20.12.12
         version: 20.12.12
       '@typescript-eslint/parser':
         specifier: ^7.1.1
@@ -3992,6 +3998,7 @@ packages:
 
   rimraf@3.0.2:
     resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==}
+    deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
 
   run-parallel@1.2.0:

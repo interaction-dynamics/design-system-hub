@@ -1,7 +1,7 @@
 interface Props {
   children: React.ReactNode
   variant: 'primary' | 'black' | 'basic'
-  onClick: () => void | Promise<void>
+  onClick?: () => void | Promise<void>
 }
 
 /**

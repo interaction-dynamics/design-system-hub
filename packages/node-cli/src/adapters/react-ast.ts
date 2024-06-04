@@ -1,6 +1,6 @@
 import path, { relative } from 'node:path'
 import { Component } from '../entities/Component'
-import ts, { TypeChecker } from 'typescript'
+import ts, { ParameterDeclaration, VariableDeclaration } from 'typescript'
 import { Property } from '../entities/Property'
 import { listFiles } from '../utils/list-files'
 import { readTsConfigFile } from './tsconfig'
@@ -28,9 +28,7 @@ export async function detectComponents(
       const sourceFileSymbol = checker.getSymbolAtLocation(sourceFile)
       const exports = checker.getExportsOfModule(sourceFileSymbol)
 
-      return exports.flatMap(e =>
-        getReactComponents(filePath, e, sourceFile, checker),
-      )
+      return exports.flatMap(e => getReactComponents(filePath, e, checker))
     })
     .map(component => ({
       ...component,
@@ -39,56 +37,22 @@ export async function detectComponents(
     .sort((a, b) => `${a.path}/${a.name}`.localeCompare(`${b.path}/${b.name}`))
 }
 
-function isJsxElement(node: ts.Node): boolean {
-  if (ts.isJsxElement(node)) return true
-
-  if (ts.isJsxSelfClosingElement(node)) return true
-
-  if (ts.isJsxFragment(node)) return true
-
-  if (ts.isParenthesizedExpression(node)) {
-    return isJsxElement(node.expression)
-  }
-
-  return false
-}
-
 function isReactComponent(
   declaration: ts.Declaration,
-  checker: TypeChecker,
 ): declaration is ts.FunctionDeclaration {
-  // console.log(
-  //   'isReactComponent',
-  //   declaration,
-  //   ts.isFunctionDeclaration(declaration),
-  // )
-
   if (!ts.isFunctionDeclaration(declaration)) return false
 
   const componentNameRegex = /[A-Z][A-Za-z]+/
 
   if (!componentNameRegex.test(declaration.name.text)) return false
 
-  // const { statements } = declaration.body
-
-  // if (statements.length === 0) return false
-
-  // checker.getSignatureFromDeclaration(declaration)?.getReturnType()
-
-  // const returnStatements = statements.filter(s => ts.isReturnStatement(s))
-
-  // return returnStatements.some(s => isJsxElement(s))
-
   return true
 }
 
 function getPropertyTypes(
   type: ts.TypeNode,
-  sourceFile: ts.SourceFile,
   checker: ts.TypeChecker,
 ): Pick<Property, 'name' | 'type' | 'optional' | 'description'>[] {
-  const properties = []
-
   if (ts.isTypeLiteralNode(type)) {
     return type.members
       .filter(m => ts.isPropertySignature(m))
@@ -105,8 +69,12 @@ function getPropertyTypes(
 
     return Array.from(symbol.members, ([, value]) => value).map(value => ({
       name: value.escapedName.toString(),
-      type: (value.valueDeclaration as any)?.type?.getText() || 'string',
-      optional: (value.valueDeclaration as any)?.questionToken !== undefined,
+      type:
+        (value.valueDeclaration as ParameterDeclaration)?.type?.getText() ||
+        'string',
+      optional:
+        (value.valueDeclaration as ParameterDeclaration)?.questionToken !==
+        undefined,
       description:
         ts.displayPartsToString(value.getDocumentationComment(checker)) ?? '',
     }))
@@ -118,29 +86,16 @@ function getPropertyTypes(
 function getReactComponents(
   filePath: string,
   symbol: ts.Symbol,
-  sourceFile: ts.SourceFile,
   checker: ts.TypeChecker,
 ): Component[] {
-  // let declaration = symbol.declarations[0]
-
-  // if (!isReactComponent(declaration, checker)) return undefined
-
-  const component = findComponentNameAndParameter(
-    filePath,
-    symbol,
-    sourceFile,
-    checker,
-  )
+  const component = findComponentNameAndParameter(symbol)
 
   if (!component) return []
-
-  // const name = declaration.name.getText()
-  // const parameter = declaration.parameters?.[0]
 
   const { name, parameter } = component
 
   const propertyTypes = parameter
-    ? getPropertyTypes(parameter.type, sourceFile, checker)
+    ? getPropertyTypes(parameter.type, checker)
     : []
 
   const properties = propertyTypes.map(type => {
@@ -169,16 +124,13 @@ function getReactComponents(
 }
 
 function findComponentNameAndParameter(
-  filePath: string,
   symbol: ts.Symbol,
-  sourceFile: ts.SourceFile,
-  checker: ts.TypeChecker,
 ):
   | { name: string; parameter: ts.ParameterDeclaration | undefined }
   | undefined {
   let declaration = symbol.declarations[0]
 
-  if (isReactComponent(declaration, checker)) {
+  if (isReactComponent(declaration)) {
     return {
       name: declaration.name.getText(),
       parameter: declaration.parameters[0],
@@ -186,8 +138,6 @@ function findComponentNameAndParameter(
   }
 
   if (ts.isVariableDeclaration(declaration)) {
-    let name = declaration.name.getText()
-
     if (
       ts.isFunctionDeclaration(declaration.initializer) ||
       ts.isArrowFunction(declaration.initializer)

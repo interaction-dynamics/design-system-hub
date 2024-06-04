@@ -11,7 +11,7 @@ async function findPackageConfigPath(targetPath: string): Promise<string> {
 
       return packageJsonPath
     } catch (error) {
-      targetPath = path.dirname(targetPath)
+      currentTargetPath = path.dirname(targetPath)
     }
   }
 

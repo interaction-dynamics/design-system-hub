@@ -65,8 +65,6 @@ describe('extractDesignSystem', () => {
       it('should return 3 component', async () => {
         const designSystem = await extractDesignSystem(dirPath)
 
-        console.log('designSystem', designSystem.components)
-
         expect(designSystem.components).toHaveLength(3)
       })
 

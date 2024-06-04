@@ -3,5 +3,5 @@ export interface Property {
   type: string
   description: string
   optional: boolean
-  defaultValue: any
+  defaultValue: string | undefined
 }

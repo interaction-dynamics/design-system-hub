@@ -20,7 +20,6 @@ program
   .argument('[directory]', 'design system directory', process.cwd())
   .action(async str => {
     const targetPath = path.resolve(process.cwd(), str)
-
     await setup(str)
   })
 
@@ -28,9 +27,7 @@ program
   .command('dev')
   .description('Find all the React components from the target directory')
   .option('--json', 'display the output with json format')
-  .option('-s, --summary', 'display some debugging')
   .argument('[directory]', 'design system directory', process.cwd())
-
   .action(async (str, options) => {
     const targetPath = path.resolve(process.cwd(), str)
 

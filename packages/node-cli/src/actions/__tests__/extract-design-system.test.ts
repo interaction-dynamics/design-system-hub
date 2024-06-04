@@ -12,19 +12,13 @@ describe('extractDesignSystem', () => {
 
       const designSystem = await extractDesignSystem(dirPath)
 
-      expect(designSystem.repository.url).toEqual(expectedUrl)
-    })
-
-    it('should return name example-empty', async () => {
-      const designSystem = await extractDesignSystem(dirPath)
-
-      expect(designSystem.project.name).toEqual('example-empty')
+      expect(designSystem.provider.url).toEqual(expectedUrl)
     })
 
     it('should return relative path src', async () => {
       const designSystem = await extractDesignSystem(dirPath)
 
-      expect(designSystem.relativePath).toEqual('examples/empty/src')
+      expect(designSystem.provider.relativePath).toEqual('examples/empty/src')
     })
 
     it('should return no components', async () => {
@@ -46,19 +40,15 @@ describe('extractDesignSystem', () => {
 
       const designSystem = await extractDesignSystem(dirPath)
 
-      expect(designSystem.repository.url).toEqual(expectedUrl)
-    })
-
-    it('should return a name example-zero-config', async () => {
-      const designSystem = await extractDesignSystem(dirPath)
-
-      expect(designSystem.project.name).toEqual('example-zero-config')
+      expect(designSystem.provider.url).toEqual(expectedUrl)
     })
 
     it('should return relative path src', async () => {
       const designSystem = await extractDesignSystem(dirPath)
 
-      expect(designSystem.relativePath).toEqual('examples/zero-config/src/libs')
+      expect(designSystem.provider.relativePath).toEqual(
+        'examples/zero-config/src/libs',
+      )
     })
 
     describe('components', () => {

@@ -29,17 +29,14 @@ export async function findDesignSystem({
   const relativePath = getRelativePath(rootPath, targetPath)
 
   const url = await findRepositoryUrl(targetPath)
-  const { name, path } = await findProject(targetPath)
+  const { path } = await findProject(targetPath)
 
   const components = await detectComponents(targetPath, path)
 
   return {
-    relativePath,
-    repository: {
+    provider: {
+      relativePath,
       url,
-    },
-    project: {
-      name,
     },
     components,
   }

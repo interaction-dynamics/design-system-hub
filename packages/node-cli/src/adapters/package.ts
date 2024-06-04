@@ -1,23 +1,6 @@
 import path from 'node:path'
 import fs, { readFile, access } from 'node:fs/promises'
 
-async function findPackageConfigPath(targetPath: string): Promise<string> {
-  let currentTargetPath = targetPath
-
-  while (currentTargetPath !== '/') {
-    const packageJsonPath = path.join(targetPath, 'package.json')
-    try {
-      await access(packageJsonPath, fs.constants.F_OK)
-
-      return packageJsonPath
-    } catch (error) {
-      currentTargetPath = path.dirname(targetPath)
-    }
-  }
-
-  throw new Error('Impossible to find package.json')
-}
-
 export async function findPackageConfig(
   targetPath: string,
 ): Promise<{ name: string; path: string }> {
@@ -29,4 +12,21 @@ export async function findPackageConfig(
     ...JSON.parse(content),
     path: path.dirname(packageConfigPath),
   }
+}
+
+async function findPackageConfigPath(targetPath: string): Promise<string> {
+  let currentTargetPath = targetPath
+
+  while (currentTargetPath !== '/') {
+    const packageJsonPath = path.join(currentTargetPath, 'package.json')
+    try {
+      await access(packageJsonPath, fs.constants.F_OK)
+
+      return packageJsonPath
+    } catch (error) {
+      currentTargetPath = path.dirname(currentTargetPath)
+    }
+  }
+
+  throw new Error('Impossible to find package.json')
 }

@@ -1,5 +1,5 @@
 import path from 'node:path'
-import { extractDesignSystem } from '../extractor'
+import { extractDesignSystem } from '../api'
 import { DesignSystem } from '../entities/DesignSystem'
 
 describe('extractDesignSystem', () => {

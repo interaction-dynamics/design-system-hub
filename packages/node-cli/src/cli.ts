@@ -24,6 +24,8 @@ program
     await setup(targetPath)
   })
 
+const logSummary = (s: string) => console.warn(chalk.yellow.bold(s))
+
 program
   .command('dev')
   .description('Find all the React components from the target directory')
@@ -38,11 +40,16 @@ program
       console.log(JSON.stringify(designSystem, null, 2))
     } else {
       console.log(yaml.stringify(designSystem))
-    }
 
-    console.warn(
-      chalk.yellow.bold(`${designSystem.components.length} components found.`),
-    )
+      logSummary(`${designSystem.components.length} components found.`)
+      const properties = designSystem.components.flatMap(c => c.properties)
+      logSummary(`${properties.length} properties found.`)
+      const descriptions = [...designSystem.components, ...properties]
+      const filledDescriptions = descriptions.filter(d => d.description)
+      logSummary(
+        `${filledDescriptions.length} / ${descriptions.length} descriptions found.`,
+      )
+    }
   })
 
 program.parse()

@@ -86,7 +86,7 @@ jobs:
           pnpm lint
         working-directory: packages/node-cli
       - name: Test ✅
-        run: pnpm test:ci --coverage
+        run: pnpm test
         working-directory: packages/node-cli
       - name: Build ⚙️
         run: pnpm build

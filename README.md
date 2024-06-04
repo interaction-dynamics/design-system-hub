@@ -37,7 +37,7 @@ The project is composed of multiple packages:
 - [documentation-portal](./packages/documentation-portal/README.md): the website that will host the design systems [STARTED]
 - a figma integration to extract the component from figma [STARTED]
 - a figma plugin that will help check the code from Figma (see development status, etc) [NOT STARTED]
-- a cli to extract the components from the code [NOT STARTED]
+- a cli to extract the components from the code [STARTED]
 - a VS Code plugin to help the developer to use the design system [NOT STARTED]
 
 You can check the roamap [here](https://github.com/orgs/interaction-dynamics/projects/10/views/1).

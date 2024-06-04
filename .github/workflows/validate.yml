@@ -52,6 +52,45 @@ jobs:
       - name: Build ⚙️
         run: pnpm build
         working-directory: packages/documentation-portal
+  node-cli:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - uses: pnpm/action-setup@v3
+        name: Install pnpm
+        with:
+          version: latest
+          run_install: false
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+      - uses: actions/cache@v4
+        name: Setup pnpm cache
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+      - name: Install 🔧
+        run: pnpm install
+      - name: Format 🔍
+        run: |
+          pnpm format
+          pnpm lint
+        working-directory: packages/node-cli
+      - name: Test ✅
+        run: pnpm test
+        working-directory: packages/node-cli
+      - name: Build ⚙️
+        run: pnpm build
+        working-directory: packages/node-cli
   global:
     runs-on: ubuntu-latest
     steps:

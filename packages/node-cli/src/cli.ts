@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { Command } from 'commander'
 import path from 'node:path'
 import yaml from 'yaml'
@@ -20,7 +21,7 @@ program
   .argument('[directory]', 'design system directory', process.cwd())
   .action(async str => {
     const targetPath = path.resolve(process.cwd(), str)
-    await setup(str)
+    await setup(targetPath)
   })
 
 program

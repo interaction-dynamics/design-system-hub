@@ -1,6 +1,6 @@
 import path, { relative } from 'node:path'
 import { Component } from '../domain/entities/Component'
-import ts, { ParameterDeclaration, VariableDeclaration } from 'typescript'
+import * as ts from 'typescript'
 import { Property } from '../domain/entities/Property'
 import { listFiles } from '../utils/list-files'
 import { readTsConfigFile } from './tsconfig'
@@ -70,10 +70,10 @@ function getPropertyTypes(
     return Array.from(symbol.members, ([, value]) => value).map(value => ({
       name: value.escapedName.toString(),
       type:
-        (value.valueDeclaration as ParameterDeclaration)?.type?.getText() ||
+        (value.valueDeclaration as ts.ParameterDeclaration)?.type?.getText() ||
         'string',
       optional:
-        (value.valueDeclaration as ParameterDeclaration)?.questionToken !==
+        (value.valueDeclaration as ts.ParameterDeclaration)?.questionToken !==
         undefined,
       description:
         ts.displayPartsToString(value.getDocumentationComment(checker)) ?? '',
@@ -128,7 +128,7 @@ function findComponentNameAndParameter(
 ):
   | { name: string; parameter: ts.ParameterDeclaration | undefined }
   | undefined {
-  let declaration = symbol.declarations[0]
+  const declaration = symbol.declarations[0]
 
   if (isReactComponent(declaration)) {
     return {

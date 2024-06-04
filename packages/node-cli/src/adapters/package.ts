@@ -14,7 +14,9 @@ export async function findPackageConfig(
   }
 }
 
-async function findPackageConfigPath(targetPath: string): Promise<string> {
+export async function findPackageConfigPath(
+  targetPath: string,
+): Promise<string> {
   let currentTargetPath = targetPath
 
   while (currentTargetPath !== '/') {

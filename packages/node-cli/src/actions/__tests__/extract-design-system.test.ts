@@ -1,10 +1,10 @@
 import path from 'node:path'
-import { extractDesignSystem } from '../api'
-import { DesignSystem } from '../entities/DesignSystem'
+import { extractDesignSystem } from '../extract-design-system'
+import { DesignSystem } from '../../entities/DesignSystem'
 
 describe('extractDesignSystem', () => {
   describe('empty design system', () => {
-    const dirPath = path.join(__dirname, '../../../../examples/empty/src')
+    const dirPath = path.join(__dirname, '../../../../../examples/empty/src')
 
     it('should return url', async () => {
       const expectedUrl =
@@ -37,7 +37,7 @@ describe('extractDesignSystem', () => {
   describe('zero config', () => {
     const dirPath = path.join(
       __dirname,
-      '../../../../examples/zero-config/src/libs',
+      '../../../../../examples/zero-config/src/libs',
     )
 
     it('should return url', async () => {

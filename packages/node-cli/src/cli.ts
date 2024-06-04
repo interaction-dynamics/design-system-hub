@@ -3,6 +3,7 @@ import path from 'node:path'
 
 import { extractDesignSystem } from './api'
 import packageJson from '../package.json'
+import { setup } from './actions/setup'
 
 const program = new Command()
 
@@ -14,40 +15,16 @@ program
 program
   .command('setup')
   .description('Configure in which folder is the design system')
-  .action(() => {})
+  .argument('[directory]', 'design system directory', process.cwd())
+  .action(async str => {
+    await setup(str)
+  })
 
 program
   .command('dev')
   .description('Find all the React components from the target directory')
-  .argument('<directory>', 'design system directory')
-  .option(
-    '-v, --verbose',
-    'activate verbose mode where all the details of the components are displayed',
-  )
+  .argument('[directory]', 'design system directory', process.cwd())
   .action(async (str, options) => {
-    console.log('target', str)
-
-    try {
-      const targetPath = path.resolve(process.cwd(), str)
-
-      const designSystem = await extractDesignSystem(targetPath)
-
-      console.log(designSystem)
-    } catch (error) {
-      console.error(error)
-    }
-  })
-
-program
-  .command('deploy')
-  .description('Deploy design system on the documentation portal')
-  .option(
-    '-v, --verbose',
-    'activate verbose mode where all the details of the components are displayed',
-  )
-  .action(async (str, options) => {
-    console.log('target', str)
-
     try {
       const targetPath = path.resolve(process.cwd(), str)
 

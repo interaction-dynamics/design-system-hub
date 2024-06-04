@@ -20,6 +20,7 @@
     "@inquirer/select": "^2.0.0",
     "@types/inquirer": "^9.0.7",
     "commander": "^12.1.0",
+    "enquirer": "^2.4.1",
     "typescript": "^5.4.5"
   },
   "devDependencies": {

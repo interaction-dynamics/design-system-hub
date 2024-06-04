@@ -1,6 +1,6 @@
 import path from 'node:path'
 import { extractDesignSystem } from '../extract-design-system'
-import { DesignSystem } from '../../entities/DesignSystem'
+import { DesignSystem } from '../../domain/entities/DesignSystem'
 
 describe('extractDesignSystem', () => {
   describe('empty design system', () => {
@@ -18,7 +18,7 @@ describe('extractDesignSystem', () => {
     it('should return name example-empty', async () => {
       const designSystem = await extractDesignSystem(dirPath)
 
-      expect(designSystem.repository.name).toEqual('example-empty')
+      expect(designSystem.project.name).toEqual('example-empty')
     })
 
     it('should return relative path src', async () => {
@@ -52,7 +52,7 @@ describe('extractDesignSystem', () => {
     it('should return a name example-zero-config', async () => {
       const designSystem = await extractDesignSystem(dirPath)
 
-      expect(designSystem.repository.name).toEqual('example-zero-config')
+      expect(designSystem.project.name).toEqual('example-zero-config')
     })
 
     it('should return relative path src', async () => {

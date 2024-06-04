@@ -19,9 +19,11 @@
     "@inquirer/input": "^2.0.0",
     "@inquirer/select": "^2.0.0",
     "@types/inquirer": "^9.0.7",
+    "chalk": "^5.3.0",
     "commander": "^12.1.0",
     "enquirer": "^2.4.1",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "yaml": "^2.4.3"
   },
   "devDependencies": {
     "@eslint/js": "^8.57.0",

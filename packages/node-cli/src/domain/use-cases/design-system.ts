@@ -36,8 +36,10 @@ export async function findDesignSystem({
   return {
     relativePath,
     repository: {
-      name,
       url,
+    },
+    project: {
+      name,
     },
     components,
   }

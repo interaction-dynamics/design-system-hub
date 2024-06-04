@@ -1,10 +1,10 @@
 import { relative } from 'node:path'
-import { DesignSystem } from '../entities/DesignSystem'
+import { DesignSystem } from '../domain/entities/DesignSystem'
 
 import { findRemoteUrl, findRootPath } from '../adapters/git'
 import { findPackageConfig } from '../adapters/package'
 import { detectComponents } from '../adapters/react-ast'
-import { findDesignSystem } from '../use-cases/design-system'
+import { findDesignSystem } from '../domain/use-cases/design-system'
 
 export async function extractDesignSystem(
   targetPath: string,

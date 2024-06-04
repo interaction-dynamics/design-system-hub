@@ -2,7 +2,7 @@ import { mkdir, writeFile } from 'node:fs/promises'
 import { dirname, join as joinPath, relative } from 'node:path'
 import Enquirer from 'enquirer'
 import { findPackageConfigPath } from '../adapters/package'
-import { saveConfig } from '../use-cases/config'
+import { saveConfig } from '../domain/use-cases/config'
 
 const { prompt } = Enquirer
 

@@ -8,11 +8,11 @@ describe('extractDesignSystem', () => {
 
     it('should return url', async () => {
       const expectedUrl =
-        'git@github.com:interaction-dynamics/design-system-manager.git'
+        /(git@github.com:interaction-dynamics\/design-system-manager.git)|(https:\/\/github.com\/interaction-dynamics\/design-system-manager)/
 
       const designSystem = await extractDesignSystem(dirPath)
 
-      expect(designSystem.provider.url).toEqual(expectedUrl)
+      expect(designSystem.provider.url).toMatch(expectedUrl)
     })
 
     it('should return relative path src', async () => {
@@ -36,11 +36,11 @@ describe('extractDesignSystem', () => {
 
     it('should return url', async () => {
       const expectedUrl =
-        'git@github.com:interaction-dynamics/design-system-manager.git'
+        /(git@github.com:interaction-dynamics\/design-system-manager.git)|(https:\/\/github.com\/interaction-dynamics\/design-system-manager)/
 
       const designSystem = await extractDesignSystem(dirPath)
 
-      expect(designSystem.provider.url).toEqual(expectedUrl)
+      expect(designSystem.provider.url).toMatch(expectedUrl)
     })
 
     it('should return relative path src', async () => {

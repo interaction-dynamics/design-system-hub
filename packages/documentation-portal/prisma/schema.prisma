@@ -53,4 +53,5 @@ model DesignSystem {
     components Component[]
     createdAt  DateTime    @default(now())
     updatedAt  DateTime    @updatedAt
+    providers  Json
 }

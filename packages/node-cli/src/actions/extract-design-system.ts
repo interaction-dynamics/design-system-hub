@@ -1,5 +1,5 @@
 import { relative } from 'node:path'
-import { DesignSystem } from '../domain/entities/DesignSystem'
+import { DesignSystem } from '../domain/entities/design-system'
 
 import { findRemoteUrl, findRootPath } from '../adapters/git'
 import { findPackageConfig } from '../adapters/package'

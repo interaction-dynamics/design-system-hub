@@ -1,6 +1,6 @@
 import path from 'node:path'
 import { extractDesignSystem } from '../extract-design-system'
-import { DesignSystem } from '../../domain/entities/DesignSystem'
+import { DesignSystem } from '../../domain/entities/design-system'
 
 describe('extractDesignSystem', () => {
   describe('empty design system', () => {

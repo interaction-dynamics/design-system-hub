@@ -1,8 +1,8 @@
 import path, { relative } from 'node:path'
-import { Component } from '../domain/entities/Component'
+import { Component } from '../domain/entities/component2'
 import * as ts from 'typescript'
-import { Property } from '../domain/entities/Property'
-import { listFiles } from '../utils/list-files'
+import { Property } from '../domain/entities/property'
+import { listFiles } from './file-system'
 import { readTsConfigFile } from './tsconfig'
 
 export async function detectComponents(

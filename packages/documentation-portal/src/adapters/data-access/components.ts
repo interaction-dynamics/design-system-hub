@@ -4,6 +4,8 @@ import { PartialComponent } from '@/domain/entities/partial-component'
 import { db } from '@/lib/db'
 import { DesignSystemDao } from './design-systems'
 import { Component } from '@/domain/entities/component'
+import { Property } from '@/domain/entities/property'
+import { DesignSystem } from '@/domain/entities/design-system'
 
 export const findPartialComponents = cache(
   async (designSystem: DesignSystemDao): Promise<PartialComponent[]> => {
@@ -44,5 +46,69 @@ export const findComponent = cache(
         providers: variantDao.providers as any,
       })),
     }
+  }
+)
+
+export const findComponentByName = cache(
+  async (
+    designSystemId: string,
+    componentName: string
+  ): Promise<Component | undefined> => {
+    const componentDao = await db.component.findFirst({
+      where: { designSystemId, name: componentName },
+      include: { variants: true },
+    })
+
+    if (!componentDao) return undefined
+
+    return {
+      name: componentDao.name,
+      slug: componentDao.slug,
+      properties: componentDao.properties.map((propertyDao) => ({
+        name: propertyDao.name,
+        type: propertyDao.type,
+        description: propertyDao.description,
+        defaultValue: propertyDao.defaultValue,
+      })),
+      providers: componentDao.providers as any,
+      variants: componentDao.variants.map((variantDao) => ({
+        name: variantDao.name,
+        slug: variantDao.slug,
+        providers: variantDao.providers as any,
+      })),
+    }
+  }
+)
+
+// export const updateComponentProvider = cache(
+//   async <T extends object>(
+//     designSystemId: string,
+//     componentName: string,
+//     providerKey: string,
+//     providerValue: T
+//   ) => {
+//     await db.component.updateMany({
+//       where: { designSystemId, name: componentName },
+//       data: {
+//         providers: {
+//           [providerKey]: providerValue,
+//         },
+//       },
+//     })
+//   }
+// )
+
+export const updateComponent = cache(
+  async (
+    designSystemId: string,
+    componentName: string,
+    values: Partial<Component>
+  ) => {
+    await db.component.updateMany({
+      where: { designSystemId, name: componentName },
+      data: {
+        ...values,
+      },
+    })
   }
 )

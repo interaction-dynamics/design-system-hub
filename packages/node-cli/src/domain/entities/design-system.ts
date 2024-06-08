@@ -1,4 +1,4 @@
-import { Component } from './component2'
+import { Component } from './component'
 
 export interface DesignSystem {
   components: Component[]

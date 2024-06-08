@@ -1,6 +1,6 @@
 import path from 'node:path'
 
-import { Component } from '../entities/component2'
+import { Component } from '../entities/component'
 import { DesignSystem } from '../entities/design-system'
 import { Organization } from '../entities/organization'
 import { Config } from '../entities/config'

@@ -1,7 +1,7 @@
 import path, { relative } from 'node:path'
 import { Component } from '../domain/entities/component'
 import * as ts from 'typescript'
-import { Property } from '../domain/entities/property'
+import { Property } from '../domain/entities/property2'
 import { listFiles } from './file-system'
 import { readTsConfigFile } from './tsconfig'
 

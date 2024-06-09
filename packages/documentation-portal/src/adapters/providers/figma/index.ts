@@ -5,7 +5,6 @@ import { getLink } from './utils/get-link'
 import { getDescription } from './utils/get-description'
 import { ComponentVariant } from '@/domain/entities/component-variant'
 import { validateFigmaComponent } from './types/figma-component'
-import { FigmaComponent } from './types/figma-component'
 
 export const figma: Provider = {
   type: 'design',

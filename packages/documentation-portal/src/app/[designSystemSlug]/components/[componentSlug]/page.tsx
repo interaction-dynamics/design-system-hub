@@ -9,6 +9,7 @@ import ComponentViewer from './_components/component-viewer'
 import { findDesignSystemBySlug } from '@/adapters/data-access/design-systems'
 import { findComponent } from '@/adapters/data-access/components'
 import { NavigationInFile } from './_components/navigation-in-file'
+import { PropertiesTable } from './_components/properties-table'
 
 export interface ComponentPageProps {
   params: any
@@ -60,6 +61,12 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
           ))}
         </div>
       )}
+      <div>
+        <Typography variant="h2" id="props">
+          Props
+        </Typography>
+        <PropertiesTable component={component} />
+      </div>
     </Main>
   )
 }

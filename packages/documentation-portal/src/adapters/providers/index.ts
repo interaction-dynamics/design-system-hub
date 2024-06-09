@@ -7,5 +7,5 @@ const isProviderId = (key: string): key is keyof typeof providers =>
   key in providers
 
 export function getProvider(providerId: string) {
-  return isProviderId(providerId) ? providers[providerId] : null
+  return isProviderId(providerId) ? providers[providerId] : undefined
 }

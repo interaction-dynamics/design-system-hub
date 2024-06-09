@@ -35,6 +35,14 @@ export function NavigationInFile({ component }: Props) {
                 ))}
               </ul>
             </li>
+            <li className="mt-0 pt-2">
+              <a
+                href="#props"
+                className="inline-block no-underline transition-colors hover:text-foreground text-muted-foreground"
+              >
+                Props
+              </a>
+            </li>
           </>
         )}
       </ul>

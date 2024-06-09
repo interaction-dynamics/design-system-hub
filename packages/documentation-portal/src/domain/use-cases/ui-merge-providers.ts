@@ -2,7 +2,7 @@ import { Component } from '../entities/component'
 import { ComponentVariant } from '../entities/component-variant'
 import Provider from '../entities/provider'
 
-type ProviderGetter = (providerId: string) => Provider | null
+type ProviderGetter = (providerId: string) => Provider | undefined
 
 function getProviders(
   component: Component | ComponentVariant,
@@ -10,7 +10,7 @@ function getProviders(
 ): Provider[] {
   return Object.keys(component.providers)
     .map((providerId) => getProvider(providerId))
-    .filter((provider): provider is Provider => provider !== undefined)
+    .filter((provider): provider is Provider => Boolean(provider))
 }
 
 export function getDescription({

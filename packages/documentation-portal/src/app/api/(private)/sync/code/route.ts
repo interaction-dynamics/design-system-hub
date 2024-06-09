@@ -4,6 +4,7 @@ import { updateDesignSystemProvider } from '@/adapters/data-access/design-system
 import { NextRequest } from 'next/server'
 import { getUser } from '../../_utils/get-user'
 import {
+  findComponentByName,
   updateComponent,
 } from '@/adapters/data-access/components'
 
@@ -18,17 +19,43 @@ const validator = z.object({
     components: z.array(
       z.object({
         name: z.string(),
-        properties: z.array(z.object({
-          name: z.string(),
-          type: z.string(),
-          description: z.string(),
-          optional: z.boolean(),
-          defaultValue: z.string().optional(),
-        })),
+        path: z.string(),
+        properties: z.array(
+          z.object({
+            name: z.string(),
+            type: z.string(),
+            description: z.string(),
+            optional: z.boolean(),
+            defaultValue: z.string().optional(),
+          })
+        ),
       })
-    )
+    ),
   }),
 })
+
+interface ReturnedDesignSystem {
+  designSystemId: string
+  organizationId: string
+  designSystem: {
+    provider: {
+      relativePath: string
+      url: string
+    }
+    components: {
+      name: string
+      path: string
+      description: string
+      properties: {
+        name: string
+        type: string
+        description: string
+        optional: boolean
+        defaultValue: string | undefined
+      }[]
+    }[]
+  }
+}
 
 export async function POST(request: NextRequest) {
   const user = await getUser(request)
@@ -37,7 +64,7 @@ export async function POST(request: NextRequest) {
     return Response.json({ error: 'Forbidden' }, { status: 401 })
   }
 
-  const body = await request.json()
+  const body: ReturnedDesignSystem = await request.json()
 
   if (!validator.safeParse(body).success) {
     return Response.json({ error: 'Bad Request' }, { status: 400 })
@@ -51,18 +78,32 @@ export async function POST(request: NextRequest) {
   })
 
   designSystem.components.forEach(async (component) => {
-    await updateComponent(body.designSystemId, component.name, {
-      providers: {
-        code: {
-          relativePath: component.provider.relativePath,
-          url: component.provider.url,
-        },
-      },
-      properties: component.properties.
-    })
-  })
+    const foundComponent = await findComponentByName(
+      body.designSystemId,
+      component.name
+    )
 
-  await updateComponentProvider(body.designSystemId)
+    if (foundComponent) {
+      await updateComponent(body.designSystemId, component.name, {
+        providers: {
+          ...foundComponent.providers,
+          code: {
+            path: component.path,
+            description: component.description,
+          },
+        },
+        properties: component.properties.map((property) => {
+          return {
+            name: property.name,
+            type: property.type,
+            description: property.description,
+            optional: property.optional ?? false,
+            defaultValue: property.defaultValue ?? undefined,
+          }
+        }),
+      })
+    }
+  })
 
   return Response.json({ status: 'ok', success: true })
 }

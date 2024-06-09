@@ -106,17 +106,25 @@ export const findAllDesignSystemsByOrganizationId = cache(
   }
 )
 
-export async function updateDesignSystemProvider<T extends object>(
+export const findDesignSystemById = cache(
+  async (
+    designSystemId: string
+  ): Promise<Array<Pick<DesignSystem, 'id' | 'name'>>> => {
+    const designSystemDaos = await db.designSystem.findMany()
+
+    return designSystemDaos.map((designSystemDao) => ({
+      id: designSystemDao.id,
+      name: designSystemDao.name,
+    }))
+  }
+)
+
+export async function updateDesignSystem<T extends object>(
   designSystemId: string,
-  providerKey: string,
-  providerValue: T
+  value: Partial<DesignSystem>
 ) {
   await db.designSystem.update({
-    data: {
-      providers: {
-        [providerKey]: providerValue,
-      },
-    },
+    data: value,
     where: { id: designSystemId },
   })
 }

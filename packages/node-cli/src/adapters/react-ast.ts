@@ -52,32 +52,42 @@ function isReactComponent(
 function getPropertyTypes(
   type: ts.TypeNode,
   checker: ts.TypeChecker,
-): Pick<Property, 'name' | 'type' | 'optional' | 'description'>[] {
+): Pick<
+  Property,
+  'name' | 'type' | 'optional' | 'description' | 'deprecated'
+>[] {
   if (ts.isTypeLiteralNode(type)) {
     return type.members
       .filter(m => ts.isPropertySignature(m))
-      .map((m: ts.PropertySignature) => ({
-        name: m.name.getText(),
-        type: m.type.getText(),
-        optional: m.questionToken !== undefined,
-        description: '',
-      }))
+      .map((m: ts.PropertySignature) => {
+        return {
+          name: m.name.getText(),
+          type: m.type.getText(),
+          optional: m.questionToken !== undefined,
+          description: '',
+          deprecated: false,
+        }
+      })
   }
 
   if (ts.isTypeReferenceNode(type)) {
     const { symbol } = checker.getTypeFromTypeNode(type)
 
-    return Array.from(symbol.members, ([, value]) => value).map(value => ({
-      name: value.escapedName.toString(),
-      type:
-        (value.valueDeclaration as ts.ParameterDeclaration)?.type?.getText() ||
-        'string',
-      optional:
-        (value.valueDeclaration as ts.ParameterDeclaration)?.questionToken !==
-        undefined,
-      description:
-        ts.displayPartsToString(value.getDocumentationComment(checker)) ?? '',
-    }))
+    return Array.from(symbol.members, ([, value]) => value).map(value => {
+      return {
+        name: value.escapedName.toString(),
+        type:
+          (
+            value.valueDeclaration as ts.ParameterDeclaration
+          )?.type?.getText() || 'string',
+        optional:
+          (value.valueDeclaration as ts.ParameterDeclaration)?.questionToken !==
+          undefined,
+        description:
+          ts.displayPartsToString(value.getDocumentationComment(checker)) ?? '',
+        deprecated: value.getJsDocTags().some(tag => tag.name === 'deprecated'),
+      }
+    })
   }
 
   return []
@@ -92,7 +102,7 @@ function getReactComponents(
 
   if (!component) return []
 
-  const { name, parameter } = component
+  const { name, parameter, isDeprecated } = component
 
   const propertyTypes = parameter
     ? getPropertyTypes(parameter.type, checker)
@@ -106,9 +116,10 @@ function getReactComponents(
     return {
       name: type.name,
       type: type.type,
-      optional: type.optional,
       description: type.description,
       defaultValue: parameterProperty?.initializer?.getText() || undefined,
+      ...(type.deprecated ? { deprecated: true } : {}),
+      ...(type.optional ? { optional: true } : {}),
     }
   })
 
@@ -119,21 +130,29 @@ function getReactComponents(
       description:
         ts.displayPartsToString(symbol.getDocumentationComment(checker)) ?? '',
       properties,
+      ...(isDeprecated ? { deprecated: true } : {}),
     },
   ]
 }
 
-function findComponentNameAndParameter(
-  symbol: ts.Symbol,
-):
-  | { name: string; parameter: ts.ParameterDeclaration | undefined }
+function findComponentNameAndParameter(symbol: ts.Symbol):
+  | {
+      name: string
+      parameter: ts.ParameterDeclaration | undefined
+      isDeprecated: boolean
+    }
   | undefined {
   const declaration = symbol.declarations[0]
+
+  const isDeprecated = symbol
+    .getJsDocTags()
+    .some(tag => tag.name === 'deprecated')
 
   if (isReactComponent(declaration)) {
     return {
       name: declaration.name.getText(),
       parameter: declaration.parameters[0],
+      isDeprecated,
     }
   }
 
@@ -145,6 +164,7 @@ function findComponentNameAndParameter(
       return {
         name: declaration.name.getText(),
         parameter: declaration.initializer?.parameters?.[0],
+        isDeprecated,
       }
     }
   }

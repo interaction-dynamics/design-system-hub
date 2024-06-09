@@ -4,8 +4,6 @@ import { PartialComponent } from '@/domain/entities/partial-component'
 import { db } from '@/lib/db'
 import { DesignSystemDao } from './design-systems'
 import { Component } from '@/domain/entities/component'
-import { Property } from '@/domain/entities/property'
-import { DesignSystem } from '@/domain/entities/design-system'
 
 export const findPartialComponents = cache(
   async (designSystem: DesignSystemDao): Promise<PartialComponent[]> => {
@@ -38,6 +36,7 @@ export const findComponent = cache(
         type: propertyDao.type,
         description: propertyDao.description,
         defaultValue: propertyDao.defaultValue,
+        optional: propertyDao.optional,
       })),
       providers: componentDao.providers as any,
       variants: componentDao.variants.map((variantDao) => ({
@@ -69,6 +68,7 @@ export const findComponentByName = cache(
         type: propertyDao.type,
         description: propertyDao.description,
         defaultValue: propertyDao.defaultValue,
+        optional: propertyDao.optional,
       })),
       providers: componentDao.providers as any,
       variants: componentDao.variants.map((variantDao) => ({

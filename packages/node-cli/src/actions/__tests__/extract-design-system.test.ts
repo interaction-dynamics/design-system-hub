@@ -52,15 +52,89 @@ describe('extractDesignSystem', () => {
     })
 
     describe('components', () => {
-      it('should return 3 component', async () => {
+      it('should return 5 component', async () => {
         const designSystem = await extractDesignSystem(dirPath)
 
-        expect(designSystem.components).toHaveLength(3)
+        expect(designSystem.components).toHaveLength(5)
+      })
+
+      describe('LegacyButton', () => {
+        const getComponent = (designSystem: DesignSystem) =>
+          designSystem.components[0]
+
+        it('should return component with name Button', async () => {
+          const designSystem = await extractDesignSystem(dirPath)
+
+          expect(getComponent(designSystem).name).toEqual('ButtonLegacy')
+        })
+
+        it('should return component with path atoms/button.tsx', async () => {
+          const designSystem = await extractDesignSystem(dirPath)
+
+          expect(getComponent(designSystem).path).toEqual(
+            'atoms/button-legacy.tsx',
+          )
+        })
+
+        it('should return component with description', async () => {
+          const designSystem = await extractDesignSystem(dirPath)
+
+          expect(getComponent(designSystem).description).toEqual(
+            'A Button component',
+          )
+        })
+
+        it('should return component deprecated', async () => {
+          const designSystem = await extractDesignSystem(dirPath)
+
+          expect(getComponent(designSystem).deprecated).toEqual(true)
+        })
+
+        it('should return component with 3 properties', async () => {
+          const designSystem = await extractDesignSystem(dirPath)
+
+          expect(getComponent(designSystem).properties).toHaveLength(3)
+        })
+
+        it('should return component with properties children', async () => {
+          const designSystem = await extractDesignSystem(dirPath)
+
+          expect(getComponent(designSystem).properties[0]).toEqual({
+            name: 'children',
+            type: 'React.ReactNode',
+            description: 'The content of the button',
+            defaultValue: undefined,
+          })
+        })
+
+        it('should return component with properties variant', async () => {
+          const designSystem = await extractDesignSystem(dirPath)
+
+          expect(getComponent(designSystem).properties[1]).toEqual({
+            name: 'variant',
+            type: "'primary' | 'black' | 'basic'",
+            description: '',
+            defaultValue: undefined,
+            deprecated: true,
+          })
+        })
+
+        it('should return component with properties onClick', async () => {
+          const designSystem = await extractDesignSystem(dirPath)
+
+          expect(getComponent(designSystem).properties[2]).toEqual({
+            name: 'onClick',
+            type: '() => void | Promise<void>',
+            description: '',
+            optional: true,
+            defaultValue: '() => {}',
+          })
+        })
       })
 
       describe('Button', () => {
         const getComponent = (designSystem: DesignSystem) =>
-          designSystem.components[0]
+          designSystem.components[1]
 
         it('should return component with name Button', async () => {
           const designSystem = await extractDesignSystem(dirPath)
@@ -82,6 +156,12 @@ describe('extractDesignSystem', () => {
           )
         })
 
+        it('should return component not deprecated', async () => {
+          const designSystem = await extractDesignSystem(dirPath)
+
+          expect(getComponent(designSystem).deprecated).toEqual(undefined)
+        })
+
         it('should return component with 3 properties', async () => {
           const designSystem = await extractDesignSystem(dirPath)
 
@@ -95,7 +175,6 @@ describe('extractDesignSystem', () => {
             name: 'children',
             type: 'React.ReactNode',
             description: 'The content of the button',
-            optional: false,
             defaultValue: undefined,
           })
         })
@@ -107,7 +186,6 @@ describe('extractDesignSystem', () => {
             name: 'variant',
             type: "'primary' | 'black' | 'basic'",
             description: '',
-            optional: false,
             defaultValue: undefined,
           })
         })
@@ -127,7 +205,7 @@ describe('extractDesignSystem', () => {
 
       describe('Input', () => {
         const getComponent = (designSystem: DesignSystem) =>
-          designSystem.components[1]
+          designSystem.components[2]
 
         it('should return component with name Input', async () => {
           const designSystem = await extractDesignSystem(dirPath)
@@ -139,6 +217,12 @@ describe('extractDesignSystem', () => {
           const designSystem = await extractDesignSystem(dirPath)
 
           expect(getComponent(designSystem).path).toEqual('atoms/input.tsx')
+        })
+
+        it('should return component not deprecated', async () => {
+          const designSystem = await extractDesignSystem(dirPath)
+
+          expect(getComponent(designSystem).deprecated).toEqual(undefined)
         })
 
         it('should return component with 3 properties', async () => {
@@ -154,7 +238,6 @@ describe('extractDesignSystem', () => {
             name: 'value',
             type: 'string | number',
             description: '',
-            optional: false,
             defaultValue: undefined,
           })
         })
@@ -166,7 +249,6 @@ describe('extractDesignSystem', () => {
             name: 'onChange',
             type: '(value: string) => void',
             description: '',
-            optional: false,
             defaultValue: '() => {}',
           })
         })
@@ -186,12 +268,52 @@ describe('extractDesignSystem', () => {
 
       describe('Card', () => {
         const getComponent = (designSystem: DesignSystem) =>
-          designSystem.components[2]
+          designSystem.components[3]
 
         it('should return component with name Card', async () => {
           const designSystem = await extractDesignSystem(dirPath)
 
           expect(getComponent(designSystem).name).toEqual('Card')
+        })
+
+        it('should return component with path molecules/Card', async () => {
+          const designSystem = await extractDesignSystem(dirPath)
+
+          expect(getComponent(designSystem).path).toEqual('molecules/card.tsx')
+        })
+
+        it('should return component not deprecated', async () => {
+          const designSystem = await extractDesignSystem(dirPath)
+
+          expect(getComponent(designSystem).deprecated).toEqual(undefined)
+        })
+
+        it('should return component with 2 properties', async () => {
+          const designSystem = await extractDesignSystem(dirPath)
+
+          expect(getComponent(designSystem).properties).toHaveLength(2)
+        })
+
+        it('should return component with properties value', async () => {
+          const designSystem = await extractDesignSystem(dirPath)
+
+          expect(getComponent(designSystem).properties[0]).toEqual({
+            name: 'title',
+            type: 'React.ReactNode',
+            description: '',
+            defaultValue: undefined,
+          })
+        })
+
+        it('should return component with properties value', async () => {
+          const designSystem = await extractDesignSystem(dirPath)
+
+          expect(getComponent(designSystem).properties[1]).toEqual({
+            name: 'description',
+            type: 'React.ReactNode',
+            description: '',
+            defaultValue: undefined,
+          })
         })
       })
     })

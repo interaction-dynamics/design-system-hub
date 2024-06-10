@@ -4,6 +4,7 @@ import { PartialComponent } from '@/domain/entities/partial-component'
 import { db } from '@/lib/db'
 import { DesignSystemDao } from './design-systems'
 import { Component } from '@/domain/entities/component'
+import generateSlug from '@/lib/generate-slug'
 
 export const findPartialComponents = cache(
   async (designSystem: DesignSystemDao): Promise<PartialComponent[]> => {
@@ -36,7 +37,8 @@ export const findComponent = cache(
         type: propertyDao.type,
         description: propertyDao.description,
         defaultValue: propertyDao.defaultValue,
-        optional: propertyDao.optional,
+        ...(propertyDao.optional ? { optional: true } : {}),
+        ...(propertyDao.deprecated ? { deprecated: true } : {}),
       })),
       providers: componentDao.providers as any,
       variants: componentDao.variants.map((variantDao) => ({
@@ -68,7 +70,8 @@ export const findComponentByName = cache(
         type: propertyDao.type,
         description: propertyDao.description,
         defaultValue: propertyDao.defaultValue,
-        optional: propertyDao.optional,
+        ...(propertyDao.optional ? { optional: true } : {}),
+        ...(propertyDao.deprecated ? { deprecated: true } : {}),
       })),
       providers: componentDao.providers as any,
       variants: componentDao.variants.map((variantDao) => ({
@@ -98,17 +101,36 @@ export const findComponentByName = cache(
 //   }
 // )
 
-export const updateComponent = cache(
-  async (
-    designSystemId: string,
-    componentName: string,
-    values: Partial<Component>
-  ) => {
-    await db.component.updateMany({
-      where: { designSystemId, name: componentName },
-      data: {
-        ...values,
-      },
-    })
-  }
-)
+export const updateComponent = async (
+  designSystemId: string,
+  componentName: string,
+  values: Partial<Component>
+) => {
+  await db.component.updateMany({
+    where: { designSystemId, name: componentName },
+    data: {
+      ...values,
+    },
+  })
+}
+
+export async function createComponent(
+  designSystemId: string,
+  values: Pick<Component, 'name' | 'providers' | 'properties'>
+) {
+  await db.component.create({
+    data: {
+      ...values,
+      designSystemId,
+      slug: generateSlug(values.name),
+      properties: values.properties.map((property) => ({
+        name: property.name,
+        type: property.type,
+        description: property.description,
+        defaultValue: property.defaultValue,
+        ...(property.optional ? { optional: true } : {}),
+        ...(property.deprecated ? { deprecated: true } : {}),
+      })),
+    },
+  })
+}

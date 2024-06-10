@@ -1,9 +1,11 @@
 import { Component } from './component'
 import { ComponentVariant } from './component-variant'
+import { DesignSystem } from './design-system'
 
-interface ActionLink {
+export interface ActionLink {
   href: string
   label: string
+  order: number
 }
 
 type ViewerType = (props: {
@@ -15,7 +17,10 @@ export default interface Provider {
 
   getDescription(component: Component | ComponentVariant): string
 
-  getLinks(component: Component | ComponentVariant): ActionLink[]
+  getLinks(
+    component: Component | ComponentVariant,
+    DesignSystem: DesignSystem
+  ): ActionLink[]
 
   getViewers(component: Component | ComponentVariant): ViewerType[]
 

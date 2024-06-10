@@ -1,3 +1,6 @@
+/**
+ * A description of the Input component
+ */
 export default function Input({
   value,
   onChange = () => {},

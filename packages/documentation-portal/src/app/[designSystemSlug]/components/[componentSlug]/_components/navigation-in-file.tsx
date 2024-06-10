@@ -7,9 +7,7 @@ interface Props {
 export function NavigationInFile({ component }: Props) {
   return (
     <div>
-      {component.variants.length > 0 && (
-        <p className="font-medium text-primary">On This Page</p>
-      )}
+      <p className="font-medium text-primary">On This Page</p>
       <ul className="m-0 list-none text-muted">
         {component.variants.length > 0 && (
           <>
@@ -35,16 +33,16 @@ export function NavigationInFile({ component }: Props) {
                 ))}
               </ul>
             </li>
-            <li className="mt-0 pt-2">
-              <a
-                href="#props"
-                className="inline-block no-underline transition-colors hover:text-foreground text-muted-foreground"
-              >
-                Props
-              </a>
-            </li>
           </>
         )}
+        <li className="mt-0 pt-2">
+          <a
+            href="#props"
+            className="inline-block no-underline transition-colors hover:text-foreground text-muted-foreground"
+          >
+            Props
+          </a>
+        </li>
       </ul>
     </div>
   )

@@ -22,5 +22,5 @@ export const FigmaComponentValidator = z.object({
 export function validateFigmaComponent(
   component: Component | ComponentVariant
 ): component is FigmaComponent {
-  return Boolean(FigmaComponentValidator.parse(component))
+  return Boolean(FigmaComponentValidator.safeParse(component))
 }

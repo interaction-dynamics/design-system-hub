@@ -71,9 +71,13 @@ program
   .command('dev')
   .description('Find all the React components from the target directory')
   .option('--json', 'display the output with json format')
-  .argument('[directory]', 'design system directory', process.cwd())
-  .action(async (str, options) => {
-    const targetPath = path.resolve(process.cwd(), str)
+  .option(
+    '--cwd <project_path>',
+    'path to the project directory',
+    process.cwd(),
+  )
+  .action(async options => {
+    const targetPath = path.resolve(process.cwd(), options.cwd)
 
     const designSystem = await extractDesignSystem(targetPath)
 

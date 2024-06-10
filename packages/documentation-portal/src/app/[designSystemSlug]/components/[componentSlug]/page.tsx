@@ -10,6 +10,7 @@ import { findDesignSystemBySlug } from '@/adapters/data-access/design-systems'
 import { findComponent } from '@/adapters/data-access/components'
 import { NavigationInFile } from './_components/navigation-in-file'
 import { PropertiesTable } from './_components/properties-table'
+import { ComponentFlags } from './_components/component-flags'
 
 export interface ComponentPageProps {
   params: any
@@ -29,16 +30,21 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
     <Main
       pageSlug={componentSlug}
       title={component.name}
-      description={getDescription({ component, getProvider })}
+      description={
+        <div>
+          {getDescription({ component, getProvider }).map((p) => (
+            <div key={p}>{p}</div>
+          ))}
+        </div>
+      }
       rightSideBar={
         <RightSideBar>
           <NavigationInFile component={component} />
         </RightSideBar>
       }
+      flags={<ComponentFlags component={component} />}
     >
-      <div className="mt-10 pb-3">
-        <ComponentLinks component={component} />
-      </div>
+      <ComponentLinks component={component} designSystem={designSystem} />
       <ComponentViewer component={component} />
       {component.variants.length > 0 && (
         <div>
@@ -54,7 +60,10 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
                 {getDescription({ component: variant, getProvider })}
               </Typography>
               <div className="mt-3 pb-3">
-                <ComponentLinks component={variant} />
+                <ComponentLinks
+                  component={variant}
+                  designSystem={designSystem}
+                />
               </div>
               <ComponentViewer component={variant} />
             </div>

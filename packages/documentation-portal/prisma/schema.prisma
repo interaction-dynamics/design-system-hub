@@ -15,7 +15,8 @@ type Property {
     name         String
     description  String
     defaultValue String?
-    optional     Boolean
+    optional     Boolean?
+    deprecated   Boolean?
 }
 
 model ComponentVariant {

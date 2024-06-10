@@ -89,6 +89,7 @@ export const findDesignSystemBySlug = cache(
       id: designSystemDao.id,
       name: designSystemDao.name,
       slug: designSystemDao.slug,
+      providers: designSystemDao.providers,
     }
   }
 )
@@ -109,13 +110,18 @@ export const findAllDesignSystemsByOrganizationId = cache(
 export const findDesignSystemById = cache(
   async (
     designSystemId: string
-  ): Promise<Array<Pick<DesignSystem, 'id' | 'name'>>> => {
-    const designSystemDaos = await db.designSystem.findMany()
+  ): Promise<Pick<DesignSystem, 'id' | 'name' | 'providers'> | undefined> => {
+    const designSystemDao = await db.designSystem.findFirst({
+      where: { id: designSystemId },
+    })
 
-    return designSystemDaos.map((designSystemDao) => ({
+    if (!designSystemDao) return undefined
+
+    return {
       id: designSystemDao.id,
       name: designSystemDao.name,
-    }))
+      providers: designSystemDao.providers,
+    }
   }
 )
 

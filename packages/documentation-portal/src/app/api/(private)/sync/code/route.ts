@@ -1,9 +1,13 @@
 import { z } from 'zod'
-import { updateDesignSystemProvider } from '@/adapters/data-access/design-systems'
+import {
+  updateDesignSystem,
+  findDesignSystemById,
+} from '@/adapters/data-access/design-systems'
 
 import { NextRequest } from 'next/server'
 import { getUser } from '../../_utils/get-user'
 import {
+  createComponent,
   findComponentByName,
   updateComponent,
 } from '@/adapters/data-access/components'
@@ -25,7 +29,8 @@ const validator = z.object({
             name: z.string(),
             type: z.string(),
             description: z.string(),
-            optional: z.boolean(),
+            optional: z.boolean().optional(),
+            deprecated: z.boolean().optional(),
             defaultValue: z.string().optional(),
           })
         ),
@@ -42,18 +47,20 @@ interface ReturnedDesignSystem {
       relativePath: string
       url: string
     }
-    components: {
+    components: Array<{
       name: string
       path: string
       description: string
+      deprecated?: boolean
       properties: {
         name: string
         type: string
         description: string
-        optional: boolean
+        optional?: boolean
+        deprecated?: boolean
         defaultValue: string | undefined
       }[]
-    }[]
+    }>
   }
 }
 
@@ -72,9 +79,16 @@ export async function POST(request: NextRequest) {
 
   const { designSystem } = body
 
-  await updateDesignSystemProvider(body.designSystemId, 'code', {
-    relativePath: designSystem.provider.relativePath,
-    url: designSystem.provider.url,
+  const foundDesignSystem = await findDesignSystemById(body.designSystemId)
+
+  await updateDesignSystem(body.designSystemId, {
+    providers: {
+      ...(foundDesignSystem?.providers ?? {}),
+      code: {
+        relativePath: designSystem.provider.relativePath,
+        url: designSystem.provider.url,
+      },
+    },
   })
 
   designSystem.components.forEach(async (component) => {
@@ -90,6 +104,7 @@ export async function POST(request: NextRequest) {
           code: {
             path: component.path,
             description: component.description,
+            ...(component.deprecated ? { deprecated: true } : {}),
           },
         },
         properties: component.properties.map((property) => {
@@ -97,7 +112,29 @@ export async function POST(request: NextRequest) {
             name: property.name,
             type: property.type,
             description: property.description,
-            optional: property.optional ?? false,
+            ...(property.optional ? { optional: true } : {}),
+            ...(property.deprecated ? { deprecated: true } : {}),
+            defaultValue: property.defaultValue ?? undefined,
+          }
+        }),
+      })
+    } else {
+      await createComponent(body.designSystemId, {
+        name: component.name,
+        providers: {
+          code: {
+            path: component.path,
+            description: component.description,
+            ...(component.deprecated ? { deprecated: true } : {}),
+          },
+        },
+        properties: component.properties.map((property) => {
+          return {
+            name: property.name,
+            type: property.type,
+            description: property.description,
+            ...(property.optional ? { optional: true } : {}),
+            ...(property.deprecated ? { deprecated: true } : {}),
             defaultValue: property.defaultValue ?? undefined,
           }
         }),

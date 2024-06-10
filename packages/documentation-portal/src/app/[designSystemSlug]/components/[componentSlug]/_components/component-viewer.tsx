@@ -11,7 +11,7 @@ interface ComponentViewerProps {
 function ComponentViewer({ component }: ComponentViewerProps) {
   const [Viewer] = getViewers({ component, getProvider })
 
-  console.log('DemoViewer.component', component)
+  if (!Viewer) return null
 
   return (
     <div className="relative w-full ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-md border overflow-hidden">

@@ -63,3 +63,15 @@ export function getViewerTitles({
     provider.getViewerTitles(component)
   )
 }
+
+export function getComponentFlags({
+  component,
+  getProvider,
+}: {
+  component: Component | ComponentVariant
+  getProvider: ProviderGetter
+}) {
+  return getProviders(component, getProvider).flatMap((provider) =>
+    provider.getComponentFlags(component)
+  )
+}

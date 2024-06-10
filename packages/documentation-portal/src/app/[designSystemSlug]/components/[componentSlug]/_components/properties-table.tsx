@@ -17,6 +17,14 @@ interface Props {
 }
 
 export function PropertiesTable({ component }: Props) {
+  if (component.properties.length === 0) {
+    return (
+      <div className="mt-10 text-muted-foreground text-sm flex justify-center">
+        No properties
+      </div>
+    )
+  }
+
   return (
     <div className="rounded-md border mt-10">
       <Table>
@@ -55,7 +63,7 @@ export function PropertiesTable({ component }: Props) {
                 <div className="flex flex-col gap-1">
                   {property.deprecated && (
                     <div className="">
-                      <Badge className="inline-flex items-center gap-1 bg-orange-400">
+                      <Badge className="inline-flex items-center gap-1 bg-orange-400 hover:bg-orange-400">
                         <svg
                           width="15"
                           height="15"
@@ -76,7 +84,9 @@ export function PropertiesTable({ component }: Props) {
                   )}
                   <span>{property.description}</span>
                   {property.optional && (
-                    <span className="font-medium">Optional</span>
+                    <div>
+                      <Badge variant="secondary">Optional</Badge>
+                    </div>
                   )}
                 </div>
               </TableCell>

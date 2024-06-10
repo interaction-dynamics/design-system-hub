@@ -2,7 +2,6 @@ import { DesignSystem } from '@/domain/entities/design-system'
 import { Chapter } from '@/domain/entities/chapter'
 import { DocumentNode, HttpFigmaFile } from './fetchFigmaFiles'
 import { PartialPage } from '@/domain/entities/partial-page'
-import { PartialComponent } from '@/domain/entities/partial-component'
 import generateSlug from '@/lib/generate-slug'
 import { FigmaPartialComponentProvider } from '../../types/figma-partial-component-provider'
 

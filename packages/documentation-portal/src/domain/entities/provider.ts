@@ -25,4 +25,6 @@ export default interface Provider {
   getViewers(component: Component | ComponentVariant): ViewerType[]
 
   getViewerTitles(component: Component | ComponentVariant): string[]
+
+  getComponentFlags(component: Component | ComponentVariant): React.ReactNode[]
 }

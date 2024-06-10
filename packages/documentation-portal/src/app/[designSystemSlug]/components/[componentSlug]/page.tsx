@@ -11,6 +11,7 @@ import { findComponent } from '@/adapters/data-access/components'
 import { NavigationInFile } from './_components/navigation-in-file'
 import { PropertiesTable } from './_components/properties-table'
 import { ComponentFlags } from './_components/component-flags'
+import { ComponentDescription } from './_components/component-description'
 
 export interface ComponentPageProps {
   params: any
@@ -30,13 +31,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
     <Main
       pageSlug={componentSlug}
       title={component.name}
-      description={
-        <div>
-          {getDescription({ component, getProvider }).map((p) => (
-            <div key={p}>{p}</div>
-          ))}
-        </div>
-      }
+      description={<ComponentDescription component={component} />}
       rightSideBar={
         <RightSideBar>
           <NavigationInFile component={component} />

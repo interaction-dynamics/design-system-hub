@@ -20,4 +20,7 @@ export const figma: Provider = {
   getLinks(component: Component | ComponentVariant) {
     return validateFigmaComponent(component) ? [getLink(component)] : []
   },
+  getComponentFlags() {
+    return []
+  },
 }

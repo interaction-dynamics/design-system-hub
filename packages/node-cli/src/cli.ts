@@ -5,8 +5,11 @@ import yaml from 'yaml'
 import chalk from 'chalk'
 
 import packageJson from '../package.json'
-import { setup } from './actions/setup'
 import { extractDesignSystem } from './actions/extract-design-system'
+import { isConnected, login, logout } from './actions/login'
+import { printWarning } from './adapters/prompt'
+import { link } from './actions/link'
+import { sync } from './actions/sync'
 
 const program = new Command()
 
@@ -14,14 +17,52 @@ program
   .name('ds')
   .description(packageJson.description)
   .version(packageJson.version)
+  .action(() => {
+    console.log('foo')
+  })
 
 program
-  .command('setup')
-  .description('Configure in which folder is the design system')
-  .argument('[directory]', 'design system directory', process.cwd())
-  .action(async str => {
-    const targetPath = path.resolve(process.cwd(), str)
-    await setup(targetPath)
+  .command('login')
+  .description('Login')
+  .action(async () => {
+    if (await isConnected()) {
+      printWarning('You are already logged in. Run `logout` command to logout.')
+      return
+    }
+
+    await login()
+  })
+
+program
+  .command('logout')
+  .description('Logout')
+  .action(async () => {
+    await logout()
+  })
+
+program
+  .command('link')
+  .description('Link')
+  .argument('[directory]', 'design system directory')
+  .option(
+    '--cwd <project_path>',
+    'path to the project directory',
+    process.cwd(),
+  )
+  .action(async (str, options) => {
+    await link(options.cwd, str)
+  })
+
+program
+  .command('sync')
+  .description('Sync')
+  .option(
+    '--cwd <project_path>',
+    'path to the project directory',
+    process.cwd(),
+  )
+  .action(async options => {
+    await sync(options.cwd)
   })
 
 const logSummary = (s: string) => console.warn(chalk.yellow.bold(s))
@@ -30,9 +71,13 @@ program
   .command('dev')
   .description('Find all the React components from the target directory')
   .option('--json', 'display the output with json format')
-  .argument('[directory]', 'design system directory', process.cwd())
-  .action(async (str, options) => {
-    const targetPath = path.resolve(process.cwd(), str)
+  .option(
+    '--cwd <project_path>',
+    'path to the project directory',
+    process.cwd(),
+  )
+  .action(async options => {
+    const targetPath = path.resolve(process.cwd(), options.cwd)
 
     const designSystem = await extractDesignSystem(targetPath)
 

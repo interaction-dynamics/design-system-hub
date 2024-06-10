@@ -14,7 +14,9 @@ type Property {
     type         String
     name         String
     description  String
-    defaultValue String
+    defaultValue String?
+    optional     Boolean?
+    deprecated   Boolean?
 }
 
 model ComponentVariant {
@@ -53,4 +55,24 @@ model DesignSystem {
     components Component[]
     createdAt  DateTime    @default(now())
     updatedAt  DateTime    @updatedAt
+    providers  Json
+}
+
+model User {
+    id        String   @id @default(auto()) @map("_id") @db.ObjectId
+    email     String   @unique
+    name      String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    Token     Token[]
+}
+
+model Token {
+    id          String   @id @default(auto()) @map("_id") @db.ObjectId
+    token       String   @unique
+    description String   @default("")
+    User        User?    @relation(fields: [userId], references: [id])
+    userId      String?  @db.ObjectId
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
 }

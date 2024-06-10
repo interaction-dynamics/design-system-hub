@@ -1,0 +1,13 @@
+{
+  "folders": [
+    {
+      "name": "node-cli",
+      "path": "../packages/node-cli"
+    },
+    {
+      "name": "documentation-portal",
+      "path": "../packages/documentation-portal"
+    },
+  ],
+  "settings": {}
+}

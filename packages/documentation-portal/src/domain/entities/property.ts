@@ -3,4 +3,6 @@ export interface Property {
   name: string
   description: string
   defaultValue: any
+  optional?: boolean
+  deprecated?: boolean
 }

@@ -16,6 +16,7 @@ export async function createDesignSystem(
     data: {
       name: designSystem.name,
       slug: designSystem.slug,
+      providers: {},
     },
   })
 
@@ -88,6 +89,48 @@ export const findDesignSystemBySlug = cache(
       id: designSystemDao.id,
       name: designSystemDao.name,
       slug: designSystemDao.slug,
+      providers: designSystemDao.providers,
     }
   }
 )
+
+export const findAllDesignSystemsByOrganizationId = cache(
+  async (
+    organizationId: string
+  ): Promise<Array<Pick<DesignSystem, 'id' | 'name'>>> => {
+    const designSystemDaos = await db.designSystem.findMany()
+
+    return designSystemDaos.map((designSystemDao) => ({
+      id: designSystemDao.id,
+      name: designSystemDao.name,
+    }))
+  }
+)
+
+export const findDesignSystemById = cache(
+  async (
+    designSystemId: string
+  ): Promise<Pick<DesignSystem, 'id' | 'name' | 'providers'> | undefined> => {
+    const designSystemDao = await db.designSystem.findFirst({
+      where: { id: designSystemId },
+    })
+
+    if (!designSystemDao) return undefined
+
+    return {
+      id: designSystemDao.id,
+      name: designSystemDao.name,
+      providers: designSystemDao.providers,
+    }
+  }
+)
+
+export async function updateDesignSystem<T extends object>(
+  designSystemId: string,
+  value: Partial<DesignSystem>
+) {
+  await db.designSystem.update({
+    data: value,
+    where: { id: designSystemId },
+  })
+}

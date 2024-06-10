@@ -1,9 +1,9 @@
 import Image from 'next/image'
 
-import SvgGrid from '@/components/atoms/svg-grid'
 import { Component } from '@/domain/entities/component'
 import { ComponentVariant } from '@/domain/entities/component-variant'
 import { getFigmaProviderMetadata } from '../utils/get-figma-provider-metadata'
+import { ComponentViewerContainer } from '@/components/organisms/component-viewer-container'
 
 export interface FigmaViewerProps {
   component: Component | ComponentVariant
@@ -19,8 +19,7 @@ export function FigmaViewer({ component }: FigmaViewerProps) {
   const figmaProvider = getFigmaProviderMetadata(component)
 
   return (
-    <div className="relative min-h-20 p-4 flex items-center justify-center">
-      <SvgGrid />
+    <ComponentViewerContainer>
       <Image
         priority
         className="relative z-20"
@@ -29,7 +28,7 @@ export function FigmaViewer({ component }: FigmaViewerProps) {
         width={figmaProvider.width}
         height={figmaProvider.height}
       />
-    </div>
+    </ComponentViewerContainer>
   )
 }
 

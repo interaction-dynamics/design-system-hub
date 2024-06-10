@@ -14,6 +14,7 @@ export interface MainProps {
   description?: React.ReactNode
   children: React.ReactNode
   rightSideBar: React.ReactNode
+  flags?: React.ReactNode
 }
 
 export default function Main({
@@ -22,6 +23,7 @@ export default function Main({
   description,
   children,
   rightSideBar,
+  flags,
 }: MainProps) {
   return (
     <main className="lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]">
@@ -29,7 +31,8 @@ export default function Main({
         <div className="mb-4" />
         <div className="space-y-2">
           <Typography variant="h1">{title}</Typography>
-          <p className="text-lg text-muted-foreground">{description}</p>
+          <div>{flags}</div>
+          <div className="text-lg text-muted-foreground">{description}</div>
         </div>
         <div>{children}</div>
         <div className="mb-10" />

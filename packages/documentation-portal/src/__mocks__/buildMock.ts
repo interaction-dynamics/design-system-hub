@@ -4,38 +4,34 @@ type DeepPartial<T> = T extends object
     }
   : T
 
-const mergeDeep = <T>(source: T, target: DeepPartial<T>): T => {
-  if (!target) return source
-
-  if (typeof target == 'object' && typeof source == 'object') {
-    let object = Object.assign({}, source)
-
-    for (const key in source) {
-      if (target[key] === undefined) {
-        object = Object.assign({}, object, { [key]: source[key] })
-      } else if (source[key] instanceof Array && target[key] instanceof Array) {
-        object = Object.assign({}, object, { [key]: target[key] })
-      } else if (
-        typeof source[key] == 'object' &&
-        typeof target[key] == 'object'
-      ) {
-        object = Object.assign({}, object, {
-          [key]: mergeDeep(source[key], target[key] as DeepPartial<T[keyof T]>),
-        })
-      } else {
-        object = Object.assign({}, object, { [key]: target[key] })
-      }
+const deepMerge = <T extends object>(
+  obj1: T,
+  obj2: DeepPartial<T> | Record<string, string>
+): T => {
+  const mergeValue = (value: unknown, newValue: unknown) => {
+    if (typeof value === 'object' && typeof newValue === 'object') {
+      return deepMerge(value, newValue)
     }
 
-    return object
+    if (newValue === undefined) {
+      return value
+    }
+
+    return newValue
   }
 
-  return target as T
+  return Object.entries(obj2).reduce(
+    (acc, [key, value]) => ({
+      ...acc,
+      [key]: mergeValue(obj1[key], value as unknown),
+    }),
+    obj1
+  )
 }
 
 const buildMock =
   <T extends object>(defaultValue: T) =>
-  (overrides: DeepPartial<T> = {}): T =>
-    mergeDeep(defaultValue, overrides)
+  (overrides?: DeepPartial<T>): T =>
+    deepMerge(defaultValue, overrides ?? {})
 
 export default buildMock

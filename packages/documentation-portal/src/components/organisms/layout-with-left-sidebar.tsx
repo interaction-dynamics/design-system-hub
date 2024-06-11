@@ -1,5 +1,3 @@
-import LeftSideBar from './left-sidebar'
-
 interface Props {
   slug: string
   section: string

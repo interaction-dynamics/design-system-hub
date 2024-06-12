@@ -12,10 +12,12 @@ export const findPartialComponents = cache(
       where: { designSystemId: designSystem.id },
     })
 
-    return componentDaos.map((componentDao) => ({
-      name: componentDao.name,
-      slug: componentDao.slug,
-    }))
+    return componentDaos
+      .map((componentDao) => ({
+        name: componentDao.name,
+        slug: componentDao.slug,
+      }))
+      .sort((a, b) => a.name.localeCompare(b.name))
   }
 )
 

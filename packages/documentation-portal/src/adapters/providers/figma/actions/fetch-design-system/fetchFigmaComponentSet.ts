@@ -21,6 +21,7 @@ export default async function fetchFigmaComponentSet(
   )
 
   if (!response.ok) {
+    console.error(response.statusText)
     throw new Error(
       `Failed to fetch Figma component set with key ${componentSetKey}`
     )

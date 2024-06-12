@@ -1,5 +1,6 @@
 import { fetchDesignSystem } from '@/adapters/providers/figma/actions/fetch-design-system'
 import {
+  createComponent,
   findComponentByName,
   updateComponent,
 } from '@/adapters/data-access/components'
@@ -24,6 +25,40 @@ export async function POST() {
           ...component.providers,
         },
       })
+    } else {
+      await createComponent(designSystemId, {
+        name: component.name,
+        providers: {
+          ...component.providers,
+        },
+        properties: [],
+      })
+
+      // if (component.variants) {
+      //   component.variants.forEach(async (variant) => {
+      //     const foundVariant = await findComponentByName(
+      //       designSystemId,
+      //       variant.name
+      //     )
+
+      //     if (foundVariant) {
+      //       await updateComponent(designSystemId, variant.name, {
+      //         providers: {
+      //           ...foundVariant.providers,
+      //           ...variant.providers,
+      //         },
+      //       })
+      //     } else {
+      //       await createComponent(designSystemId, {
+      //         name: variant.name,
+      //         providers: {
+      //           ...variant.providers,
+      //         },
+      //         properties: [],
+      //       })
+      //     }
+      //   })
+      // }
     }
   })
 

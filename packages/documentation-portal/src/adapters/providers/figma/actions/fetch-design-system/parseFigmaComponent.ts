@@ -8,6 +8,7 @@ export default function parseFigmaComponent(
   partialComponent: Omit<PartialHttpFigmaComponent, 'variants'>
 ): FigmaComponent {
   return {
+    id: '',
     name: figmaComponent.name,
     slug: generateSlug(figmaComponent.name),
     variants: [],

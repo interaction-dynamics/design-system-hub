@@ -32,6 +32,7 @@ export const findComponent = cache(
     })
 
     return {
+      id: componentDao.id,
       name: componentDao.name,
       slug: componentDao.slug,
       properties: componentDao.properties.map((propertyDao) => ({
@@ -65,6 +66,7 @@ export const findComponentByName = cache(
     if (!componentDao) return undefined
 
     return {
+      id: componentDao.id,
       name: componentDao.name,
       slug: componentDao.slug,
       properties: componentDao.properties.map((propertyDao) => ({
@@ -119,8 +121,8 @@ export const updateComponent = async (
 export async function createComponent(
   designSystemId: string,
   values: Pick<Component, 'name' | 'providers' | 'properties'>
-) {
-  await db.component.create({
+): Promise<{ id: string }> {
+  return await db.component.create({
     data: {
       ...values,
       designSystemId,

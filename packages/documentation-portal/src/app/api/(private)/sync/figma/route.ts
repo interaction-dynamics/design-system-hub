@@ -4,6 +4,10 @@ import {
   findComponentByName,
   updateComponent,
 } from '@/adapters/data-access/components'
+import {
+  createComponentVariant,
+  deleteComponentVariants,
+} from '@/adapters/data-access/component-variants'
 
 export async function POST() {
   const designSystem = await fetchDesignSystem(
@@ -25,8 +29,15 @@ export async function POST() {
           ...component.providers,
         },
       })
+
+      await deleteComponentVariants(foundComponent.id)
+      if (component.variants) {
+        component.variants.forEach(async (variant) => {
+          await createComponentVariant(foundComponent.id, variant)
+        })
+      }
     } else {
-      await createComponent(designSystemId, {
+      const newComponent = await createComponent(designSystemId, {
         name: component.name,
         providers: {
           ...component.providers,
@@ -34,31 +45,13 @@ export async function POST() {
         properties: [],
       })
 
-      // if (component.variants) {
-      //   component.variants.forEach(async (variant) => {
-      //     const foundVariant = await findComponentByName(
-      //       designSystemId,
-      //       variant.name
-      //     )
+      await deleteComponentVariants(newComponent.id)
 
-      //     if (foundVariant) {
-      //       await updateComponent(designSystemId, variant.name, {
-      //         providers: {
-      //           ...foundVariant.providers,
-      //           ...variant.providers,
-      //         },
-      //       })
-      //     } else {
-      //       await createComponent(designSystemId, {
-      //         name: variant.name,
-      //         providers: {
-      //           ...variant.providers,
-      //         },
-      //         properties: [],
-      //       })
-      //     }
-      //   })
-      // }
+      if (component.variants) {
+        component.variants.forEach(async (variant) => {
+          await createComponentVariant(newComponent.id, variant)
+        })
+      }
     }
   })
 

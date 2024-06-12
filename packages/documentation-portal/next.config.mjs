@@ -4,9 +4,9 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 's3-alpha.figma.com',
+        hostname: '**',
         port: '',
-        pathname: '/**',
+        pathname: '**',
       },
     ],
   },

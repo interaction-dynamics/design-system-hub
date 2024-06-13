@@ -8,7 +8,7 @@ export default async function LoadingComponentPage() {
       description={<Skeleton className="h-[28px] w-[250px]" />}
       rightSideBar={<></>}
     >
-      foo
+      <Skeleton className="h-[28px] mt-10 w-[250px]" />
     </Main>
   )
 }

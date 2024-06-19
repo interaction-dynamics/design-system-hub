@@ -5,6 +5,7 @@ import { getLink } from './utils/get-link'
 import { getDescription } from './utils/get-description'
 import { ComponentVariant } from '@/domain/entities/component-variant'
 import { validateFigmaComponent } from './types/figma-component'
+import { getComponentFlags } from './utils/get-component-flags'
 
 export const figma: Provider = {
   type: 'design',
@@ -20,7 +21,7 @@ export const figma: Provider = {
   getLinks(component: Component | ComponentVariant) {
     return validateFigmaComponent(component) ? [getLink(component)] : []
   },
-  getComponentFlags() {
-    return []
+  getComponentFlags(component: Component | ComponentVariant) {
+    return validateFigmaComponent(component) ? getComponentFlags(component) : []
   },
 }

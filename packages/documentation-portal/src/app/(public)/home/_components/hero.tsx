@@ -3,6 +3,8 @@ import { Button } from '@/components/ui/button'
 
 import Image from 'next/image'
 import { BetaFlag } from './beta-flag'
+import Link from 'next/link'
+import { demoLink } from '../_utils/demo-link'
 
 export function Hero() {
   return (
@@ -19,7 +21,9 @@ export function Hero() {
           deliver features faster.
         </p>
         <div className="flex items-center gap-4">
-          <Button size="lg">Try demo</Button>
+          <Button size="lg" asChild>
+            <Link href={demoLink}>Try demo</Link>
+          </Button>
           <Button size="lg" variant="outline">
             Request Access
           </Button>

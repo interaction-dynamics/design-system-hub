@@ -3,6 +3,8 @@ import Header from '@/components/atoms/header'
 import Footer from '@/components/atoms/footer'
 import Typography from '@/components/atoms/typography'
 import { Button } from '@/components/ui/button'
+import Link from 'next/link'
+import { demoLink } from './home/_utils/demo-link'
 
 export default async function DesignSystemLayout({
   children,
@@ -13,7 +15,9 @@ export default async function DesignSystemLayout({
         <div className="w-full">
           <div className="max-w-5xl m-auto text-left flex items-center justify-between">
             <h1 className="text-lg font-bold">Design Systematik</h1>
-            <Button size="sm">Try demo</Button>
+            <Button size="sm" asChild>
+              <Link href={demoLink}>Try demo</Link>
+            </Button>
           </div>
         </div>
       </Header>

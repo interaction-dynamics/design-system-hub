@@ -4,7 +4,7 @@ import Footer from '@/components/atoms/footer'
 import Typography from '@/components/atoms/typography'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import { demoLink } from './home/_utils/demo-link'
+import { demoLink } from './(home)/_utils/demo-link'
 
 export default async function DesignSystemLayout({
   children,

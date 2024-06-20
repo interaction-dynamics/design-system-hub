@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import { PropsWithChildren } from 'react'
-import { LayoutWithLeftSidebar } from '../../../../components/organisms/layout-with-left-sidebar'
-import LeftSideBar from '../../../../components/organisms/left-sidebar'
+import { LayoutWithLeftSidebar } from '@/components/organisms/layout-with-left-sidebar'
+import LeftSideBar from '@/components/organisms/left-sidebar'
 import { findDesignSystemBySlug } from '@/adapters/data-access/design-systems'
 import { findPartialComponents } from '@/adapters/data-access/components'
 

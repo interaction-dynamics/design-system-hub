@@ -1,5 +1,5 @@
 import { Skeleton } from '@/components/ui/skeleton'
-import Main from '../../../../components/organisms/main'
+import Main from '@/components/organisms/main'
 
 export default async function LoadingComponentPage() {
   return (

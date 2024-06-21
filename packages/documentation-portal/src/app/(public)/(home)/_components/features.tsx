@@ -34,8 +34,8 @@ export function Features() {
         </h2>
         <p className="mt-4 max-w-[26rem] text-left  text-base/6 text-neutral-200">
           Provide the Figma files URL and run the command line interface in the
-          code directory and everything is built automatically. You don't need
-          to worry about the configuration.
+          code directory and everything is built automatically. You don&apos;t
+          need to worry about the configuration.
         </p>
       </WobbleCard>
       <WobbleCard containerClassName="col-span-1 lg:col-span-1 bg-blue-900 min-h-[500px] lg:min-h-[600px] xl:min-h-[300px]">

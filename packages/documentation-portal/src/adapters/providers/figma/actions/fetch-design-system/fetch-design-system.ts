@@ -47,8 +47,7 @@ export async function fetchDesignSystem(fileIds: string[]) {
     fileIds
   )
 
-  const { designSystem, figmaComponents, chapters } =
-    parseFigmaFiles(figmaFiles)
+  const { designSystem, figmaComponents, pages } = parseFigmaFiles(figmaFiles)
 
   const unsortedComponents = await Promise.all(
     figmaComponents.map((p) => fetchComponent(p))
@@ -59,6 +58,6 @@ export async function fetchDesignSystem(fileIds: string[]) {
   return {
     designSystem,
     components,
-    chapters,
+    pages,
   }
 }

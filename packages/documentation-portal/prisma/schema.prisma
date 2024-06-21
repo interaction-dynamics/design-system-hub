@@ -82,6 +82,7 @@ model Page {
     id        String   @id @default(auto()) @map("_id") @db.ObjectId
     title     String
     path      String
+    slug      String
     provider  Json
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt

@@ -11,7 +11,7 @@ import { usePathname } from 'next/navigation'
 
 const navigation = [
   // { title: 'Getting Started', href: 'getting-started' },
-  { title: 'Principles', href: 'principles' },
+  // { title: 'Principles', href: 'principles' },
   { title: 'Foundations', href: 'foundations' },
   { title: 'Components', href: 'components' },
 ]

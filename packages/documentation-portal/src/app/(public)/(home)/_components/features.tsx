@@ -15,9 +15,9 @@ export function Features() {
             A nexus for designers and developers
           </h2>
           <p className="mt-4 text-left  text-base/6 text-neutral-200">
-            Design System Manager generates a documentation site with all your
-            guidelines, tokens, colors, typography and components. Both
-            developers and designers can make use of it.
+            Design System Manager aggregate all the guidelines, tokens, colors,
+            typography and components in a documentation site. Both developers
+            and designers can make use of it without changing their habits.
           </p>
         </div>
         <Image
@@ -34,13 +34,14 @@ export function Features() {
         </h2>
         <p className="mt-4 max-w-[26rem] text-left  text-base/6 text-neutral-200">
           Provide the Figma files URL and run the command line interface in the
-          code directory and everything is built automatically.
+          code directory and everything is built automatically. You don't need
+          to worry about the configuration.
         </p>
       </WobbleCard>
       <WobbleCard containerClassName="col-span-1 lg:col-span-1 bg-blue-900 min-h-[500px] lg:min-h-[600px] xl:min-h-[300px]">
         <div className="max-w-sm">
           <h2 className="max-w-sm md:max-w-lg  text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
-            A professional-grade documentation site in seconds
+            The standards of the industry
           </h2>
           <p className="mt-4 max-w-[26rem] text-left  text-base/6 text-neutral-200">
             You can forget your heavy, slow, ugly and unstable Storybook. With

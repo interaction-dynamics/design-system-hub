@@ -1,4 +1,5 @@
 import { Component } from './component'
+import { Page } from './page'
 
 export interface DesignSystem {
   components: Component[]
@@ -6,4 +7,5 @@ export interface DesignSystem {
     relativePath: string
     url: string
   }
+  pages: Page[]
 }

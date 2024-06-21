@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { Command } from 'commander'
 import path from 'node:path'
 import yaml from 'yaml'
@@ -17,9 +16,6 @@ program
   .name('ds')
   .description(packageJson.description)
   .version(packageJson.version)
-  .action(() => {
-    console.log('foo')
-  })
 
 program
   .command('login')
@@ -71,6 +67,7 @@ program
   .command('dev')
   .description('Find all the React components from the target directory')
   .option('--json', 'display the output with json format')
+  .option('--summary', 'show only the summary')
   .option(
     '--cwd <project_path>',
     'path to the project directory',
@@ -84,7 +81,9 @@ program
     if (options.json) {
       console.log(JSON.stringify(designSystem, null, 2))
     } else {
-      console.log(yaml.stringify(designSystem))
+      if (!options.summary) {
+        console.log(yaml.stringify(designSystem))
+      }
 
       logSummary(`${designSystem.components.length} components found.`)
       const properties = designSystem.components.flatMap(c => c.properties)
@@ -94,6 +93,8 @@ program
       logSummary(
         `${filledDescriptions.length} / ${descriptions.length} descriptions found.`,
       )
+
+      logSummary(`${designSystem.pages.length} pages found.`)
     }
   })
 

@@ -57,6 +57,7 @@ model DesignSystem {
     updatedAt  DateTime    @updatedAt
     providers  Json
     pages      Page[]
+    styles     Style[]
 }
 
 model User {
@@ -83,11 +84,24 @@ model Page {
     title     String
     path      String
     slug      String
-    provider  Json
+    providers Json
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
     order     Int
 
+    DesignSystem   DesignSystem? @relation(fields: [designSystemId], references: [id])
+    designSystemId String?       @db.ObjectId
+}
+
+model Style {
+    id        String @id @default(auto()) @map("_id") @db.ObjectId
+    name      String
+    type      String
+    providers Json
+    metadata  Json
+
+    createdAt      DateTime      @default(now())
+    updatedAt      DateTime      @updatedAt
     DesignSystem   DesignSystem? @relation(fields: [designSystemId], references: [id])
     designSystemId String?       @db.ObjectId
 }

@@ -1,0 +1,196 @@
+{
+  "error": false,
+  "status": 200,
+  "meta": {
+    "styles": [
+      {
+        "key": "d83f29075064e934ed92e12007ba2bd035144c31",
+        "file_key": "zTNDlw3P1z5pjm9mOFzB62",
+        "node_id": "2131:3",
+        "style_type": "FILL",
+        "thumbnail_url": "https://s3-alpha.figma.com/checkpoints/dbG/twQ/DtgbHM1GZ7Yq4aKK/2131_3.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQ4GOSFWC5YUK2IUR%2F20240620%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20240620T000000Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=33b9cd8f119cd6798ed1d64d5e01dd8a97c0748826f46d2b5f904b9de8742111",
+        "name": "black",
+        "description": "",
+        "created_at": "2024-06-21T22:03:47.022Z",
+        "updated_at": "2024-06-22T10:09:14.307Z",
+        "user": {
+          "id": "839986785033185383",
+          "handle": "Thibault Friedrich",
+          "img_url": "https://www.gravatar.com/avatar/0357de635420d011f745142e5fd06bc5?size=240&default=https%3A%2F%2Fs3-alpha.figma.com%2Fstatic%2Fuser_t_v2.png"
+        },
+        "sort_position": "\""
+      },
+      {
+        "key": "394cefeceb5e38e7dbf43980fb8923477be02332",
+        "file_key": "zTNDlw3P1z5pjm9mOFzB62",
+        "node_id": "2135:21",
+        "style_type": "TEXT",
+        "thumbnail_url": "https://s3-alpha.figma.com/checkpoints/FDO/hOX/yLugVSfaqvu069eF/2135_21.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQ4GOSFWC5YUK2IUR%2F20240620%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20240620T000000Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=eae41adbb877e318e29910334fce9b0177e05220e23de378b9df7621138f23dc",
+        "name": "h2",
+        "description": "For subtitles",
+        "created_at": "2024-06-22T10:15:38.633Z",
+        "updated_at": "2024-06-22T10:15:38.633Z",
+        "user": {
+          "id": "839986785033185383",
+          "handle": "Thibault Friedrich",
+          "img_url": "https://www.gravatar.com/avatar/0357de635420d011f745142e5fd06bc5?size=240&default=https%3A%2F%2Fs3-alpha.figma.com%2Fstatic%2Fuser_t_v2.png"
+        },
+        "sort_position": "\"P"
+      },
+      {
+        "key": "5d094cc885bde2502be05cc6909707599577164a",
+        "file_key": "zTNDlw3P1z5pjm9mOFzB62",
+        "node_id": "2135:28",
+        "style_type": "EFFECT",
+        "thumbnail_url": "https://s3-alpha.figma.com/checkpoints/iG2/fL1/zRdaVFGE7tAEdGMI/2135_28.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQ4GOSFWC5YUK2IUR%2F20240620%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20240620T000000Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=d4e10965a2a70a2a5f04cdb20f2552af37b10a37c54cede728aeb436ae0b88bf",
+        "name": "raised",
+        "description": "",
+        "created_at": "2024-06-22T10:22:17.932Z",
+        "updated_at": "2024-06-22T10:22:17.932Z",
+        "user": {
+          "id": "839986785033185383",
+          "handle": "Thibault Friedrich",
+          "img_url": "https://www.gravatar.com/avatar/0357de635420d011f745142e5fd06bc5?size=240&default=https%3A%2F%2Fs3-alpha.figma.com%2Fstatic%2Fuser_t_v2.png"
+        },
+        "sort_position": "\"7"
+      },
+      {
+        "key": "0ec5b42e13f3c76e731529708a96fefd371705f2",
+        "file_key": "zTNDlw3P1z5pjm9mOFzB62",
+        "node_id": "2135:41",
+        "style_type": "FILL",
+        "thumbnail_url": "https://s3-alpha.figma.com/checkpoints/vuy/S4l/NcCCiszPA3KletjL/2135_41.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQ4GOSFWC5YUK2IUR%2F20240620%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20240620T000000Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=ddc3da01b47775beb4a17a6522dcc98d3e15d551ecd21a41c52aa292783d61c9",
+        "name": "white",
+        "description": "",
+        "created_at": "2024-06-22T10:36:10.308Z",
+        "updated_at": "2024-06-22T10:36:10.308Z",
+        "user": {
+          "id": "839986785033185383",
+          "handle": "Thibault Friedrich",
+          "img_url": "https://www.gravatar.com/avatar/0357de635420d011f745142e5fd06bc5?size=240&default=https%3A%2F%2Fs3-alpha.figma.com%2Fstatic%2Fuser_t_v2.png"
+        },
+        "sort_position": "("
+      },
+      {
+        "key": "176e2d0a6d49708c8c669cc0eec39c01b96a4079",
+        "file_key": "zTNDlw3P1z5pjm9mOFzB62",
+        "node_id": "2132:15",
+        "style_type": "FILL",
+        "thumbnail_url": "https://s3-alpha.figma.com/checkpoints/T6m/6OA/fMch85Ueb2vNem4D/2132_15.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQ4GOSFWC5YUK2IUR%2F20240620%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20240620T000000Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=c024851cbb00a853b43a01702207c23e22d3e9d96d9a2b8cb2901b4149cec123",
+        "name": "primary/700",
+        "description": "",
+        "created_at": "2024-06-22T10:09:14.297Z",
+        "updated_at": "2024-06-22T10:36:10.325Z",
+        "user": {
+          "id": "839986785033185383",
+          "handle": "Thibault Friedrich",
+          "img_url": "https://www.gravatar.com/avatar/0357de635420d011f745142e5fd06bc5?size=240&default=https%3A%2F%2Fs3-alpha.figma.com%2Fstatic%2Fuser_t_v2.png"
+        },
+        "sort_position": "%"
+      },
+      {
+        "key": "4516bcaa491ceecfe221ad2e7ae2eb438842121d",
+        "file_key": "zTNDlw3P1z5pjm9mOFzB62",
+        "node_id": "2132:14",
+        "style_type": "FILL",
+        "thumbnail_url": "https://s3-alpha.figma.com/checkpoints/yxx/mhC/iwkuU6R4G1Evn9FM/2132_14.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQ4GOSFWC5YUK2IUR%2F20240620%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20240620T000000Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=bb768cec2a207eadb73f49c270c4076fc75ecb9cd210be97951be72019368148",
+        "name": "primary/600",
+        "description": "",
+        "created_at": "2024-06-22T10:09:14.292Z",
+        "updated_at": "2024-06-22T10:36:10.331Z",
+        "user": {
+          "id": "839986785033185383",
+          "handle": "Thibault Friedrich",
+          "img_url": "https://www.gravatar.com/avatar/0357de635420d011f745142e5fd06bc5?size=240&default=https%3A%2F%2Fs3-alpha.figma.com%2Fstatic%2Fuser_t_v2.png"
+        },
+        "sort_position": "$"
+      },
+      {
+        "key": "a241f3df6d356d10ab04b8a786f6f2176b6f4789",
+        "file_key": "zTNDlw3P1z5pjm9mOFzB62",
+        "node_id": "2132:13",
+        "style_type": "FILL",
+        "thumbnail_url": "https://s3-alpha.figma.com/checkpoints/iBO/Dp5/ZTG2kJWrki57CMxx/2132_13.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQ4GOSFWC5YUK2IUR%2F20240620%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20240620T000000Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=b5643e1863e656ff4b80af70a1c96c7045544fe768714e6fb190b727d5a682db",
+        "name": "primary/500",
+        "description": "Primary color",
+        "created_at": "2024-06-22T10:09:14.286Z",
+        "updated_at": "2024-06-22T10:36:10.336Z",
+        "user": {
+          "id": "839986785033185383",
+          "handle": "Thibault Friedrich",
+          "img_url": "https://www.gravatar.com/avatar/0357de635420d011f745142e5fd06bc5?size=240&default=https%3A%2F%2Fs3-alpha.figma.com%2Fstatic%2Fuser_t_v2.png"
+        },
+        "sort_position": "#"
+      },
+      {
+        "key": "ee808fd783c5932cae62a1b44387a8052aeab7d4",
+        "file_key": "zTNDlw3P1z5pjm9mOFzB62",
+        "node_id": "2135:32",
+        "style_type": "FILL",
+        "thumbnail_url": "https://s3-alpha.figma.com/checkpoints/cpm/OEi/XvTQqe9gE3Jph1YJ/2135_32.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQ4GOSFWC5YUK2IUR%2F20240620%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20240620T000000Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=83f2f8b4949bb8bc08fa3d6131791d93a55d5adef03acddf7a5eb9790aa1a747",
+        "name": "slate/500",
+        "description": "",
+        "created_at": "2024-06-22T10:26:01.995Z",
+        "updated_at": "2024-06-22T10:36:10.342Z",
+        "user": {
+          "id": "839986785033185383",
+          "handle": "Thibault Friedrich",
+          "img_url": "https://www.gravatar.com/avatar/0357de635420d011f745142e5fd06bc5?size=240&default=https%3A%2F%2Fs3-alpha.figma.com%2Fstatic%2Fuser_t_v2.png"
+        },
+        "sort_position": "&"
+      },
+      {
+        "key": "dafdf550196c92dd44c28bf8092ba71bc2aaae2f",
+        "file_key": "zTNDlw3P1z5pjm9mOFzB62",
+        "node_id": "2135:42",
+        "style_type": "GRID",
+        "thumbnail_url": "https://s3-alpha.figma.com/checkpoints/XwE/Eha/UnL7tq6GwA5hIg6a/2135_42.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQ4GOSFWC5YUK2IUR%2F20240620%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20240620T000000Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=ab24bca1a6bf24e012653421fb2299ea80febddbe2b1d047e3a719eb26e189ac",
+        "name": "small",
+        "description": "",
+        "created_at": "2024-06-22T10:58:59.920Z",
+        "updated_at": "2024-06-22T10:58:59.920Z",
+        "user": {
+          "id": "839986785033185383",
+          "handle": "Thibault Friedrich",
+          "img_url": "https://www.gravatar.com/avatar/0357de635420d011f745142e5fd06bc5?size=240&default=https%3A%2F%2Fs3-alpha.figma.com%2Fstatic%2Fuser_t_v2.png"
+        },
+        "sort_position": "\"+"
+      },
+      {
+        "key": "4219d309cf055a7e0e71cb1baf176e308118f78d",
+        "file_key": "zTNDlw3P1z5pjm9mOFzB62",
+        "node_id": "2135:30",
+        "style_type": "EFFECT",
+        "thumbnail_url": "https://s3-alpha.figma.com/checkpoints/l4Y/P7a/pftcMkrRiJAFGrhf/2135_30.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQ4GOSFWC5YUK2IUR%2F20240620%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20240620T000000Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=d4f9291148c42876f88e539999b69e78e718ca98a25ebb1c8a949fbe6d7d2343",
+        "name": "Overlay",
+        "description": "",
+        "created_at": "2024-06-22T10:22:17.937Z",
+        "updated_at": "2024-06-22T10:58:59.935Z",
+        "user": {
+          "id": "839986785033185383",
+          "handle": "Thibault Friedrich",
+          "img_url": "https://www.gravatar.com/avatar/0357de635420d011f745142e5fd06bc5?size=240&default=https%3A%2F%2Fs3-alpha.figma.com%2Fstatic%2Fuser_t_v2.png"
+        },
+        "sort_position": "\"8"
+      },
+      {
+        "key": "fbb0b49a023343a73b6564422955481e59c7c7fa",
+        "file_key": "zTNDlw3P1z5pjm9mOFzB62",
+        "node_id": "2135:20",
+        "style_type": "TEXT",
+        "thumbnail_url": "https://s3-alpha.figma.com/checkpoints/Azs/Usp/nC8149xzqNE5Rtbw/2135_20.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQ4GOSFWC5YUK2IUR%2F20240620%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20240620T000000Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=5c3b4515a4b370dc4a542eb680dffebd78b380140d8d1147b71d5ba66f0d15f8",
+        "name": "h1",
+        "description": "For titles",
+        "created_at": "2024-06-22T10:15:38.625Z",
+        "updated_at": "2024-06-22T10:58:59.941Z",
+        "user": {
+          "id": "839986785033185383",
+          "handle": "Thibault Friedrich",
+          "img_url": "https://www.gravatar.com/avatar/0357de635420d011f745142e5fd06bc5?size=240&default=https%3A%2F%2Fs3-alpha.figma.com%2Fstatic%2Fuser_t_v2.png"
+        },
+        "sort_position": "\"O"
+      }
+    ]
+  },
+  "i18n": null
+}

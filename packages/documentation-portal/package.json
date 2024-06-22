@@ -24,6 +24,7 @@
     "@radix-ui/react-tabs": "^1.0.4",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "figma-api": "^1.11.0",
     "framer-motion": "^11.2.10",
     "mini-svg-data-uri": "^1.4.4",
     "next": "14.2.3",

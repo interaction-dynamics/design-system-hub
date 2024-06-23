@@ -1,10 +1,12 @@
-import { notFound } from 'next/navigation'
 import { PropsWithChildren } from 'react'
+import { usePathname } from 'next/navigation'
+
 import { LayoutWithLeftSidebar } from '@/components/organisms/layout-with-left-sidebar'
 import LeftSideBar from '@/components/organisms/left-sidebar'
 
 interface FoundationsPageProps extends PropsWithChildren {
   params: any
+  slug: string
 }
 
 const foundations = [
@@ -24,26 +26,27 @@ const foundations = [
     label: 'Elevation',
     href: 'elevation',
   },
-  {
-    label: 'Border',
-    href: 'border',
-  },
-  {
-    label: 'Icons',
-    href: 'icons',
-  },
+  // {
+  //   label: 'Border',
+  //   href: 'border',
+  // },
+  // {
+  //   label: 'Icons',
+  //   href: 'icons',
+  // },
 ]
 
-export default async function ComponentsLayout({
+export async function FoundationLayout({
   params,
   children,
+  slug,
 }: FoundationsPageProps) {
   const links =
     foundations.map((foundation) => {
       return {
         label: foundation.label,
-        href: `/${params.designSystemSlug}/foundations/${foundation.href}`,
-        active: foundation.href === params.foundationSlug,
+        href: `/${params.designSystemSlug}/styles/${foundation.href}`,
+        active: slug === foundation.href,
       }
     }) ?? []
 

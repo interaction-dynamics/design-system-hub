@@ -1,7 +1,7 @@
 import * as Figma from 'figma-api'
 import { StyleType } from '@/domain/entities/style'
 import { FigmaStyle } from '../../types/figma-style'
-import { HttpFigmaStyle } from './fetch-figma-style'
+import { StyleMetadata } from 'figma-api/lib/api-types'
 
 const typeMap: Record<string, StyleType> = {
   FILL: 'color',
@@ -105,7 +105,7 @@ function convertFigmaColor(
 }
 
 export async function parseFigmaStyle(
-  style: HttpFigmaStyle,
+  style: StyleMetadata,
   nodes: {
     [nodeId: string]: HttpFigmaNode | null
   }
@@ -142,6 +142,8 @@ export async function parseFigmaStyle(
           nodeId: style.node_id,
           thumbnailUrl: style.thumbnail_url,
           description: style.description,
+          width: node.document.absoluteBoundingBox.width,
+          height: node.document.absoluteBoundingBox.height,
         },
       },
     }
@@ -166,6 +168,8 @@ export async function parseFigmaStyle(
           nodeId: style.node_id,
           thumbnailUrl: style.thumbnail_url,
           description: style.description,
+          width: node.document.absoluteBoundingBox.width,
+          height: node.document.absoluteBoundingBox.height,
         },
       },
     }
@@ -198,6 +202,8 @@ export async function parseFigmaStyle(
           nodeId: style.node_id,
           thumbnailUrl: style.thumbnail_url,
           description: style.description,
+          width: node.document.absoluteBoundingBox.width,
+          height: node.document.absoluteBoundingBox.height,
         },
       },
     }
@@ -220,6 +226,8 @@ export async function parseFigmaStyle(
           nodeId: style.node_id,
           thumbnailUrl: style.thumbnail_url,
           description: style.description,
+          width: node.document.absoluteBoundingBox.width,
+          height: node.document.absoluteBoundingBox.height,
         },
       },
     }

@@ -9,5 +9,5 @@ interface PageProps {
 export default async function RedirectToFirstComponentPage({
   params,
 }: PageProps) {
-  redirect(`foundations/color`)
+  redirect(`styles/color`)
 }

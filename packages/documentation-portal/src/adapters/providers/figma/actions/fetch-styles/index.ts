@@ -1,1 +1,1 @@
-import * from './fetch-styles'
+export * from './fetch-styles'

@@ -38,26 +38,27 @@ interface IStyle<
   providers: S
 }
 
-export interface ColorStyle<S extends object> extends IStyle<ColorMetadata, S> {
+export interface ColorStyle<S extends object = any>
+  extends IStyle<ColorMetadata, S> {
   type: 'color'
 }
 
-export interface TypographyStyle<S extends object>
+export interface TypographyStyle<S extends object = any>
   extends IStyle<TypographyMetadata, S> {
   type: 'typography'
 }
 
-export interface ElevationStyle<S extends object>
+export interface ElevationStyle<S extends object = any>
   extends IStyle<ElevationMetadata, S> {
   type: 'elevation'
 }
 
-export interface SpacingStyle<S extends object>
+export interface SpacingStyle<S extends object = any>
   extends IStyle<SpacingMetadata, S> {
   type: 'spacing'
 }
 
-export type Style<S extends object> =
+export type Style<S extends object = any> =
   | ColorStyle<S>
   | TypographyStyle<S>
   | ElevationStyle<S>

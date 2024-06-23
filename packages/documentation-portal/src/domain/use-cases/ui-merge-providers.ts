@@ -2,6 +2,7 @@ import { Component } from '../entities/component'
 import { ComponentVariant } from '../entities/component-variant'
 import { DesignSystem } from '../entities/design-system'
 import Provider from '../entities/provider'
+import { Style } from '../entities/style'
 
 type ProviderGetter = (providerId: string) => Provider | undefined
 
@@ -73,5 +74,26 @@ export function getComponentFlags({
 }) {
   return getProviders(component, getProvider).flatMap((provider) =>
     provider.getComponentFlags(component)
+  )
+}
+
+function getStyleProviders(
+  style: Style,
+  getProvider: ProviderGetter
+): Provider[] {
+  return Object.keys(style.providers)
+    .map((providerId) => getProvider(providerId))
+    .filter((provider): provider is Provider => Boolean(provider))
+}
+
+export function getStyleViewers({
+  style,
+  getProvider,
+}: {
+  style: Style
+  getProvider: ProviderGetter
+}) {
+  return getStyleProviders(style, getProvider).flatMap((provider) =>
+    provider.getStyleViewers(style)
   )
 }

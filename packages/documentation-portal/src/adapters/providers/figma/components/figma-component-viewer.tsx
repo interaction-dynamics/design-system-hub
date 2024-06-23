@@ -9,11 +9,11 @@ export interface FigmaViewerProps {
   component: Component | ComponentVariant
 }
 
-export function FigmaViewer({ component }: FigmaViewerProps) {
+export function FigmaComponentViewer({ component }: FigmaViewerProps) {
   if (!component) return <></>
 
   if ('variants' in component && component.variants.length > 0) {
-    return <FigmaViewer component={component.variants[0]} />
+    return <FigmaComponentViewer component={component.variants[0]} />
   }
 
   const figmaProvider = getFigmaProviderMetadata(component)

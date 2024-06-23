@@ -24,7 +24,7 @@ export default async function DesignSystemLayout({
     <div className="relative min-h-screen flex flex-col scroll-smooth">
       <Header>
         <div className="w-full flex justify-between items-center">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-10">
             <a href={`/${designSystem.slug}`}>
               <h1 className="text-lg font-bold">{designSystem.name}</h1>
             </a>

@@ -1,4 +1,3 @@
-import { readFile } from 'node:fs/promises'
 import { relative } from 'node:path'
 import {
   pushDesignSystem,
@@ -13,16 +12,19 @@ import { detectComponents } from '../adapters/react-ast'
 import { readGlobalConfig } from '../adapters/global-store'
 import { postDesignSystem } from '../adapters/rest-api'
 import { printText, printWarning } from '../adapters/prompt'
+import { findPages } from '../domain/use-cases/page'
+import { isDirectory, listFiles, readFile } from '../adapters/file-system'
+
+async function detectPages(projectPath: string) {
+  return findPages({ projectPath }, { readFile, isDirectory, listFiles })
+}
 
 export async function sync(projectPath: string) {
   const config = await readConfig<Config>(
     { projectPath },
     {
       readMetadataFile: (filePath: string) =>
-        readMetadataFile(
-          { filePath },
-          { readFile: (filePath: string) => readFile(filePath, 'utf-8') },
-        ),
+        readMetadataFile({ filePath }, { readFile }),
     },
   )
 
@@ -46,6 +48,7 @@ export async function sync(projectPath: string) {
               findRootPath,
               getRelativePath: relative,
               detectComponents,
+              detectPages,
             },
           }),
         postDesignSystem,

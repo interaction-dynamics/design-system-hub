@@ -1,11 +1,17 @@
 import { Component } from '@/domain/entities/component'
-import { FigmaViewer, getFigmaViewerTitle } from './components/figma-viewer'
+import {
+  FigmaComponentViewer,
+  getFigmaViewerTitle,
+} from './components/figma-component-viewer'
 import Provider from '@/domain/entities/provider'
 import { getLink } from './utils/get-link'
 import { getDescription } from './utils/get-description'
 import { ComponentVariant } from '@/domain/entities/component-variant'
 import { validateFigmaComponent } from './types/figma-component'
 import { getComponentFlags } from './utils/get-component-flags'
+import { validateFigmaStyle } from './types/figma-style'
+import { Style } from '@/domain/entities/style'
+import { FigmaStyleViewer } from './components/figma-style-viewer'
 
 export const figma: Provider = {
   type: 'design',
@@ -13,7 +19,7 @@ export const figma: Provider = {
     return validateFigmaComponent(component) ? getDescription(component) : ''
   },
   getViewers(component: Component | ComponentVariant) {
-    return [FigmaViewer]
+    return [FigmaComponentViewer]
   },
   getViewerTitles(component: Component | ComponentVariant) {
     return [getFigmaViewerTitle()]
@@ -23,5 +29,8 @@ export const figma: Provider = {
   },
   getComponentFlags(component: Component | ComponentVariant) {
     return validateFigmaComponent(component) ? getComponentFlags(component) : []
+  },
+  getStyleViewers(style: Style) {
+    return validateFigmaStyle(style) ? [FigmaStyleViewer] : []
   },
 }

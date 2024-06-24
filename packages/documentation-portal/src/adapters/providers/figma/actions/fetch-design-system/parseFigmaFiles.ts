@@ -1,9 +1,8 @@
 import { DesignSystem } from '@/domain/entities/design-system'
-import { Chapter } from '@/domain/entities/chapter'
 import { DocumentNode, HttpFigmaFile } from './fetchFigmaFiles'
-import { PartialPage } from '@/domain/entities/partial-page'
 import generateSlug from '@/lib/generate-slug'
 import { FigmaPartialComponentProvider } from '../../types/figma-partial-component-provider'
+import { Page } from '@/domain/entities/page'
 
 const authorizedChapterTitles = ['Principles', 'Foundations'].map((s) =>
   s.toLowerCase()
@@ -48,7 +47,7 @@ export interface PartialHttpFigmaComponent {
 
 export default function parseFigmaFiles(figmaFiles: HttpFigmaFile[]): {
   designSystem: DesignSystem
-  chapters: Chapter[]
+  pages: Page[]
   figmaComponents: PartialHttpFigmaComponent[]
 } {
   if (figmaFiles.length === 1) {
@@ -58,19 +57,16 @@ export default function parseFigmaFiles(figmaFiles: HttpFigmaFile[]): {
       authorizedChapterTitles.includes(s.name.toLowerCase())
     )
 
-    const chapters = figmaCanvas.map((canvas): Chapter => {
-      const pages = (canvas?.children ?? []).map(
-        (page): PartialPage => ({
-          title: page.name,
-          slug: generateSlug(page.name),
-        })
-      )
+    // const pages = figmaCanvas
+    //   .map((canvas) => {
+    //     const pages = (canvas?.children ?? []).map((page) => ({
+    //       title: page.name,
+    //       slug: generateSlug(page.name),
+    //     }))
 
-      return {
-        type: canvas.name.toLowerCase() as Chapter['type'],
-        pages: pages,
-      }
-    })
+    //     return pages
+    //   })
+    //   .flatMap((p) => p)
 
     const componentsNotInSet = Object.entries(figmaResponse.components ?? {})
       .filter(([nodeId, c]) => !c.componentSetId)
@@ -125,7 +121,7 @@ export default function parseFigmaFiles(figmaFiles: HttpFigmaFile[]): {
         slug: generateSlug(figmaResponse.name),
         providers: {},
       },
-      chapters,
+      pages: [],
       figmaComponents,
     }
   }
@@ -137,7 +133,7 @@ export default function parseFigmaFiles(figmaFiles: HttpFigmaFile[]): {
       slug: '',
       providers: {},
     },
-    chapters: [],
+    pages: [],
     figmaComponents: [],
   }
 }

@@ -56,6 +56,8 @@ model DesignSystem {
     createdAt  DateTime    @default(now())
     updatedAt  DateTime    @updatedAt
     providers  Json
+    pages      Page[]
+    styles     Style[]
 }
 
 model User {
@@ -64,7 +66,7 @@ model User {
     name      String
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
-    Token     Token[]
+    tokens    Token[]
 }
 
 model Token {
@@ -75,4 +77,31 @@ model Token {
     userId      String?  @db.ObjectId
     createdAt   DateTime @default(now())
     updatedAt   DateTime @updatedAt
+}
+
+model Page {
+    id        String   @id @default(auto()) @map("_id") @db.ObjectId
+    title     String
+    path      String
+    slug      String
+    providers Json
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    order     Int
+
+    DesignSystem   DesignSystem? @relation(fields: [designSystemId], references: [id])
+    designSystemId String?       @db.ObjectId
+}
+
+model Style {
+    id        String @id @default(auto()) @map("_id") @db.ObjectId
+    name      String
+    type      String
+    providers Json
+    metadata  Json
+
+    createdAt      DateTime      @default(now())
+    updatedAt      DateTime      @updatedAt
+    DesignSystem   DesignSystem? @relation(fields: [designSystemId], references: [id])
+    designSystemId String?       @db.ObjectId
 }

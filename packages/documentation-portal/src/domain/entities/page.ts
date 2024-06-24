@@ -1,5 +1,8 @@
-import { PartialPage } from './partial-page'
-
-export interface Page extends PartialPage {
+export interface Page {
+  id: string
+  title: string
+  slug: string
+  path: string
   content: string
+  order: number
 }

@@ -4,6 +4,7 @@ import Header from '@/components/atoms/header'
 import Footer from '@/components/atoms/footer'
 import Typography from '@/components/atoms/typography'
 import { findDesignSystemBySlug } from '@/adapters/data-access/design-systems'
+import Navigation from '@/components/organisms/navigation'
 
 export interface DesignSystemLayoutProps extends PropsWithChildren {
   params: any
@@ -23,11 +24,11 @@ export default async function DesignSystemLayout({
     <div className="relative min-h-screen flex flex-col scroll-smooth">
       <Header>
         <div className="w-full flex justify-between items-center">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-10">
             <a href={`/${designSystem.slug}`}>
               <h1 className="text-lg font-bold">{designSystem.name}</h1>
             </a>
-            {/* <Navigation designSystemSlug={designSystemSlug} /> */}
+            <Navigation designSystemSlug={params.designSystemSlug} />
           </div>
         </div>
       </Header>

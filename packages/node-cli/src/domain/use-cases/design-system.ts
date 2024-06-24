@@ -4,6 +4,7 @@ import { Component } from '../entities/component'
 import { DesignSystem } from '../entities/design-system'
 import { Organization } from '../entities/organization'
 import { Config } from '../entities/config'
+import { Page } from '../entities/page'
 
 interface Arguments {
   options: { targetPath: string }
@@ -16,6 +17,7 @@ interface Arguments {
       targetPath: string,
       packagePath: string,
     ) => Promise<Component[]>
+    detectPages: (packagePath: string) => Promise<Page[]>
   }
 }
 
@@ -27,6 +29,7 @@ export async function findDesignSystem({
     findRootPath,
     getRelativePath,
     detectComponents,
+    detectPages,
   },
 }: Arguments): Promise<DesignSystem> {
   const rootPath = await findRootPath(targetPath)
@@ -37,12 +40,15 @@ export async function findDesignSystem({
 
   const components = await detectComponents(targetPath, path)
 
+  const pages = await detectPages(path)
+
   return {
     provider: {
       relativePath,
       url,
     },
     components,
+    pages,
   }
 }
 

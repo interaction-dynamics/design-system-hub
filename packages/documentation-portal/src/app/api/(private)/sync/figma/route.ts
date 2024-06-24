@@ -8,11 +8,22 @@ import {
   createComponentVariant,
   deleteComponentVariants,
 } from '@/adapters/data-access/component-variants'
+import { NextRequest } from 'next/server'
+import { getUser } from '../../_utils/get-user'
+import { fetchStyles } from '@/adapters/providers/figma/actions/fetch-styles'
+import { deleteStyles, insertStyles } from '@/adapters/data-access/styles'
 
-export async function POST() {
-  const designSystem = await fetchDesignSystem(
-    process.env.FIGMA_FILE_IDS?.split(',') ?? []
-  )
+export async function POST(request: NextRequest) {
+  console.log('/sync/figma')
+  const user = await getUser(request)
+
+  if (!user) {
+    return Response.json({ error: 'Forbidden' }, { status: 401 })
+  }
+
+  const fileIds = process.env.FIGMA_FILE_IDS?.split(',') ?? []
+
+  const designSystem = await fetchDesignSystem(fileIds)
 
   const designSystemId = '665701b6735feee3ac27825d'
 
@@ -54,6 +65,12 @@ export async function POST() {
       }
     }
   })
+
+  const styles = await fetchStyles(fileIds, process.env.FIGMA_TOKEN ?? '')
+
+  await deleteStyles(designSystemId)
+
+  await insertStyles(designSystemId, styles)
 
   return Response.json({ status: 'ok' })
 }

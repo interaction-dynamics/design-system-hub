@@ -18,7 +18,8 @@ export function Hero() {
         </div>
         <p className="text-xl leading-7 text-muted-foreground max-w-lg">
           A zero-config, single source of truth for your design system to
-          deliver features faster.
+          facilitate the consistency of your product and deliver features
+          faster.
         </p>
         <div className="flex items-center gap-4">
           <Button size="lg" asChild>

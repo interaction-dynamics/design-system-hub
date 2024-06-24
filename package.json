@@ -1,7 +1,7 @@
 {
   "name": "design-system-manager",
   "scripts": {
-    "commitlint": "commitlint --from=25879b7ef4f1227f42aa026f41c059499db08b4c"
+    "commitlint": "commitlint --from=3f19694e5d667297c13a0ce45286fd98acfd21d2"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.1.0",

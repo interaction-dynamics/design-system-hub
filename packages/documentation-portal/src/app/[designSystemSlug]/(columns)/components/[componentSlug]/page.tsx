@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
-import Main from '../../../../components/organisms/main'
-import ComponentLinks from '@/app/[designSystemSlug]/components/[componentSlug]/_components/component-links'
+import Main from '@/components/organisms/main'
+import ComponentLinks from './_components/component-links'
 import Typography from '@/components/atoms/typography'
 import RightSideBar from '@/components/organisms/right-sidebar'
 import { getProvider } from '@/adapters/providers'

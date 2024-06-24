@@ -30,4 +30,8 @@ export const code: Provider = {
   getComponentFlags(component: Component | ComponentVariant) {
     return validateCodeComponent(component) ? getComponentFlags(component) : []
   },
+
+  getStyleViewers() {
+    return []
+  },
 }

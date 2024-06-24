@@ -63,6 +63,9 @@ program
 
 const logSummary = (s: string) => console.warn(chalk.yellow.bold(s))
 
+// eslint-disable-next-line no-console
+const logInfo = (s: string) => console.log(s)
+
 program
   .command('dev')
   .description('Find all the React components from the target directory')
@@ -79,10 +82,10 @@ program
     const designSystem = await extractDesignSystem(targetPath)
 
     if (options.json) {
-      console.log(JSON.stringify(designSystem, null, 2))
+      logSummary(JSON.stringify(designSystem, null, 2))
     } else {
       if (!options.summary) {
-        console.log(yaml.stringify(designSystem))
+        logSummary(yaml.stringify(designSystem))
       }
 
       logSummary(`${designSystem.components.length} components found.`)

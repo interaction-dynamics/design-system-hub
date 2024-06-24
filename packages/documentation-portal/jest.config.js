@@ -17,7 +17,7 @@ const customJestConfig = {
     '!e2e/**/*',
   ],
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
-    prefix: '<rootDir>/src/',
+    prefix: '<rootDir>/',
   }),
 }
 

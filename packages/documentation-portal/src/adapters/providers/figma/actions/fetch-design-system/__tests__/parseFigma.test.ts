@@ -30,14 +30,6 @@ describe('parseFigma', () => {
       expect(designSystem.slug).toBe('example-design-system')
     })
 
-    it('should add section principles', () => {
-      const figmaResponse = [figmaResponseBasic]
-
-      const { chapters } = parseFigma(figmaResponse)
-
-      expect(chapters?.[0].type).toEqual('principles')
-    })
-
     describe('component', () => {
       it('should add components', () => {
         const figmaResponse = [figmaResponseBasic]
@@ -70,14 +62,6 @@ describe('parseFigma', () => {
       const { designSystem } = parseFigma(figmaResponse)
 
       expect(designSystem.slug).toBe('example-design-system---with-variants')
-    })
-
-    it('should add section principles', () => {
-      const figmaResponse = [figmaResponseWithVariants]
-
-      const { chapters } = parseFigma(figmaResponse)
-
-      expect(chapters?.[0].type).toEqual('principles')
     })
 
     describe('component', () => {

@@ -82,10 +82,10 @@ program
     const designSystem = await extractDesignSystem(targetPath)
 
     if (options.json) {
-      logSummary(JSON.stringify(designSystem, null, 2))
+      logInfo(JSON.stringify(designSystem, null, 2))
     } else {
       if (!options.summary) {
-        logSummary(yaml.stringify(designSystem))
+        logInfo(yaml.stringify(designSystem))
       }
 
       logSummary(`${designSystem.components.length} components found.`)

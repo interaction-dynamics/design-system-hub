@@ -53,13 +53,13 @@ export default async function ColorPage({ params }: PageProps) {
         {Object.entries(colorsByGroup)
           .sort()
           .map(([group, colors]) => (
-            <div className="2xl:contents" id={group}>
+            <div className="2xl:contents" id={group} key={group}>
               <div className="text-sm font-semibold text-slate-900 dark:text-slate-200 2xl:col-end-1 2xl:pt-2.5 select-all">
                 {group}
               </div>
               <div className="grid mt-3 grid-cols-1 sm:grid-cols-11 gap-y-3 gap-x-2 sm:mt-2 2xl:mt-0">
                 {colors.map((color: ColorStyle) => (
-                  <div className="relative flex">
+                  <div className="relative flex" key={color.name}>
                     <div className="flex items-center gap-x-3 w-full sm:block sm:space-y-1.5">
                       <div
                         className="h-10 w-10 rounded dark:ring-1 dark:ring-inset dark:ring-white/10 sm:w-full"

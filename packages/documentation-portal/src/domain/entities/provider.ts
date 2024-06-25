@@ -15,6 +15,12 @@ type ViewerType = (props: {
 
 type StyleViewer = (props: { style: Style }) => JSX.Element
 
+export interface Flag {
+  type: 'warning'
+  label: string
+  description: string
+}
+
 export default interface Provider {
   type: 'design' | 'development'
 
@@ -29,7 +35,7 @@ export default interface Provider {
 
   getViewerTitles(component: Component | ComponentVariant): string[]
 
-  getComponentFlags(component: Component | ComponentVariant): React.ReactNode[]
+  getComponentFlags(component: Component | ComponentVariant): Flag[]
 
   getStyleViewers(style: Style): StyleViewer[]
 }

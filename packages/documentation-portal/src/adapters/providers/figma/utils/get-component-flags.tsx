@@ -1,14 +1,17 @@
-import { Badge } from '@/components/ui/badge'
 import { FigmaComponent } from '../types/figma-component'
+import { Flag } from '@/domain/entities/provider'
 
 export function getComponentFlags(component: FigmaComponent) {
-  console.log('component', component)
+  const flags: Flag[] = []
 
-  return [
-    component.providers.figma && !('code' in component.providers) && (
-      <Badge className="inline-flex items-center gap-1 bg-orange-400 hover:bg-orange-400">
-        Code missing
-      </Badge>
-    ),
-  ].filter(Boolean)
+  if (component.providers.figma && !('code' in component.providers)) {
+    flags.push({
+      type: 'warning',
+      label: 'Missing code',
+      description:
+        'This component is not available in code. It may be a design-only component.',
+    })
+  }
+
+  return flags
 }

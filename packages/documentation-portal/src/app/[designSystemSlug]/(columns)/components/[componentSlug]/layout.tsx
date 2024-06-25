@@ -4,6 +4,8 @@ import { LayoutWithLeftSidebar } from '@/components/organisms/layout-with-left-s
 import LeftSideBar from '@/components/organisms/left-sidebar'
 import { findDesignSystemBySlug } from '@/adapters/data-access/design-systems'
 import { findPartialComponents } from '@/adapters/data-access/components'
+import { metadata } from '@/app/layout'
+import { NavigationComponentFlags } from './_components/navigation-component-flags'
 
 interface ComponentPageProps extends PropsWithChildren {
   params: any
@@ -26,6 +28,10 @@ export default async function ComponentsLayout({
         label: component.name,
         href: `/${designSystem.slug}/components/${component.slug}`,
         active: component.slug === componentSlug,
+        metadata: {
+          designSystem,
+          componentSlug: component.slug,
+        },
       }
     }) ?? []
 
@@ -33,7 +39,9 @@ export default async function ComponentsLayout({
     <LayoutWithLeftSidebar
       slug={designSystemSlug}
       section="components"
-      leftSidebar={<LeftSideBar links={links} />}
+      leftSidebar={
+        <LeftSideBar links={links} flags={NavigationComponentFlags} />
+      }
     >
       {children}
     </LayoutWithLeftSidebar>

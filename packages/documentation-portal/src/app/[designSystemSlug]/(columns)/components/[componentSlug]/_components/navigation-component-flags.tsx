@@ -45,8 +45,12 @@ export async function NavigationComponentFlags({
               />
             </svg>
           </TooltipTrigger>
-          <TooltipContent>
-            <p>{flags[0].label}</p>
+          <TooltipContent side="right" className="bg-orange-400">
+            <p className="font-semibold">
+              {flags.map((f) => f.label).join(', ')}
+            </p>
+            {/* <p className="font-semibold">{flags[0].label}</p> */}
+            {/* <p>{flags[0].description}</p> */}
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>

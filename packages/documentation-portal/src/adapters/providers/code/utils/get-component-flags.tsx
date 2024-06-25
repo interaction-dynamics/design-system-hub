@@ -13,7 +13,7 @@ export function getComponentFlags(component: CodeComponent): Flag[] {
     })
   }
 
-  if (!component.providers.figma && !component.providers.code.deprecated) {
+  if (!component.providers.figma) {
     flags.push({
       type: 'warning',
       label: 'Missing design',

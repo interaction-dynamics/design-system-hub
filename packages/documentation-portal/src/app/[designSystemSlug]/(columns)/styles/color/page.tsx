@@ -48,33 +48,37 @@ export default async function ColorPage({ params }: PageProps) {
       <Typography variant="h2" id="palette">
         Palette
       </Typography>
-      <div className="grid grid-cols-3 gap-4">
-        {Object.entries(colorsByGroup).map(([group, colors]) => (
-          <div key={group}>
-            <Typography variant="h3" id={group}>
-              {group}
-            </Typography>
-            <div className="mt-1 flex flex-col border rounded-md overflow-hidden">
-              {colors.map((color: ColorStyle) => (
-                <div
-                  key={color.id}
-                  className="border-b last:bolder-b-0 p-1 px-3 flex items-start justify-between h-16"
-                  style={{ backgroundColor: color.metadata.color }}
-                >
-                  <Typography variant="p" className="mt-2 font-semibold">
-                    {color.name}
-                  </Typography>
-                  <Typography
-                    variant="p"
-                    className="mt-2 font-semibold select-all"
-                  >
-                    {convertToHex(color.metadata.color)}
-                  </Typography>
-                </div>
-              ))}
+      <div className="mt-10" />
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(8rem,1fr))] gap-x-2 gap-y-8 sm:grid-cols-1">
+        {Object.entries(colorsByGroup)
+          .sort()
+          .map(([group, colors]) => (
+            <div className="2xl:contents" id={group}>
+              <div className="text-sm font-semibold text-slate-900 dark:text-slate-200 2xl:col-end-1 2xl:pt-2.5 select-all">
+                {group}
+              </div>
+              <div className="grid mt-3 grid-cols-1 sm:grid-cols-11 gap-y-3 gap-x-2 sm:mt-2 2xl:mt-0">
+                {colors.map((color: ColorStyle) => (
+                  <div className="relative flex">
+                    <div className="flex items-center gap-x-3 w-full sm:block sm:space-y-1.5">
+                      <div
+                        className="h-10 w-10 rounded dark:ring-1 dark:ring-inset dark:ring-white/10 sm:w-full"
+                        style={{ backgroundColor: color.metadata.color }}
+                      />
+                      <div className="px-0.5">
+                        <div className="w-6 font-medium text-xs text-slate-900 2xl:w-full dark:text-white">
+                          {color.name.split('/')[1]}
+                        </div>
+                        <div className="text-slate-500 text-xs font-mono lowercase dark:text-slate-400 sm:text-[0.625rem] md:text-xs lg:text-[0.625rem] 2xl:text-xs select-all">
+                          {convertToHex(color.metadata.color).slice(0, 7)}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </Main>
   )

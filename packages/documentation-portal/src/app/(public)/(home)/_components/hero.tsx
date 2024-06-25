@@ -5,8 +5,11 @@ import Image from 'next/image'
 import { BetaFlag } from './beta-flag'
 import Link from 'next/link'
 import { demoLink } from '../_utils/demo-link'
+import { useBetaLink } from '../_utils/use-beta-link'
 
 export function Hero() {
+  const betaLink = useBetaLink()
+
   return (
     <div className="pt-20 flex flex-col items-start gap-10">
       <div className="max-w-4xl m-auto p-5 flex flex-col items-start gap-4">
@@ -25,8 +28,8 @@ export function Hero() {
           <Button size="lg" asChild>
             <Link href={demoLink}>Try demo</Link>
           </Button>
-          <Button size="lg" variant="outline">
-            Request Access
+          <Button size="lg" variant="outline" asChild>
+            <a href={betaLink}>Request Access</a>
           </Button>
         </div>
       </div>

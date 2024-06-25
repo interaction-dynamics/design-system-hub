@@ -14,7 +14,7 @@ export default async function DesignSystemLayout({
       <Header>
         <div className="w-full">
           <div className="max-w-5xl m-auto text-left flex items-center justify-between">
-            <h1 className="text-lg font-bold">Design Systematik</h1>
+            <h1 className="text-lg font-bold">DesignSystemHub</h1>
             <Button size="sm" asChild>
               <Link href={demoLink}>Try demo</Link>
             </Button>

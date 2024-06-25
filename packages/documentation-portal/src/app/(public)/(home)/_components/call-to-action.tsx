@@ -1,9 +1,10 @@
-import { AnimatedGradientText } from '@/components/magicui/animated-gradient-text'
 import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
 import { BetaFlag } from './beta-flag'
+import { useBetaLink } from '../_utils/use-beta-link'
 
 export function CallToAction() {
+  const betaLink = useBetaLink()
+
   return (
     <div className="py-20 text-center p-5 flex justify-center items-center min-h-[70vh]">
       <div className="flex flex-col items-center gap-5">
@@ -17,7 +18,9 @@ export function CallToAction() {
           <br /> Request your beta access now and get your design system
           documentation today.
         </p>
-        <Button size="lg">Request Access</Button>
+        <Button size="lg" asChild>
+          <a href={betaLink}>Request Access</a>
+        </Button>
       </div>
     </div>
   )

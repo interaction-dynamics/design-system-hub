@@ -20,7 +20,7 @@ export function Hero() {
           <BetaFlag />
         </div>
         <p className="text-xl leading-7 text-muted-foreground max-w-lg">
-          A zero-config, single source of truth for your design system to
+          A zero-config and open source hub to present your design system,
           facilitate the consistency of your product and deliver features
           faster.
         </p>

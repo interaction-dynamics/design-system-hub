@@ -15,7 +15,7 @@ export function Features() {
             A nexus for designers and developers
           </h2>
           <p className="mt-4 text-left  text-base/6 text-neutral-200">
-            Design System Manager aggregate all the guidelines, tokens, colors,
+            DesignSystemHub aggregate all the guidelines, tokens, colors,
             typography and components in a documentation site. Both developers
             and designers can make use of it without changing their habits.
           </p>
@@ -45,8 +45,8 @@ export function Features() {
           </h2>
           <p className="mt-4 max-w-[26rem] text-left  text-base/6 text-neutral-200">
             You can forget your heavy, slow, ugly and unstable Storybook. With
-            Design system manager, you produce a professional-grade
-            documentation site with the standards of the industry.
+            DesignSystemHub, you produce a professional-grade documentation site
+            with the standards of the industry.
           </p>
         </div>
         {/* <Image
@@ -63,8 +63,8 @@ export function Features() {
             No more desynchronization between Figma and the code
           </h2>
           <p className="mt-4 max-w-[26rem] text-left  text-base/6 text-neutral-200">
-            Design System Manager will show you a warning as soon as a component
-            is in Figma but not in the code or vice versa. It will help you to
+            DesignSystemHub will show you a warning as soon as a component is in
+            Figma but not in the code or vice versa. It will help you to
             maintain your design system in sync and will save hours of work.
           </p>
         </div>

@@ -29,7 +29,7 @@ export default async function DesignSystemLayout({
             href="https://github.com/interaction-dynamics/design-system-manager"
             className="underline hover:text-primary"
           >
-            DesignSystemManager
+            DesignSystemHub
           </a>
         </Typography>
       </Footer>

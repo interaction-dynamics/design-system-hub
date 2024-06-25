@@ -61,7 +61,7 @@ export function Synchronization() {
           <Circle
             ref={productRef}
             className="h-16 w-16"
-            title="Design System Manager"
+            title="DesignSystemHub"
           >
             <Icons.openai />
           </Circle>

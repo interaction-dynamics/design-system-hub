@@ -10,9 +10,21 @@ import { cn } from '@/lib/utils'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Design System Documentation',
-  description:
-    'A centralized place to read the documentation of your design system',
+  title: 'DesignSystemHub',
+  description: 'The hub for your design system documentation',
+  openGraph: {
+    title: 'DesignSystemHub',
+    description: 'The hub for your design system documentation',
+    images: [{ url: '/screenshot.png' }],
+    siteName: 'DesignSystemHub',
+    url: 'https://design-system-manager.vercel.app',
+  },
+  twitter: {
+    title: 'DesignSystemHub',
+    description: 'The hub for your design system documentation',
+    card: 'summary_large_image',
+    images: [{ url: '/screenshot.png' }],
+  },
 }
 
 export default function RootLayout({

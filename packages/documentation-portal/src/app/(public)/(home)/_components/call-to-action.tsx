@@ -14,9 +14,9 @@ export function CallToAction() {
         </h2>
         <BetaFlag />
         <p className="max-w-md m-auto text-xl leading-7 text-muted-foreground">
-          The setup takes less than 5 minutes.
-          <br /> Request your beta access now and get your design system
-          documentation today.
+          You are one step away from a new way to maintain your design system.
+          <br /> Request your beta access now and change the way you manage your
+          design system forever.
         </p>
         <Button size="lg" asChild>
           <a href={betaLink}>Request Access</a>

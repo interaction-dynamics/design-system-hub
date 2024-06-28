@@ -27,6 +27,7 @@ export function ThemeSwitcher() {
       <DropdownMenuContent align="end">
         {themes.map((t) => (
           <DropdownMenuCheckboxItem
+            key={t}
             className="cursor-pointer"
             checked={theme === t.toLowerCase()}
             onClick={() => setTheme(t.toLowerCase())}

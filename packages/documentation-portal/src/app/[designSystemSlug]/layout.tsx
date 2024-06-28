@@ -4,6 +4,7 @@ import Header from '@/components/atoms/header'
 import { findDesignSystemBySlug } from '@/adapters/data-access/design-systems'
 import Navigation from '@/components/organisms/navigation'
 import Footer from '@/components/atoms/footer'
+import { UserMenu } from '@/components/organisms/user-menu'
 
 export interface DesignSystemLayoutProps extends PropsWithChildren {
   params: any
@@ -29,6 +30,7 @@ export default async function DesignSystemLayout({
             </a>
             <Navigation designSystemSlug={params.designSystemSlug} />
           </div>
+          <UserMenu />
         </div>
       </Header>
       <main className="flex-1">{children}</main>

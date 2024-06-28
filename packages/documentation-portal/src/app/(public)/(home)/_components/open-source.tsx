@@ -31,7 +31,7 @@ export default function OpenSource() {
           </div>
         </div>
         <div className="">
-          <div className="relative rounded-xl border shadow-[0_-10px_60px_-15px_rgba(255,255,255,0.3)] overflow-hidden">
+          <div className="relative rounded-xl border shadow-[0_-10px_60px_-15px_rgba(0,0,0,0.6)] dark:shadow-[0_-10px_60px_-15px_rgba(255,255,255,0.3)] overflow-hidden">
             <BorderBeam borderWidth={2} />
             <Image
               src="/roadmap-screenshot.png"

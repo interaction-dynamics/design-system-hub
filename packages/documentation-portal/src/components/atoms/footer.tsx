@@ -3,6 +3,7 @@ import { Separator } from '../ui/separator'
 import { cn } from '@/lib/utils'
 import Typography from './typography'
 import { productName } from '@/config/names'
+import { ThemeSwitcher } from '../organisms/theme-switcher'
 
 interface FooterProps extends PropsWithChildren {
   className?: string
@@ -95,17 +96,8 @@ export default function Footer({ children, className }: FooterProps) {
   return (
     <footer className="">
       <Separator className="w-full" />
-      <div className={cn('container py-10', className)}>
-        <div className="flex justify-between items-start">
-          <Typography variant="p">
-            Powered by{' '}
-            <a
-              href="https://github.com/interaction-dynamics/design-system-manager"
-              className="underline hover:text-primary"
-            >
-              {productName}
-            </a>
-          </Typography>
+      <div className={cn('container py-10 ', className)}>
+        <div className="min-h-32 flex justify-between items-center">
           <div className="flex items-center gap-2">
             {socials.map((social, index) => (
               <a
@@ -119,6 +111,16 @@ export default function Footer({ children, className }: FooterProps) {
               </a>
             ))}
           </div>
+          <Typography variant="p">
+            Powered by{' '}
+            <a
+              href="https://github.com/interaction-dynamics/design-system-manager"
+              className="underline hover:text-primary"
+            >
+              {productName}
+            </a>
+          </Typography>
+          <ThemeSwitcher />
         </div>
         {children}
       </div>

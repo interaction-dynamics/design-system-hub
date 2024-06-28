@@ -13,7 +13,7 @@ export function Hero() {
   return (
     <div className="pt-20 flex flex-col items-start gap-10">
       <div className="max-w-4xl m-auto p-5 flex flex-col items-start gap-4">
-        <h1 className="text-4xl sm:text-5xl font-bold relative z-20 bg-clip-text text-transparent bg-gradient-to-b from-neutral-100 to-neutral-500 py-5">
+        <h1 className="text-4xl sm:text-5xl font-bold relative z-20 bg-clip-text text-transparent text-black dark:bg-gradient-to-b dark:from-neutral-100 dark:to-neutral-500 py-5">
           Synchronize your design system accross your organization
         </h1>
         <div>
@@ -34,7 +34,7 @@ export function Hero() {
         </div>
       </div>
       <div className="max-w-6xl m-auto p-5 ">
-        <div className="relative rounded-xl border shadow-[0_-10px_60px_-15px_rgba(255,255,255,0.3)] overflow-hidden">
+        <div className="relative rounded-xl border shadow-[0_-10px_60px_-15px_rgba(0,0,0,0.6)] dark:shadow-[0_-10px_60px_-15px_rgba(255,255,255,0.3)] overflow-hidden">
           <BorderBeam borderWidth={2} />
           <Image
             src="/screenshot.png"

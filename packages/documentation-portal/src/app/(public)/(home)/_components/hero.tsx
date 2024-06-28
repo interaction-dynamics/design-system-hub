@@ -13,7 +13,7 @@ export function Hero() {
   return (
     <div className="pt-20 flex flex-col items-start gap-10">
       <div className="max-w-4xl m-auto p-5 flex flex-col items-start gap-4">
-        <h1 className="text-4xl sm:text-5xl font-bold relative z-20 bg-clip-text text-transparent text-black dark:bg-gradient-to-b dark:from-neutral-100 dark:to-neutral-500 py-5">
+        <h1 className="text-4xl sm:text-5xl font-bold relative z-20 bg-clip-text text-black dark:text-transparent dark:bg-gradient-to-b dark:from-neutral-100 dark:to-neutral-500 py-5">
           Synchronize your design system accross your organization
         </h1>
         <div>

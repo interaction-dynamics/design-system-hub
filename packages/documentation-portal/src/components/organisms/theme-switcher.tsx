@@ -2,6 +2,7 @@
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
+  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
@@ -9,8 +10,10 @@ import {
 import { MoonIcon, SunIcon } from '@radix-ui/react-icons'
 import { useTheme } from 'next-themes'
 
+const themes = ['Light', 'Dark', 'System'] as const
+
 export function ThemeSwitcher() {
-  const { setTheme } = useTheme()
+  const { setTheme, theme } = useTheme()
 
   return (
     <DropdownMenu>
@@ -22,15 +25,15 @@ export function ThemeSwitcher() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme('light')}>
-          Light
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('dark')}>
-          Dark
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('system')}>
-          System
-        </DropdownMenuItem>
+        {themes.map((t) => (
+          <DropdownMenuCheckboxItem
+            className="cursor-pointer"
+            checked={theme === t.toLowerCase()}
+            onClick={() => setTheme(t.toLowerCase())}
+          >
+            {t}
+          </DropdownMenuCheckboxItem>
+        ))}
       </DropdownMenuContent>
     </DropdownMenu>
   )

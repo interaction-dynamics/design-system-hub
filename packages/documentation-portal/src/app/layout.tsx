@@ -1,13 +1,13 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { GeistSans } from 'geist/font/sans'
+import { GeistMono } from 'geist/font/mono'
+
 import { GoogleAnalytics } from '@next/third-parties/google'
 import Script from 'next/script'
 
 import './globals.css'
 import ThemeProvider from '@/components/organisms/theme-provider'
 import { cn } from '@/lib/utils'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://design-system-hub.vercel.app'),
@@ -34,8 +34,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className={cn('min-h-screen scroll-smooth', inter.className)}>
+    <html lang="en" className={cn(GeistSans.variable, GeistMono.variable)}>
+      <body className="min-h-screen scroll-smooth">
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

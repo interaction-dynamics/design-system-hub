@@ -2,7 +2,7 @@ import { PropsWithChildren } from 'react'
 import Header from '@/components/atoms/header'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import { demoLink } from './(home)/_utils/demo-link'
+import { demoLink } from './_utils/demo-link'
 import Footer from '@/components/atoms/footer'
 
 export default async function DesignSystemLayout({

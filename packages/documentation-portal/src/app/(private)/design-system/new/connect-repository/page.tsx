@@ -8,13 +8,12 @@ import {
 } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { productName } from '@/config/names'
-import { ConnectFigmaButton } from './_components/connect-figma-button'
 
 export default function NewDesignSystemFigmaPage() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-2xl">Connect Figma</CardTitle>
+        <CardTitle className="text-2xl">Connect Repository</CardTitle>
         <CardDescription>
           In order to maintain your design system, {productName} needs to access
           some of your figma files. The first step is to connect your Figma
@@ -23,10 +22,10 @@ export default function NewDesignSystemFigmaPage() {
       </CardHeader>
       <CardContent>
         <p className="p-10 flex items-center justify-center">
-          <ConnectFigmaButton />
+          <Button>Code</Button>
         </p>
       </CardContent>
-      <CardFooter>
+      <CardFooter className="justify-end">
         <p>
           <Button
             variant="link"

@@ -2,7 +2,7 @@ import { PropsWithChildren } from 'react'
 import { notFound } from 'next/navigation'
 import Header from '@/components/atoms/header'
 import { findDesignSystemBySlug } from '@/adapters/data-access/design-systems'
-import Navigation from '@/components/organisms/navigation'
+import Navigation from './_components/navigation'
 import Footer from '@/components/atoms/footer'
 import { UserMenu } from '@/components/organisms/user-menu'
 

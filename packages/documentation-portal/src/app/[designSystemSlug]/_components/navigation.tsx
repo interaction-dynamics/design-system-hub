@@ -10,7 +10,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 const navigation = [
-  // { title: 'Getting Started', href: 'getting-started' },
+  // { title: 'Getting Started', href: '/' },
   // { title: 'Principles', href: 'principles' },
   { title: 'Styles', href: 'styles' },
   { title: 'Components', href: 'components' },

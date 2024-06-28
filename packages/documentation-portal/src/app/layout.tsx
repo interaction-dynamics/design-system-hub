@@ -10,6 +10,7 @@ import { cn } from '@/lib/utils'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://design-system-hub.vercel.app'),
   title: 'DesignSystemHub',
   description: 'The hub for your design system documentation',
   openGraph: {
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
     description: 'The hub for your design system documentation',
     images: [{ url: '/screenshot.png' }],
     siteName: 'DesignSystemHub',
-    url: 'https://design-system-manager.vercel.app',
+    url: 'https://design-system-hub.vercel.app',
   },
   twitter: {
     title: 'DesignSystemHub',

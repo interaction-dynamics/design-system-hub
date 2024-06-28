@@ -1,5 +1,5 @@
 import { findAllDesignSystemsByOrganizationId } from '@/adapters/data-access/design-systems'
-import { getUser } from '../../../_utils/get-user'
+import { getUser } from '../../../../_utils/get-user'
 import { NextRequest } from 'next/server'
 
 export async function GET(

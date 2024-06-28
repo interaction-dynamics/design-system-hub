@@ -5,7 +5,7 @@ import {
 } from '@/adapters/data-access/design-systems'
 
 import { NextRequest } from 'next/server'
-import { getUser } from '../../_utils/get-user'
+import { getUser } from '../../../_utils/get-user'
 import {
   createComponent,
   findComponentByName,

@@ -9,12 +9,11 @@ import {
   deleteComponentVariants,
 } from '@/adapters/data-access/component-variants'
 import { NextRequest } from 'next/server'
-import { getUser } from '../../_utils/get-user'
+import { getUser } from '../../../_utils/get-user'
 import { fetchStyles } from '@/adapters/providers/figma/actions/fetch-styles'
 import { deleteStyles, insertStyles } from '@/adapters/data-access/styles'
 
 export async function POST(request: NextRequest) {
-  console.log('/sync/figma')
   const user = await getUser(request)
 
   if (!user) {

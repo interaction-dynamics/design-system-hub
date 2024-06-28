@@ -1,6 +1,6 @@
 import { NextRequest } from 'next/server'
 import { Organization } from '../../../../domain/entities/organization'
-import { getUser } from '../_utils/get-user'
+import { getUser } from '../../_utils/get-user'
 
 export async function GET(request: NextRequest) {
   const user = await getUser(request)

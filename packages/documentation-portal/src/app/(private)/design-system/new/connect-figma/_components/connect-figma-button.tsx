@@ -1,10 +1,10 @@
 'use client'
 import { useRouter } from 'next/navigation'
+import { useRef } from 'react'
 
 import { generateOauthUrl } from '@/adapters/providers/figma/actions/generate-oauth-url'
 import { Button } from '@/components/ui/button'
 import { openWindow } from '../_utils/open-window'
-import { useEffect, useRef } from 'react'
 import { useMessages } from '@/lib/tabs-messages'
 
 const eventName = 'connect-figma-success'
@@ -21,7 +21,6 @@ export function ConnectFigmaButton() {
   const router = useRouter()
 
   useMessages(eventName, () => {
-    window.current.window?.close()
     router.push('/design-system/new/connect-repository')
   })
 

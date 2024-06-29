@@ -7,7 +7,7 @@ import { sendMessage } from '@/lib/tabs-messages'
 export function WindowActionEmitter() {
   const searchParams = useSearchParams()
 
-  const eventName = searchParams.get('event') ?? ''
+  const eventName = searchParams.get('state') ?? ''
 
   useEffect(() => {
     sendMessage(eventName)

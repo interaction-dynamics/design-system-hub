@@ -2,9 +2,7 @@
 
 import { generateOauthUrl } from '@/adapters/providers/figma/actions/generate-oauth-url'
 import { Button } from '@/components/ui/button'
-
-export const callbackUrl =
-  'https://design-system-hub.vercel.app/design-system/new/figma/callback'
+import { callbackUrl } from '../../_utils/url'
 
 export function ConnectFigmaButton() {
   // https://www.figma.com/developers/api#register-oauth2

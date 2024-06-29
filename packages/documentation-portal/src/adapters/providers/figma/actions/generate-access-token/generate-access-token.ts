@@ -1,5 +1,12 @@
 import { FigmaDesignSystemCredentials } from '../../types/figma-design-system-credentials'
 
+interface ResponseType {
+  user_id: number
+  access_token: string
+  expires_in: number
+  refresh_token: string
+}
+
 export async function generateAccessToken(
   callbackUrl: string,
   code: string
@@ -18,12 +25,17 @@ export async function generateAccessToken(
     }),
   })
 
-  const data = await response.json()
+  const data: ResponseType = await response.json()
+
+  console.log('data', data, callbackUrl)
+
+  const today = new Date()
+  today.setSeconds(today.getSeconds() + (data.expires_in ?? 0))
 
   return {
-    userId: data.user.id,
+    userId: data.user_id,
     accessToken: data.access_token,
-    expirationDate: data.expires_in,
+    expirationDate: today.toISOString(),
     refreshToken: data.refresh_token,
   }
 }

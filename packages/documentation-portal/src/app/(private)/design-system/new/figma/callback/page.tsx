@@ -1,8 +1,8 @@
 import { generateAccessToken } from '@/adapters/providers/figma/actions/generate-access-token'
-import { callbackUrl } from '../connect/_components/connect-figma-button'
 import { createEmptyDesignSystem } from '@/adapters/data-access/design-systems'
 import { createFigmaDesignSystemCredentials } from '@/adapters/data-access/figma-design-system-credentials'
 import { redirect } from 'next/navigation'
+import { callbackUrl } from '../_utils/url'
 
 export default async function Page({
   searchParams,
@@ -11,11 +11,11 @@ export default async function Page({
 }) {
   const newSearchParams = new URLSearchParams(searchParams)
 
-  redirect(
-    `http://${
-      searchParams.state
-    }/design-system/new/figma/callback/?${newSearchParams.toString()}`
-  )
+  // redirect(
+  //   `http://${
+  //     searchParams.state
+  //   }/design-system/new/figma/callback/?${newSearchParams.toString()}`
+  // )
 
   const credentials = await generateAccessToken(callbackUrl, searchParams.code)
 
@@ -30,10 +30,10 @@ export default async function Page({
     designSystemDao.id
   )
 
+  console.log('response', response)
+
   if (response) {
-    redirect(
-      `${searchParams.state}/design-system/new/figma/choose-files/${designSystemDao.slug}`
-    )
+    redirect(`/design-system/new/figma/choose-files/${designSystemDao.slug}`)
   }
 
   return (

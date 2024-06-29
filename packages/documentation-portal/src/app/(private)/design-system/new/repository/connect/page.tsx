@@ -25,7 +25,7 @@ export default function NewDesignSystemFigmaPage() {
           <Button>Code</Button>
         </p>
       </CardContent>
-      <CardFooter className="justify-end">
+      <CardFooter>
         <SkipButton href="/design-system/new/repository/connect" />
       </CardFooter>
     </Card>

@@ -11,7 +11,11 @@ export default async function Page({
 }) {
   const credentials = await generateAccessToken(callbackUrl, searchParams.code)
 
+  console.warn('credentials', credentials)
+
   const designSystemDao = await createEmptyDesignSystem()
+
+  console.warn('designSystemDao', designSystemDao)
 
   const response = await createFigmaDesignSystemCredentials(
     credentials,

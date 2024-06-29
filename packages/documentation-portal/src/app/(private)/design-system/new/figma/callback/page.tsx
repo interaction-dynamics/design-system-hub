@@ -9,6 +9,14 @@ export default async function Page({
 }: {
   searchParams: { code: string; state: string }
 }) {
+  const newSearchParams = new URLSearchParams(searchParams)
+
+  redirect(
+    `${
+      searchParams.state
+    }/design-system/new/figma/callback/?${newSearchParams.toString()}`
+  )
+
   const credentials = await generateAccessToken(callbackUrl, searchParams.code)
 
   console.warn('credentials', credentials)

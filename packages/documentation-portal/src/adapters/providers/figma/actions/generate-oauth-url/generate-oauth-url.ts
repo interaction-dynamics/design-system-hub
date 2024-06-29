@@ -1,4 +1,4 @@
-export function generateOauthUrl(state: any) {
+export function generateOauthUrl(state: string) {
   const url = new URL('https://www.figma.com/oauth?')
 
   url.searchParams.append(

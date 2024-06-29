@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { SkipButton } from '../../_components/skip-button'
+import { SkipButton } from '../../../_components/skip-button'
 
 export default function Page() {
   return (

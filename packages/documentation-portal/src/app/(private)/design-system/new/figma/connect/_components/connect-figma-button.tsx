@@ -1,13 +1,7 @@
 'use client'
-import { useRouter } from 'next/navigation'
-import { useRef } from 'react'
 
 import { generateOauthUrl } from '@/adapters/providers/figma/actions/generate-oauth-url'
 import { Button } from '@/components/ui/button'
-import { openWindow } from '../_utils/open-window'
-import { useMessages } from '@/lib/tabs-messages'
-
-const eventName = 'connect-figma-success'
 
 export const callbackUrl =
   'https://design-system-hub.vercel.app/design-system/new/figma/callback'
@@ -15,16 +9,10 @@ export const callbackUrl =
 export function ConnectFigmaButton() {
   // https://www.figma.com/developers/api#register-oauth2
   const onClick = async () => {
-    const url = generateOauthUrl(eventName, callbackUrl)
+    const url = generateOauthUrl(window.location.host, callbackUrl)
 
     window.location.href = url.toString()
   }
-
-  // const router = useRouter()
-
-  // useMessages(eventName, () => {
-  //   router.push('/design-system/new/connect-repository')
-  // })
 
   return (
     <Button onClick={onClick}>

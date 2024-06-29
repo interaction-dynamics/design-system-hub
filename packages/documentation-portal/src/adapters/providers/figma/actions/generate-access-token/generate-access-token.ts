@@ -1,5 +1,10 @@
-export async function generateAccessToken(callbackUrl: string, code: string) {
-  const response = await fetch('https://api.figma.com/v1/oauth/token', {
+import { FigmaDesignSystemCredentials } from '../../types/figma-design-system-credentials'
+
+export async function generateAccessToken(
+  callbackUrl: string,
+  code: string
+): Promise<FigmaDesignSystemCredentials> {
+  const response = await fetch('https://www.figma.com/api/oauth/token', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -13,5 +18,12 @@ export async function generateAccessToken(callbackUrl: string, code: string) {
     }),
   })
 
-  return await response.json()
+  const data = await response.json()
+
+  return {
+    userId: data.user.id,
+    accessToken: data.access_token,
+    expirationDate: data.expires_in,
+    refreshToken: data.refresh_token,
+  }
 }

@@ -49,15 +49,16 @@ model Component {
 }
 
 model DesignSystem {
-    id         String      @id @default(auto()) @map("_id") @db.ObjectId
-    slug       String      @unique
-    name       String
-    components Component[]
-    createdAt  DateTime    @default(now())
-    updatedAt  DateTime    @updatedAt
-    providers  Json
-    pages      Page[]
-    styles     Style[]
+    id               String                         @id @default(auto()) @map("_id") @db.ObjectId
+    slug             String                         @unique
+    name             String
+    components       Component[]
+    createdAt        DateTime                       @default(now())
+    updatedAt        DateTime                       @updatedAt
+    providers        Json
+    pages            Page[]
+    styles           Style[]
+    figmaCredentials FigmaDesignSystemCredentials[]
 }
 
 model User {
@@ -102,6 +103,17 @@ model Style {
 
     createdAt      DateTime      @default(now())
     updatedAt      DateTime      @updatedAt
+    DesignSystem   DesignSystem? @relation(fields: [designSystemId], references: [id])
+    designSystemId String?       @db.ObjectId
+}
+
+model FigmaDesignSystemCredentials {
+    id             String @id @default(auto()) @map("_id") @db.ObjectId
+    userId         String
+    accessToken    String
+    expirationDate String
+    refreshToken   String
+
     DesignSystem   DesignSystem? @relation(fields: [designSystemId], references: [id])
     designSystemId String?       @db.ObjectId
 }

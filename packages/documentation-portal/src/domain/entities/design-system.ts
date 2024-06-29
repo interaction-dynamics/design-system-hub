@@ -1,6 +1,6 @@
-export interface DesignSystem {
+export interface DesignSystem<T = any> {
   id: string
   name: string
   slug: string
-  providers: any
+  providers: T
 }

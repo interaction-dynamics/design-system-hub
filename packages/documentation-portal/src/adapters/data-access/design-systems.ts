@@ -8,6 +8,16 @@ export interface DesignSystemDao extends DesignSystem {
   id: string
 }
 
+export async function createEmptyDesignSystem() {
+  return await db.designSystem.create({
+    data: {
+      name: 'Empty Design System',
+      slug: self.crypto.randomUUID(),
+      providers: {},
+    },
+  })
+}
+
 export async function createDesignSystem(
   designSystem: DesignSystem,
   components: Component[]

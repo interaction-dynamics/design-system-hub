@@ -12,7 +12,7 @@ export async function createEmptyDesignSystem() {
   return await db.designSystem.create({
     data: {
       name: 'Empty Design System',
-      slug: self.crypto.randomUUID(),
+      slug: (Math.random() + 1).toString(36).substring(7),
       providers: {},
     },
   })

@@ -42,7 +42,7 @@ export default function RootLayout({
       <body className="min-h-screen scroll-smooth">
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >

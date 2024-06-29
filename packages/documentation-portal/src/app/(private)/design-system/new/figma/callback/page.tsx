@@ -12,7 +12,7 @@ export default async function Page({
   const newSearchParams = new URLSearchParams(searchParams)
 
   redirect(
-    `${
+    `http://${
       searchParams.state
     }/design-system/new/figma/callback/?${newSearchParams.toString()}`
   )

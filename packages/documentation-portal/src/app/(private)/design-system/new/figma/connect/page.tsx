@@ -6,9 +6,9 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
 import { productName } from '@/config/names'
 import { ConnectFigmaButton } from './_components/connect-figma-button'
+import { SkipButton } from '../../_components/skip-button'
 
 export default function NewDesignSystemFigmaPage() {
   return (
@@ -27,28 +27,7 @@ export default function NewDesignSystemFigmaPage() {
         </p>
       </CardContent>
       <CardFooter>
-        <p>
-          <Button
-            variant="link"
-            className="p-0 text-muted-foreground hover:text-foreground"
-          >
-            I will do it later
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-4"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="m8.25 4.5 7.5 7.5-7.5 7.5"
-              />
-            </svg>
-          </Button>
-        </p>
+        <SkipButton href="/design-system/new/repository/connect" />
       </CardFooter>
     </Card>
   )

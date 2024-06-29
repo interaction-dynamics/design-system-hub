@@ -9,20 +9,22 @@ import { useMessages } from '@/lib/tabs-messages'
 
 const eventName = 'connect-figma-success'
 
-export function ConnectFigmaButton() {
-  const window = useRef<{ window: Window | null }>({ window: null })
+export const callbackUrl =
+  'https://design-system-hub.vercel.app/design-system/new/figma/callback'
 
+export function ConnectFigmaButton() {
   // https://www.figma.com/developers/api#register-oauth2
   const onClick = async () => {
-    const url = generateOauthUrl(eventName)
-    window.current.window = openWindow({ url, title: 'Connect to Figma' })
+    const url = generateOauthUrl(eventName, callbackUrl)
+
+    window.location.href = url.toString()
   }
 
-  const router = useRouter()
+  // const router = useRouter()
 
-  useMessages(eventName, () => {
-    router.push('/design-system/new/connect-repository')
-  })
+  // useMessages(eventName, () => {
+  //   router.push('/design-system/new/connect-repository')
+  // })
 
   return (
     <Button onClick={onClick}>

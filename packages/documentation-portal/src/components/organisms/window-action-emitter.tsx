@@ -11,7 +11,6 @@ export function WindowActionEmitter() {
 
   useEffect(() => {
     sendMessage(eventName)
-    window.close()
   }, [eventName])
 
   return <div className="fixed inset-0 bg-background" />

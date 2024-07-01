@@ -9,7 +9,7 @@ export async function createFigmaFile(key: string, designSystemId: string) {
   })
 }
 
-export async function findFigmaFileByDesignSystemId(designSystemId: string) {
+export async function findFigmaFilesByDesignSystemId(designSystemId: string) {
   return db.figmaFile.findMany({
     where: {
       designSystemId,

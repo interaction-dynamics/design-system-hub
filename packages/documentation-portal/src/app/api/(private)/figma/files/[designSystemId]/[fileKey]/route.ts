@@ -1,6 +1,6 @@
 import { findDesignSystemBySlug } from '@/adapters/data-access/design-systems'
 import { findFigmaDesignSystemCredentials } from '@/adapters/data-access/figma-design-system-credentials'
-import { fetchFile } from '@/adapters/providers/figma/actions/fetch-file'
+import { fetchFile } from '@/adapters/providers/figma/actions/files'
 import { NextRequest } from 'next/server'
 
 export async function GET(

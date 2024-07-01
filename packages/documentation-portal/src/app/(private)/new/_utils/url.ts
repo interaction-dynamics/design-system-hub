@@ -1,2 +1,2 @@
 export const getFigmaCallbackUrl = () =>
-  `https://design-system-hub.vercel.app/new/figma-callback`
+  `https://design-system-hub-git-feat-authentication-interaction-dynamics.vercel.app/new/figma-callback`

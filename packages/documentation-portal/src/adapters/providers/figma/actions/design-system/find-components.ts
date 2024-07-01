@@ -1,9 +1,7 @@
 import * as Figma from 'figma-api'
 
 import { Component } from '@/domain/entities/component'
-import parseFigmaFiles from '../fetch-design-system/parseFigmaFiles'
 import { fetchFile } from '../files'
-import generateSlug from '@/lib/generate-slug'
 import { findComponent } from './utils/find-component'
 import { findComponentSet } from './utils/find-component-set'
 

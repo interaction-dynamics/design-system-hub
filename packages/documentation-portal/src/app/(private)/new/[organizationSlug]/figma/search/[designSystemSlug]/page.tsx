@@ -42,7 +42,7 @@ export default function NewDesignSystemFigmaPage({ params }: Props) {
         <div className="flex justify-end mt-5">
           <Button asChild>
             <Link href="/new/design-system/repository/connect">
-              Let's continue
+              Let&apos;s continue
             </Link>
           </Button>
         </div>

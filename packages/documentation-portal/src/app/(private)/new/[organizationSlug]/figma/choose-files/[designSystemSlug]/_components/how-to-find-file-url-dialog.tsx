@@ -23,7 +23,8 @@ export function HowToFindFileUrlDialog({ open, onOpenChange }: Props) {
         <div className="text-sm text-muted-foreground flex flex-col gap-10">
           <p>1. Open your file on figma.</p>
           <p>
-            2. Click on the button "Share" in the top right corner of the Figma:
+            2. Click on the button &quot;Share&quot; in the top right corner of
+            the Figma:
             <Image
               src="/images/screenshots/how-to-find-figma-file-url-1.png"
               alt="Figma file url"
@@ -34,8 +35,8 @@ export function HowToFindFileUrlDialog({ open, onOpenChange }: Props) {
           </p>
 
           <p>
-            3. Click on the button "Copy link" and paste it into the input
-            field.
+            3. Click on the button &quot;Copy link&quot; and paste it into the
+            input field.
             <Image
               src="/images/screenshots/how-to-find-figma-file-url-2.png"
               alt="Figma file url"

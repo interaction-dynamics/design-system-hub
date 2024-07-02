@@ -27,7 +27,10 @@ export default async function Page({ params }: Props) {
       </CardHeader>
       <CardContent>
         <Suspense fallback={<Skeleton className="w-full h-[300px] rounded" />}>
-          <FileListServer designSystemSlug={params.designSystemSlug} />
+          <FileListServer
+            designSystemSlug={params.designSystemSlug}
+            organizationSlug={params.organizationSlug}
+          />
         </Suspense>
       </CardContent>
       <CardFooter>

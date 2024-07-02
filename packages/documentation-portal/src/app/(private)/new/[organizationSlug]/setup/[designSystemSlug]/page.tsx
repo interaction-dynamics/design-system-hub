@@ -5,6 +5,9 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import { FormInputServer } from './_components/form-input-server'
+import { Suspense } from 'react'
+import { Skeleton } from '@/components/ui/skeleton'
 
 interface Props {
   params: { designSystemSlug: string }
@@ -15,9 +18,15 @@ export default function NewDesignSystemSetupPage({ params }: Props) {
     <Card>
       <CardHeader>
         <CardTitle className="text-2xl">Last setup</CardTitle>
-        <CardDescription>Last information before finalization.</CardDescription>
+        <CardDescription>
+          Few last information are required before enjoying your design system.
+        </CardDescription>
       </CardHeader>
-      <CardContent>fdsfds</CardContent>
+      <CardContent>
+        <Suspense fallback={<Skeleton className="w-full h-10" />}>
+          <FormInputServer designSystemSlug={params.designSystemSlug} />
+        </Suspense>
+      </CardContent>
     </Card>
   )
 }

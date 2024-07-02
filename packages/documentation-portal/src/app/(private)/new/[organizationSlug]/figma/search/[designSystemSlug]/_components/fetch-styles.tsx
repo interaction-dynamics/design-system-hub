@@ -1,9 +1,10 @@
 import { findDesignSystemBySlug } from '@/adapters/data-access/design-systems'
 import { findFigmaDesignSystemCredentials } from '@/adapters/data-access/figma-design-system-credentials'
 import { findFigmaFilesByDesignSystemId } from '@/adapters/data-access/figma-file'
-import { findFigmaComponents } from '@/adapters/providers/figma/actions/design-system'
 import { FetchIndicator } from './fetch-indicator'
 import { fetchStyles } from '@/adapters/providers/figma/actions/styles'
+import { deleteStyles, insertStyles } from '@/adapters/data-access/styles'
+import { syncStyles } from '@/domain/use-cases/sync-styles'
 
 interface Props {
   designSystemSlug: string
@@ -23,6 +24,11 @@ export async function FetchStyles({ designSystemSlug }: Props) {
   const fileKeys = files.map((file) => file.fileKey)
 
   const styles = await fetchStyles(fileKeys, accessToken)
+
+  await syncStyles(
+    { designSystemId: designSystem.id, styles },
+    { deleteStyles, insertStyles }
+  )
 
   return (
     <FetchIndicator

@@ -14,7 +14,7 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 
 interface Props {
-  params: { designSystemSlug: string }
+  params: { designSystemSlug: string; organizationSlug: string }
 }
 
 export default function NewDesignSystemFigmaPage({ params }: Props) {
@@ -41,7 +41,9 @@ export default function NewDesignSystemFigmaPage({ params }: Props) {
         </Accordion>
         <div className="flex justify-end mt-5">
           <Button asChild>
-            <Link href="/new/design-system/repository/connect">
+            <Link
+              href={`/new/${params.organizationSlug}/repository/connect/${params.designSystemSlug}`}
+            >
               Let&apos;s continue
             </Link>
           </Button>

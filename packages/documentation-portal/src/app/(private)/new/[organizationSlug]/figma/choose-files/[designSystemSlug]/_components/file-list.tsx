@@ -25,9 +25,14 @@ interface FigmaFile {
 interface Props {
   designSystemSlug: string
   designSystemId: string
+  organizationSlug: string
 }
 
-export function FileList({ designSystemSlug, designSystemId }: Props) {
+export function FileList({
+  designSystemSlug,
+  designSystemId,
+  organizationSlug,
+}: Props) {
   const [files, setFiles] = useState<FigmaFile[]>([])
 
   const [open, setOpen] = useState(false)
@@ -121,7 +126,7 @@ export function FileList({ designSystemSlug, designSystemId }: Props) {
     setLoading(false)
 
     if (success) {
-      router.push(`/design-system/new/figma/search/${designSystemSlug}`)
+      router.push(`/new/${organizationSlug}/figma/search/${designSystemSlug}`)
     }
   }
 
@@ -202,7 +207,10 @@ export function FileList({ designSystemSlug, designSystemId }: Props) {
         <ScrollBar orientation="vertical" />
       </ScrollArea>
       <div className="mt-4 flex justify-end">
-        <Button disabled={files.length === 0} onClick={onAddFiles}>
+        <Button
+          disabled={files.filter((f) => !f.loading).length === 0}
+          onClick={onAddFiles}
+        >
           {loading && (
             <svg
               className="animate-spin h-5 w-5 -ml-1 mr-2"

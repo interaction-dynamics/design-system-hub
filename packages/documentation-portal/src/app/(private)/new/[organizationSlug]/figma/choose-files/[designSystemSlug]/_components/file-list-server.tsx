@@ -3,8 +3,10 @@ import { FileList } from './file-list'
 
 export async function FileListServer({
   designSystemSlug,
+  organizationSlug,
 }: {
   designSystemSlug: string
+  organizationSlug: string
 }) {
   const designSystem = await findDesignSystemBySlug(designSystemSlug)
 
@@ -14,6 +16,7 @@ export async function FileListServer({
     <FileList
       designSystemId={designSystem.id}
       designSystemSlug={designSystemSlug}
+      organizationSlug={organizationSlug}
     />
   )
 }

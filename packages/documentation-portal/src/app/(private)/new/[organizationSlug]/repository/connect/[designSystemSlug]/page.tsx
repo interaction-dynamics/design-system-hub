@@ -11,7 +11,7 @@ import { productName } from '@/config/names'
 import { SkipButton } from '../../../_components/skip-button'
 
 interface Props {
-  params: { designSystemSlug: string }
+  params: { designSystemSlug: string; organizationSlug: string }
 }
 
 export default function NewDesignSystemFigmaPage({ params }: Props) {
@@ -31,7 +31,7 @@ export default function NewDesignSystemFigmaPage({ params }: Props) {
       </CardContent>
       <CardFooter>
         <SkipButton
-          href={`/design-system/new/setup/${params.designSystemSlug}`}
+          href={`/new/${params.organizationSlug}/setup/${params.designSystemSlug}`}
         />
       </CardFooter>
     </Card>

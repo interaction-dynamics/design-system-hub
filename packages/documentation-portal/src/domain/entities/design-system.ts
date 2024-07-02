@@ -3,4 +3,5 @@ export interface DesignSystem<T = any> {
   name: string
   slug: string
   providers: T
+  isPublic: boolean
 }

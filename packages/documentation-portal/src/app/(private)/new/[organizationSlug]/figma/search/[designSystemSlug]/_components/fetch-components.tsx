@@ -3,6 +3,16 @@ import { findFigmaDesignSystemCredentials } from '@/adapters/data-access/figma-d
 import { findFigmaFilesByDesignSystemId } from '@/adapters/data-access/figma-file'
 import { findFigmaComponents } from '@/adapters/providers/figma/actions/design-system'
 import { FetchIndicator } from './fetch-indicator'
+import {
+  createComponent,
+  findComponentByName,
+  updateComponent,
+} from '@/adapters/data-access/components'
+import {
+  createComponentVariant,
+  deleteComponentVariants,
+} from '@/adapters/data-access/component-variants'
+import { syncComponent } from '@/domain/use-cases/sync-component'
 
 interface Props {
   designSystemSlug: string
@@ -22,6 +32,21 @@ export async function FetchComponents({ designSystemSlug }: Props) {
   const fileKeys = files.map((file) => file.fileKey)
 
   const components = await findFigmaComponents(fileKeys, accessToken)
+
+  await Promise.all(
+    components.map(async (component) =>
+      syncComponent(
+        { designSystemId: designSystem.id, component },
+        {
+          findComponentByName,
+          updateComponent,
+          deleteComponentVariants,
+          createComponentVariant,
+          createComponent,
+        }
+      )
+    )
+  )
 
   return (
     <FetchIndicator

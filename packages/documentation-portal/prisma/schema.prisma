@@ -35,7 +35,7 @@ model ComponentVariant {
 
 model Component {
     id   String @id @default(auto()) @map("_id") @db.ObjectId
-    slug String @unique
+    slug String
     name String
 
     properties Property[]
@@ -46,16 +46,20 @@ model Component {
 
     DesignSystem   DesignSystem? @relation(fields: [designSystemId], references: [id])
     designSystemId String?       @db.ObjectId
+
+    @@unique([slug, designSystemId])
 }
 
 model DesignSystem {
-    id               String                         @id @default(auto()) @map("_id") @db.ObjectId
-    slug             String                         @unique
-    name             String
-    components       Component[]
-    createdAt        DateTime                       @default(now())
-    updatedAt        DateTime                       @updatedAt
-    providers        Json
+    id         String      @id @default(auto()) @map("_id") @db.ObjectId
+    slug       String      @unique
+    name       String
+    components Component[]
+    createdAt  DateTime    @default(now())
+    updatedAt  DateTime    @updatedAt
+    providers  Json
+
+    isPublic         Boolean
     pages            Page[]
     styles           Style[]
     figmaCredentials FigmaDesignSystemCredentials[]

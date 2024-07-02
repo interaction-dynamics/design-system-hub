@@ -18,9 +18,8 @@ import {
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 
 import { Input } from '@/components/ui/input'
-import { Switch } from '@/components/ui/switch'
-import { DesignSystem } from '@prisma/client'
 import { useRouter } from 'next/navigation'
+import { DesignSystem } from '@/domain/entities/design-system'
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -173,22 +172,10 @@ export function FormInput({ designSystem }: Props) {
                 ></path>
               </svg>
             )}
-            Add files to Submit
+            Save
           </Button>
         </div>
       </form>
     </Form>
-
-    // <form className="flex flex-col items-stretch gap-10">
-    //   <div className="flex flex-col items-stretch gap-1.5">
-    //     <Label htmlFor="name">Name</Label>
-    //     <Input type="name" id="name" placeholder="Name" className="w-full" />
-    //   </div>
-    //   <div className="flex flex-col items-stretch gap-1.5">
-    //     <Label htmlFor="url">URL</Label>
-    //     <Input type="url" id="url" placeholder="Url" />
-    //   </div>
-    //
-    // </form>
   )
 }

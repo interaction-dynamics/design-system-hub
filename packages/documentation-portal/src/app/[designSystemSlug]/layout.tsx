@@ -5,6 +5,7 @@ import { findDesignSystemBySlug } from '@/adapters/data-access/design-systems'
 import Navigation from './_components/navigation'
 import Footer from '@/components/atoms/footer'
 import { UserMenu } from '@/components/organisms/user-menu'
+// import { SettingsButton } from './_components/settings-button'
 
 export interface DesignSystemLayoutProps extends PropsWithChildren {
   params: any
@@ -30,7 +31,11 @@ export default async function DesignSystemLayout({
             </a>
             <Navigation designSystemSlug={params.designSystemSlug} />
           </div>
-          <UserMenu />
+          <div className="flex items-center gap-10">
+            {/* <NotificationCenter /> */}
+            {/* <SettingsButton designSystem={designSystem} /> */}
+            <UserMenu />
+          </div>
         </div>
       </Header>
       <main className="flex-1">{children}</main>

@@ -13,6 +13,7 @@ export async function createEmptyDesignSystem() {
     data: {
       name: 'Empty Design System',
       slug: (Math.random() + 1).toString(36).substring(7),
+      isPublic: false,
       providers: {},
     },
   })
@@ -26,6 +27,7 @@ export async function createDesignSystem(
     data: {
       name: designSystem.name,
       slug: designSystem.slug,
+      isPublic: false,
       providers: {},
     },
   })
@@ -100,6 +102,7 @@ export const findDesignSystemBySlug = cache(
       name: designSystemDao.name,
       slug: designSystemDao.slug,
       providers: designSystemDao.providers,
+      isPublic: designSystemDao.isPublic,
     }
   }
 )

@@ -9,15 +9,18 @@ interface LeftSideBarProps<T> {
     active?: boolean
     metadata?: T
   }[]
+  title?: string
   flags?: (props: T) => Promise<JSX.Element>
 }
 
 export default function LeftSideBar<T extends { [prop: string]: any }>({
+  title,
   links,
   flags: Flags,
 }: LeftSideBarProps<T>) {
   return (
     <aside className="fixed top-14 pt-8 z-30 -ml-2 hidden h-[calc(100vh-3.5rem)] w-full shrink-0 md:sticky md:block">
+      {title && <div className="px-2 pb-5 text-lg font-semibold">{title}</div>}
       <div className="grid grid-flow-row auto-rows-max text-sm">
         {links.map((link) => (
           <Link

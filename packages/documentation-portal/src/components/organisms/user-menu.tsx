@@ -13,8 +13,7 @@ export function UserMenu() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        {' '}
-        <Avatar>
+        <Avatar className="w-9 h-9">
           <AvatarImage src="https://github.com/shadcn.png" />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
@@ -26,9 +25,10 @@ export function UserMenu() {
             foo.bar@baz.com
           </div>
         </DropdownMenuLabel>
+        <DropdownMenuItem>Account settings</DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem disabled>Dashboard</DropdownMenuItem>
-        <DropdownMenuItem disabled>Account settings</DropdownMenuItem>
+        <DropdownMenuItem>Switch Design System</DropdownMenuItem>
+        <DropdownMenuItem>Create Team</DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
           <Link className="cursor-pointer" href="/">

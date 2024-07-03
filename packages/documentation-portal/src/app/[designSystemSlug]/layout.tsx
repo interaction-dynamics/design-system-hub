@@ -1,11 +1,13 @@
 import { PropsWithChildren } from 'react'
+import { auth } from '@clerk/nextjs/server'
+
 import { notFound } from 'next/navigation'
 import Header from '@/components/atoms/header'
 import { findDesignSystemBySlug } from '@/adapters/data-access/design-systems'
 import Navigation from './_components/navigation'
 import Footer from '@/components/atoms/footer'
 import { UserMenu } from '@/components/organisms/user-menu'
-// import { SettingsButton } from './_components/settings-button'
+import { SignButton } from './_components/sign-button'
 
 export interface DesignSystemLayoutProps extends PropsWithChildren {
   params: any
@@ -21,6 +23,8 @@ export default async function DesignSystemLayout({
     notFound()
   }
 
+  const { userId } = auth()
+
   return (
     <div className="relative min-h-screen flex flex-col scroll-smooth">
       <Header>
@@ -32,6 +36,7 @@ export default async function DesignSystemLayout({
             <Navigation designSystemSlug={params.designSystemSlug} />
           </div>
           <div className="flex items-center gap-10">
+            {!userId && <SignButton />}
             {/* <NotificationCenter /> */}
             {/* <SettingsButton designSystem={designSystem} /> */}
             <UserMenu />

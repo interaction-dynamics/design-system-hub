@@ -1,5 +1,6 @@
 import { BorderBeam } from '@/components/magicui/border-beam'
 import { Button } from '@/components/ui/button'
+import { SignUpButton } from '@clerk/nextjs'
 
 import Image from 'next/image'
 import { BetaFlag } from './beta-flag'
@@ -26,10 +27,10 @@ export function Hero() {
         </p>
         <div className="flex items-center gap-4">
           <Button size="lg" asChild>
-            <Link href={demoLink}>Try demo</Link>
+            <SignUpButton>Start Building for free</SignUpButton>
           </Button>
           <Button size="lg" variant="outline" asChild>
-            <a href={betaLink}>Request Access</a>
+            <Link href={demoLink}>Try demo</Link>
           </Button>
         </div>
       </div>

@@ -1,3 +1,6 @@
+import { currentUser } from '@clerk/nextjs/server'
+import { SignOutButton } from '@clerk/nextjs'
+
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
   DropdownMenu,
@@ -6,33 +9,34 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-  DropdownMenuShortcut,
 } from '@/components/ui/dropdown-menu'
 import Link from 'next/link'
 
-export function UserMenu() {
+export async function UserMenu() {
+  const user = await currentUser()
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
         <Avatar className="w-9 h-9">
-          <AvatarImage src="https://github.com/shadcn.png" />
-          <AvatarFallback>CN</AvatarFallback>
+          <AvatarImage src={user?.imageUrl} />
+          <AvatarFallback>JD</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent side="bottom" align="end">
         <DropdownMenuLabel>
-          <div>Unknown</div>
-          <div className="font-light text-muted-foreground">
-            foo.bar@baz.com
+          <div>{user?.fullName ?? 'John Doe'}</div>
+          <div className="font-light text-muted-foreground max-w-44 truncate">
+            {user?.primaryEmailAddress?.emailAddress ?? 'john.doe@bar.com'}
           </div>
         </DropdownMenuLabel>
-        <DropdownMenuItem asChild>
+        <DropdownMenuItem asChild disabled>
           <Link className="cursor-pointer" href="/settings">
             Account settings
           </Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem asChild>
+        <DropdownMenuItem asChild disabled={!user}>
           <Link
             href="/dashboard"
             className="cursor-pointer flex justify-between gap-4"
@@ -65,7 +69,13 @@ export function UserMenu() {
             Home Page
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem disabled>Log out</DropdownMenuItem>
+        <DropdownMenuItem
+          className="w-full cursor-pointer"
+          disabled={!user}
+          asChild
+        >
+          <SignOutButton redirectUrl="/">Log out</SignOutButton>
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )

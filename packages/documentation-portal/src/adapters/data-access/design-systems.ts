@@ -110,12 +110,21 @@ export const findDesignSystemBySlug = cache(
 export const findAllDesignSystemsByOrganizationId = cache(
   async (
     organizationId: string
-  ): Promise<Array<Pick<DesignSystem, 'id' | 'name'>>> => {
+  ): Promise<
+    Array<
+      Pick<DesignSystem, 'id' | 'name' | 'slug' | 'isPublic'> & {
+        updatedAt: Date
+      }
+    >
+  > => {
     const designSystemDaos = await db.designSystem.findMany()
 
     return designSystemDaos.map((designSystemDao) => ({
       id: designSystemDao.id,
       name: designSystemDao.name,
+      slug: designSystemDao.slug,
+      isPublic: designSystemDao.isPublic,
+      updatedAt: designSystemDao.updatedAt,
     }))
   }
 )

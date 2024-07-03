@@ -4,7 +4,6 @@ import { LayoutWithLeftSidebar } from '@/components/organisms/layout-with-left-s
 import LeftSideBar from '@/components/organisms/left-sidebar'
 import { findDesignSystemBySlug } from '@/adapters/data-access/design-systems'
 import { findPartialComponents } from '@/adapters/data-access/components'
-import { metadata } from '@/app/layout'
 import { NavigationComponentFlags } from './_components/navigation-component-flags'
 
 interface ComponentPageProps extends PropsWithChildren {

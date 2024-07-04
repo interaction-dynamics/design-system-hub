@@ -3,3 +3,8 @@ export interface Organization {
   name: string
   slug: string
 }
+
+export interface OrganizationMembership {
+  id: string
+  role: string
+}

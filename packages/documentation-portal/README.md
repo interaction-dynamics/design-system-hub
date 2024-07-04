@@ -14,3 +14,5 @@ pnpm dev
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Vercel](https://vercel.com/)
 - [MongoDB](https://www.mongodb.com/)
+- [Clerk](https://clerk.com/)
+- [Figma API](https://www.figma.com/developers/api)

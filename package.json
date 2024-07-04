@@ -1,5 +1,5 @@
 {
-  "name": "design-system-manager",
+  "name": "design-system-hub",
   "scripts": {
     "commitlint": "commitlint --from=5159eadd60e163a68f8210e388cea62b5f557657"
   },

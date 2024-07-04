@@ -8,7 +8,7 @@ Thank you for reporting any issues you find. We do our best to test and make thi
 
 Please follow these guidelines when reporting issues:
 
-- Create a new issue in the [issue tracker](https://github.com/interaction-dynamics/design-system-manager/issues).
+- Create a new issue in the [issue tracker](https://github.com/interaction-dynamics/design-system-hub/issues).
 - Provide a title in the format of `<Error> when <Task>`
 - Tag your issue with the tag `bug`
 - Provide a short summary of what you are trying to do

@@ -18,7 +18,7 @@ pnpm cli dev ../../examples/zero-config/src/libs
 
 provider:
   relativePath: examples/zero-config/src/libs
-  url: git@github.com:interaction-dynamics/design-system-manager.git
+  url: git@github.com:interaction-dynamics/design-system-hub.git
 components:
   - name: Button
     path: atoms/button.tsx

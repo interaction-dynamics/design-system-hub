@@ -8,7 +8,7 @@ describe('extractDesignSystem', () => {
 
     it('should return url', async () => {
       const expectedUrl =
-        /(git@github.com:interaction-dynamics\/design-system-manager.git)|(https:\/\/github.com\/interaction-dynamics\/design-system-manager)/
+        /(git@github.com:interaction-dynamics\/design-system-hub.git)|(https:\/\/github.com\/interaction-dynamics\/design-system-hub)/
 
       const designSystem = await extractDesignSystem(dirPath)
 
@@ -36,7 +36,7 @@ describe('extractDesignSystem', () => {
 
     it('should return url', async () => {
       const expectedUrl =
-        /(git@github.com:interaction-dynamics\/design-system-manager.git)|(https:\/\/github.com\/interaction-dynamics\/design-system-manager)/
+        /(git@github.com:interaction-dynamics\/design-system-hub.git)|(https:\/\/github.com\/interaction-dynamics\/design-system-hub)/
 
       const designSystem = await extractDesignSystem(dirPath)
 

@@ -7,7 +7,7 @@ describe('getLinks', () => {
     const designSystem = mockDesignSystem({
       providers: {
         code: {
-          url: 'git@github.com:interaction-dynamics/design-system-manager.git',
+          url: 'git@github.com:interaction-dynamics/design-system-hub.git',
           relativePath: 'examples/zero-config',
         },
       },
@@ -26,7 +26,7 @@ describe('getLinks', () => {
     expect(links).toEqual([
       {
         label: 'Open in GitHub',
-        href: 'https://github.com/interaction-dynamics/design-system-manager/blob/main/examples/zero-config/src/libs/atoms/input.tsx',
+        href: 'https://github.com/interaction-dynamics/design-system-hub/blob/main/examples/zero-config/src/libs/atoms/input.tsx',
         order: 5,
       },
     ])
@@ -36,7 +36,7 @@ describe('getLinks', () => {
     const designSystem = mockDesignSystem({
       providers: {
         code: {
-          url: 'git@github.com:interaction-dynamics/design-system-manager.git',
+          url: 'git@github.com:interaction-dynamics/design-system-hub.git',
           relativePath: 'examples/zero-config',
         },
       },
@@ -55,7 +55,7 @@ describe('getLinks', () => {
     expect(links).toEqual([
       {
         label: 'Open in GitHub',
-        href: 'https://github.com/interaction-dynamics/design-system-manager/blob/main/examples/zero-config/src/libs/atoms/input.tsx',
+        href: 'https://github.com/interaction-dynamics/design-system-hub/blob/main/examples/zero-config/src/libs/atoms/input.tsx',
         order: 5,
       },
     ])
@@ -65,7 +65,7 @@ describe('getLinks', () => {
     const designSystem = mockDesignSystem({
       providers: {
         code: {
-          url: 'git@gitlab.com:interaction-dynamics/design-system-manager.git',
+          url: 'git@gitlab.com:interaction-dynamics/design-system-hub.git',
           relativePath: 'examples/zero-config',
         },
       },

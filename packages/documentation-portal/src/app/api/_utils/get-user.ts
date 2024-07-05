@@ -12,5 +12,6 @@ export async function getUser(request: NextRequest): Promise<User | undefined> {
     id: '1',
     name: 'John Doe',
     email: '',
+    slug: 'user',
   }
 }

@@ -1,8 +1,10 @@
 import { generateAccessToken } from '@/adapters/providers/figma/actions/credentials'
 import { createEmptyDesignSystem } from '@/adapters/data-access/design-systems'
 import { createFigmaDesignSystemCredentials } from '@/adapters/data-access/figma-design-system-credentials'
-import { redirect } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import { getFigmaCallbackUrl } from '../_utils/url'
+import { auth } from '@clerk/nextjs/server'
+import { findOrganizationbySlug } from '@/adapters/data-access/organizations'
 
 export default async function Page({
   searchParams,
@@ -11,12 +13,28 @@ export default async function Page({
 }) {
   const newSearchParams = new URLSearchParams(searchParams)
 
+  const organizationSlug = searchParams.state
+
   const credentials = await generateAccessToken(
     getFigmaCallbackUrl(),
     searchParams.code
   )
 
-  const designSystemDao = await createEmptyDesignSystem(searchParams.state)
+  const { userId } = auth()
+
+  if (!userId) {
+    redirect('/')
+    return
+  }
+
+  const organization = await findOrganizationbySlug(organizationSlug, userId)
+
+  if (!organization) {
+    notFound()
+    return
+  }
+
+  const designSystemDao = await createEmptyDesignSystem(organization.id)
 
   const response = await createFigmaDesignSystemCredentials(
     credentials,
@@ -25,7 +43,7 @@ export default async function Page({
 
   if (response) {
     redirect(
-      `/new/${searchParams.state}/figma/choose-files/${designSystemDao.slug}`
+      `/new/${organizationSlug}/figma/choose-files/${designSystemDao.slug}`
     )
   }
 

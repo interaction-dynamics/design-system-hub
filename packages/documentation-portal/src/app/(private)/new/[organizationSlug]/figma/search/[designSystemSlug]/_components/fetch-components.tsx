@@ -13,10 +13,45 @@ import {
   deleteComponentVariants,
 } from '@/adapters/data-access/component-variants'
 import { syncComponent } from '@/domain/use-cases/sync-component'
+import { cache } from 'react'
 
 interface Props {
   designSystemSlug: string
 }
+
+const cachedSync = cache(
+  async (designSystemId: string, accessToken: string) => {
+    console.log('cachedSync', designSystemId, accessToken)
+
+    const files = await findFigmaFilesByDesignSystemId(designSystemId)
+
+    const fileKeys = files.map((file) => file.fileKey)
+
+    const components = await findFigmaComponents(fileKeys, accessToken)
+
+    console.log(
+      'components',
+      components.map((c) => c.name)
+    )
+
+    await Promise.all(
+      components.map(async (component) =>
+        syncComponent(
+          { designSystemId: designSystemId, component },
+          {
+            findComponentByName,
+            updateComponent,
+            deleteComponentVariants,
+            createComponentVariant,
+            createComponent,
+          }
+        )
+      )
+    )
+
+    return components
+  }
+)
 
 export async function FetchComponents({ designSystemSlug }: Props) {
   const designSystem = await findDesignSystemBySlug(designSystemSlug)
@@ -27,26 +62,7 @@ export async function FetchComponents({ designSystemSlug }: Props) {
     designSystem.id
   )
 
-  const files = await findFigmaFilesByDesignSystemId(designSystem.id)
-
-  const fileKeys = files.map((file) => file.fileKey)
-
-  const components = await findFigmaComponents(fileKeys, accessToken)
-
-  await Promise.all(
-    components.map(async (component) =>
-      syncComponent(
-        { designSystemId: designSystem.id, component },
-        {
-          findComponentByName,
-          updateComponent,
-          deleteComponentVariants,
-          createComponentVariant,
-          createComponent,
-        }
-      )
-    )
-  )
+  const components = await cachedSync(designSystem.id, accessToken)
 
   return (
     <FetchIndicator

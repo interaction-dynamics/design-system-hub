@@ -30,7 +30,7 @@ model ComponentVariant {
     Component   Component? @relation(fields: [componentId], references: [id])
     componentId String?    @db.ObjectId
 
-    @@unique([componentId, slug], name: "componentVariantSlug")
+    // @@unique([componentId, slug], name: "componentVariantSlug")
 }
 
 model Component {
@@ -47,7 +47,7 @@ model Component {
     DesignSystem   DesignSystem? @relation(fields: [designSystemId], references: [id])
     designSystemId String?       @db.ObjectId
 
-    @@unique([slug, designSystemId])
+    // @@unique([slug, designSystemId])
 }
 
 model DesignSystem {
@@ -64,25 +64,16 @@ model DesignSystem {
     styles           Style[]
     figmaCredentials FigmaDesignSystemCredentials[]
     FigmaFile        FigmaFile[]
-}
 
-model User {
-    id                     String                   @id @default(auto()) @map("_id") @db.ObjectId
-    email                  String                   @unique
-    name                   String
-    createdAt              DateTime                 @default(now())
-    updatedAt              DateTime                 @updatedAt
-    tokens                 Token[]
-    OrganizationMembership OrganizationMembership[]
-    Organization           Organization[]
+    Organization   Organization? @relation(fields: [organizationId], references: [id])
+    organizationId String?       @db.ObjectId
 }
 
 model Token {
     id          String   @id @default(auto()) @map("_id") @db.ObjectId
     token       String   @unique
     description String   @default("")
-    User        User?    @relation(fields: [userId], references: [id])
-    userId      String?  @db.ObjectId
+    userId      String?
     createdAt   DateTime @default(now())
     updatedAt   DateTime @updatedAt
 }
@@ -134,22 +125,21 @@ model FigmaFile {
 }
 
 model Organization {
-    id        String                   @id @default(auto()) @map("_id") @db.ObjectId
-    name      String
-    slug      String
-    createdAt DateTime                 @default(now())
-    updatedAt DateTime                 @updatedAt
-    members   OrganizationMembership[]
-    Owner     User                     @relation(fields: [ownerId], references: [id])
-    ownerId   String                   @db.ObjectId
+    id           String                   @id @default(auto()) @map("_id") @db.ObjectId
+    name         String
+    slug         String
+    createdAt    DateTime                 @default(now())
+    updatedAt    DateTime                 @updatedAt
+    members      OrganizationMembership[]
+    ownerId      String
+    DesignSystem DesignSystem[]
 }
 
 model OrganizationMembership {
     id             String       @id @default(auto()) @map("_id") @db.ObjectId
     organization   Organization @relation(fields: [organizationId], references: [id])
     organizationId String       @db.ObjectId
-    user           User         @relation(fields: [userId], references: [id])
-    userId         String       @db.ObjectId
+    userId         String
     role           String
     createdAt      DateTime     @default(now())
     updatedAt      DateTime     @updatedAt

@@ -1,6 +1,6 @@
 import {
   createOrganization,
-  findOrganizationByUserId,
+  findAllOrganizationsByUserId,
 } from '@/adapters/data-access/organizations'
 import { redirect } from 'next/navigation'
 import { auth } from '@clerk/nextjs/server'
@@ -13,7 +13,7 @@ export default async function Page() {
     return
   }
 
-  const organizations = await findOrganizationByUserId('userId')
+  const organizations = await findAllOrganizationsByUserId(userId)
 
   if (organizations.length > 0) {
     redirect(`/dashboard/${organizations[0].slug}`)

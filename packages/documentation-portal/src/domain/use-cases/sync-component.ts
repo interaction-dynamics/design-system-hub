@@ -46,6 +46,8 @@ export async function syncComponent(
       },
     })
 
+    console.log('deleteComponentVariants', foundComponent.id)
+
     await deleteComponentVariants(foundComponent.id)
 
     if (component.variants) {
@@ -64,12 +66,12 @@ export async function syncComponent(
       properties: [],
     })
 
-    await deleteComponentVariants(newComponent.id)
-
     if (component.variants) {
-      component.variants.forEach(async (variant) => {
-        await createComponentVariant(newComponent.id, variant)
-      })
+      await Promise.all(
+        component.variants.map((variant) =>
+          createComponentVariant(newComponent.id, variant)
+        )
+      )
     }
   }
 }

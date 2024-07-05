@@ -18,33 +18,16 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 import { useState } from 'react'
+import { Organization } from '@/domain/entities/organization'
 
-const frameworks = [
-  {
-    value: 'next.js',
-    label: 'Next.js',
-  },
-  {
-    value: 'sveltekit',
-    label: 'SvelteKit',
-  },
-  {
-    value: 'nuxt.js',
-    label: 'Nuxt.js',
-  },
-  {
-    value: 'remix',
-    label: 'Remix',
-  },
-  {
-    value: 'astro',
-    label: 'Astro',
-  },
-]
+interface Props {
+  organizations: Organization[]
+  organizationSlug: string
+}
 
-export function TeamSwitcher() {
+export function TeamSwitcher({ organizations, organizationSlug }: Props) {
   const [open, setOpen] = useState(false)
-  const [value, setValue] = useState('next.js')
+  const [value, setValue] = useState(organizationSlug)
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -55,21 +38,21 @@ export function TeamSwitcher() {
           aria-expanded={open}
           className="w-[200px] justify-between"
         >
-          {value
-            ? frameworks.find((framework) => framework.value === value)?.label
-            : 'Select framework...'}
+          {organizationSlug
+            ? organizations.find((org) => org.slug === organizationSlug)?.name
+            : 'Select Team...'}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
         <Command>
-          <CommandInput placeholder="Search framework..." />
+          <CommandInput placeholder="Search Team..." />
           <CommandList>
             <CommandEmpty>No results found.</CommandEmpty>
-            {frameworks.map((framework) => (
+            {organizations.map((org) => (
               <CommandItem
-                key={framework.value}
-                value={framework.value}
+                key={org.slug}
+                value={org.slug}
                 className="cursor-pointer"
                 onSelect={(currentValue: string) => {
                   setValue(currentValue === value ? '' : currentValue)
@@ -79,10 +62,10 @@ export function TeamSwitcher() {
                 <Check
                   className={cn(
                     'mr-2 h-4 w-4',
-                    value === framework.value ? 'opacity-100' : 'opacity-0'
+                    value === org.slug ? 'opacity-100' : 'opacity-0'
                   )}
                 />
-                {framework.label}
+                {org.name}
               </CommandItem>
             ))}
             <CommandSeparator />

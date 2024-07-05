@@ -16,7 +16,7 @@ export default async function Page({
     searchParams.code
   )
 
-  const designSystemDao = await createEmptyDesignSystem()
+  const designSystemDao = await createEmptyDesignSystem(searchParams.state)
 
   const response = await createFigmaDesignSystemCredentials(
     credentials,

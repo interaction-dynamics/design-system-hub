@@ -8,13 +8,14 @@ export interface DesignSystemDao extends DesignSystem {
   id: string
 }
 
-export async function createEmptyDesignSystem() {
+export async function createEmptyDesignSystem(organizationId: string) {
   return await db.designSystem.create({
     data: {
       name: 'Empty Design System',
       slug: (Math.random() + 1).toString(36).substring(7),
       isPublic: false,
       providers: {},
+      organizationId,
     },
   })
 }
@@ -117,7 +118,10 @@ export const findAllDesignSystemsByOrganizationId = cache(
       }
     >
   > => {
-    const designSystemDaos = await db.designSystem.findMany()
+    const designSystemDaos = await db.designSystem.findMany({
+      where: { organizationId },
+      orderBy: { updatedAt: 'desc' },
+    })
 
     return designSystemDaos.map((designSystemDao) => ({
       id: designSystemDao.id,

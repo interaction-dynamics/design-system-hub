@@ -1,9 +1,33 @@
+import Link from 'next/link'
+import { auth } from '@clerk/nextjs/server'
+import { notFound, redirect } from 'next/navigation'
+import { findOrganizationbySlug } from '@/adapters/data-access/organizations'
 import { Card, CardContent } from '@/components/ui/card'
 import { findAllDesignSystemsByOrganizationId } from '@/adapters/data-access/design-systems'
-import Link from 'next/link'
+import { Button } from '@/components/ui/button'
 
-export async function DesignSystemList() {
-  const designSystemList = await findAllDesignSystemsByOrganizationId('dds')
+interface Props {
+  organizationSlug: string
+}
+
+export async function DesignSystemList({ organizationSlug }: Props) {
+  const { userId } = auth()
+
+  if (!userId) {
+    redirect('/')
+    return
+  }
+
+  const organization = await findOrganizationbySlug(organizationSlug, userId)
+
+  if (!organization) {
+    notFound()
+    return
+  }
+
+  const designSystemList = await findAllDesignSystemsByOrganizationId(
+    organization.id
+  )
 
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">

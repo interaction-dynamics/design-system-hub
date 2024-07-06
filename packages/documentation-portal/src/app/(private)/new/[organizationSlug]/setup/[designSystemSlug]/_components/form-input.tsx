@@ -84,11 +84,9 @@ export function FormInput({
     if (success) {
       router.push(`/${slug}`)
     } else if (reason === 'slug_duplicated') {
-      console.log('duplicating')
       form.setError('url', {
         type: 'custom',
         message: 'This slug already exists.',
-        on,
       })
     }
   }

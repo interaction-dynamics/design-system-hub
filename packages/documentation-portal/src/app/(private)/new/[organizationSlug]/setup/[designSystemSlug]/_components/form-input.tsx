@@ -45,15 +45,23 @@ async function updateDesignSystem(
 
 interface Props {
   designSystem: DesignSystem
+  defaultName: string
+  defaultSlug: string
+  defaultVisibility: 'public' | 'private'
 }
 
-export function FormInput({ designSystem }: Props) {
+export function FormInput({
+  designSystem,
+  defaultName,
+  defaultSlug,
+  defaultVisibility,
+}: Props) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: '',
-      url: '',
-      visibility: 'public',
+      name: defaultName,
+      url: defaultSlug,
+      visibility: defaultVisibility,
     },
   })
 
@@ -67,7 +75,7 @@ export function FormInput({ designSystem }: Props) {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const slug = values.url
 
-    const { success } = await trigger({
+    const { success, reason } = await trigger({
       name: values.name,
       slug,
       isPublic: values.visibility === 'public',
@@ -75,6 +83,13 @@ export function FormInput({ designSystem }: Props) {
 
     if (success) {
       router.push(`/${slug}`)
+    } else if (reason === 'slug_duplicated') {
+      console.log('duplicating')
+      form.setError('url', {
+        type: 'custom',
+        message: 'This slug already exists.',
+        on,
+      })
     }
   }
 
@@ -149,8 +164,11 @@ export function FormInput({ designSystem }: Props) {
           )}
         />
         <div className="flex justify-end">
-          <Button disabled={isMutating} type="submit">
-            {isMutating && (
+          <Button
+            disabled={form.formState.isSubmitting || !form.formState.isValid}
+            type="submit"
+          >
+            {form.formState.isSubmitting && (
               <svg
                 className="animate-spin h-5 w-5 -ml-1 mr-2"
                 xmlns="http://www.w3.org/2000/svg"
@@ -163,7 +181,7 @@ export function FormInput({ designSystem }: Props) {
                   cy="12"
                   r="10"
                   stroke="currentColor"
-                  stroke-width="4"
+                  strokeWidth="4"
                 />
                 <path
                   className="opacity-75"

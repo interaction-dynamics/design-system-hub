@@ -12,13 +12,13 @@ interface LeftSideBarProps<T> {
     metadata?: T
   }[]
   title?: string
-  flags?: (props: T) => Promise<JSX.Element>
+  flags?: React.ReactNode[]
 }
 
 export default function LeftSideBar<T extends { [prop: string]: any }>({
   title,
   links,
-  flags: Flags,
+  flags,
 }: LeftSideBarProps<T>) {
   const pathname = usePathname()
 
@@ -26,7 +26,7 @@ export default function LeftSideBar<T extends { [prop: string]: any }>({
     <aside className="fixed top-14 pt-8 z-30 -ml-2 hidden h-[calc(100vh-3.5rem)] w-full shrink-0 md:sticky md:block">
       {title && <div className="px-2 pb-5 text-lg font-semibold">{title}</div>}
       <div className="grid grid-flow-row auto-rows-max text-sm">
-        {links.map((link) => (
+        {links.map((link, index) => (
           <Link
             key={link.href}
             className={cn(
@@ -38,14 +38,7 @@ export default function LeftSideBar<T extends { [prop: string]: any }>({
             href={link.href}
           >
             {link.label}
-
-            {Flags && (
-              <div className="ml-2">
-                <Suspense>
-                  <Flags {...(link.metadata as any)} />
-                </Suspense>
-              </div>
-            )}
+            {flags?.[index] && <div className="ml-2">{flags?.[index]}</div>}
           </Link>
         ))}
       </div>

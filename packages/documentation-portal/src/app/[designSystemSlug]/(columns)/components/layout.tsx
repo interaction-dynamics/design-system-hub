@@ -1,10 +1,10 @@
 import { notFound } from 'next/navigation'
-import { PropsWithChildren } from 'react'
+import { PropsWithChildren, Suspense } from 'react'
 import { LayoutWithLeftSidebar } from '@/components/organisms/layout-with-left-sidebar'
 import LeftSideBar from '@/components/organisms/left-sidebar'
 import { findDesignSystemBySlug } from '@/adapters/data-access/design-systems'
 import { findPartialComponents } from '@/adapters/data-access/components'
-import { NavigationComponentFlags } from './_components/navigation-component-flags'
+import { NavigationComponentFlags } from './[componentSlug]/_components/navigation-component-flags'
 
 interface ComponentPageProps extends PropsWithChildren {
   params: any
@@ -26,7 +26,6 @@ export default async function ComponentsLayout({
       return {
         label: component.name,
         href: `/${designSystem.slug}/components/${component.slug}`,
-        active: component.slug === componentSlug,
         metadata: {
           designSystem,
           componentSlug: component.slug,
@@ -34,13 +33,17 @@ export default async function ComponentsLayout({
       }
     }) ?? []
 
+  const flags = links.map((link) => (
+    <Suspense>
+      <NavigationComponentFlags {...link.metadata} />
+    </Suspense>
+  ))
+
   return (
     <LayoutWithLeftSidebar
       slug={designSystemSlug}
       section="components"
-      leftSidebar={
-        <LeftSideBar links={links} flags={NavigationComponentFlags} />
-      }
+      leftSidebar={<LeftSideBar links={links} flags={flags} />}
     >
       {children}
     </LayoutWithLeftSidebar>

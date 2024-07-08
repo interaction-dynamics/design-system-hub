@@ -24,12 +24,24 @@ import {
 } from '@/components/ui/form'
 import { Button } from '@/components/ui/button'
 import { Spinner } from '@/components/atoms/spinner'
+import useSWRMutation from 'swr/mutation'
+import { useRouter } from 'next/navigation'
 
 const formSchema = z.object({
   slug: z.string().min(2, {
     message: 'URL must be at least 2 characters.',
   }),
 })
+
+async function updateDesignSystem(
+  url: string,
+  { arg }: { arg: { slug: string } }
+) {
+  return fetch(url, {
+    method: 'PUT',
+    body: JSON.stringify(arg),
+  }).then((r) => r.json())
+}
 
 export function SlugEditor({ designSystem }: { designSystem: DesignSystem }) {
   const form = useForm<z.infer<typeof formSchema>>({
@@ -39,9 +51,29 @@ export function SlugEditor({ designSystem }: { designSystem: DesignSystem }) {
     },
   })
 
-  const isMutating = true
+  const { trigger, isMutating } = useSWRMutation(
+    `/api/design-system/${designSystem.id}`,
+    updateDesignSystem
+  )
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {}
+  const router = useRouter()
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const { success, reason } = await trigger({
+      slug: values.slug,
+    })
+
+    if (reason) {
+      form.setError('slug', {
+        type: 'custom',
+        message: reason,
+      })
+    }
+
+    if (success) {
+      router.push(`/${values.slug}/settings/general`)
+    }
+  }
 
   return (
     <Card>

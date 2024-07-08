@@ -8,6 +8,7 @@ import Navigation from './_components/navigation'
 import Footer from '@/components/atoms/footer'
 import { UserMenu } from '@/components/organisms/user-menu'
 import { SignButton } from './_components/sign-button'
+import { SettingsButton } from './_components/settings-button'
 
 export interface DesignSystemLayoutProps extends PropsWithChildren {
   params: any
@@ -38,7 +39,7 @@ export default async function DesignSystemLayout({
           <div className="flex items-center gap-10">
             {!userId && <SignButton />}
             {/* <NotificationCenter /> */}
-            {/* <SettingsButton designSystem={designSystem} /> */}
+            {userId && <SettingsButton designSystem={designSystem} />}
             <UserMenu />
           </div>
         </div>

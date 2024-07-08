@@ -1,5 +1,4 @@
 import { findDesignSystemBySlug } from '@/adapters/data-access/design-systems'
-import { PropsWithChildren } from 'react'
 import { notFound } from 'next/navigation'
 import { NameEditor } from './_components/name-editor'
 import { SlugEditor } from './_components/slug-editor'

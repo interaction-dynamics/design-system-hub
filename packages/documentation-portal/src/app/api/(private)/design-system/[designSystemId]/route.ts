@@ -4,9 +4,9 @@ import { NextRequest } from 'next/server'
 import z from 'zod'
 
 const formSchema = z.object({
-  name: z.string().min(2),
-  slug: z.string().min(2),
-  isPublic: z.boolean(),
+  name: z.string().min(2).optional(),
+  slug: z.string().min(2).optional(),
+  isPublic: z.boolean().optional(),
 })
 
 export async function PUT(
@@ -17,8 +17,6 @@ export async function PUT(
 
   try {
     formSchema.parse(result)
-
-    const { name, slug, isPublic } = result
 
     await updateDesignSystem(params.designSystemId, result)
 

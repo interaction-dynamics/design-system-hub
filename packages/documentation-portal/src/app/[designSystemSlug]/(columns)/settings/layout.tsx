@@ -24,7 +24,6 @@ export default async function SettingsLayout({
     {
       label: 'General',
       href: `/${designSystem.slug}/settings/general`,
-      active: true,
     },
     {
       label: 'Integrations',
@@ -35,10 +34,8 @@ export default async function SettingsLayout({
   return (
     <LayoutWithLeftSidebar
       slug={designSystemSlug}
-      section="components"
-      leftSidebar={
-        <LeftSideBar links={links} title={`${designSystem.name} Settings`} />
-      }
+      section="settings"
+      leftSidebar={<LeftSideBar links={links} />}
     >
       {children}
     </LayoutWithLeftSidebar>

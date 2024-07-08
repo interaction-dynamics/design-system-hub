@@ -7,6 +7,9 @@ import { getLinks } from './utils/get-links'
 import { getComponentFlags } from './utils/get-component-flags'
 
 export const code: Provider = {
+  name: 'Repository',
+  description: 'Import the grand truth of your design system from the codebase',
+
   type: 'development',
   getDescription(component: Component | ComponentVariant) {
     return validateCodeComponent(component)

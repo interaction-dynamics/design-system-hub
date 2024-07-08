@@ -22,6 +22,9 @@ export interface Flag {
 }
 
 export default interface Provider {
+  name: string
+  description: string
+
   type: 'design' | 'development'
 
   getDescription(component: Component | ComponentVariant): string

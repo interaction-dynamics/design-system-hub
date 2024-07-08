@@ -21,7 +21,7 @@ export default async function LoadingLayout() {
         description={<Skeleton className="w-[100px] h-[20px] rounded-md" />}
         rightSideBar={<></>}
       >
-        <Skeleton className="w-[100px] h-[20px] rounded-full" />
+        <Skeleton className="w-[100px] h-[20px] rounded-full mt-2" />
       </Main>
     </LayoutWithLeftSidebar>
   )

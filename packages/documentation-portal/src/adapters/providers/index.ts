@@ -10,3 +10,7 @@ const isProviderId = (key: string): key is keyof typeof providers =>
 export function getProvider(providerId: string) {
   return isProviderId(providerId) ? providers[providerId] : undefined
 }
+
+export function getProviders() {
+  return Object.values(providers)
+}

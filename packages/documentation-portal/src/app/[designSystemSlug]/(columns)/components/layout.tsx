@@ -14,7 +14,7 @@ export default async function ComponentsLayout({
   params,
   children,
 }: ComponentPageProps) {
-  const { designSystemSlug, componentSlug } = params
+  const { designSystemSlug } = params
 
   const designSystem = await findDesignSystemBySlug(params.designSystemSlug)
 

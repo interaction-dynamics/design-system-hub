@@ -49,8 +49,8 @@ export default async function NewDesignSystemFigmaPage({ params }: Props) {
           <CodeBlock language="bash">{command}</CodeBlock>
         </div>
         <div className="text-sm text-muted-foreground">
-          Please keep in mind that we won't show your token again. Make sure to
-          save it in a safe place to rerun the command in the future.
+          Please keep in mind that we won&apos;t show your token again. Make
+          sure to save it in a safe place to rerun the command in the future.
         </div>
         <div className="flex justify-end mt-5">
           <Button asChild>

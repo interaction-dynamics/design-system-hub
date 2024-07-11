@@ -65,17 +65,9 @@ model DesignSystem {
     figmaCredentials FigmaDesignSystemCredentials[]
     FigmaFile        FigmaFile[]
 
-    Organization   Organization? @relation(fields: [organizationId], references: [id])
-    organizationId String?       @db.ObjectId
-}
-
-model Token {
-    id          String   @id @default(auto()) @map("_id") @db.ObjectId
-    token       String   @unique
-    description String   @default("")
-    userId      String?
-    createdAt   DateTime @default(now())
-    updatedAt   DateTime @updatedAt
+    Organization       Organization?       @relation(fields: [organizationId], references: [id])
+    organizationId     String?             @db.ObjectId
+    designSystemTokens DesignSystemToken[]
 }
 
 model Page {
@@ -143,4 +135,29 @@ model OrganizationMembership {
     role           String
     createdAt      DateTime     @default(now())
     updatedAt      DateTime     @updatedAt
+}
+
+model UserToken {
+    id          String @id @default(auto()) @map("_id") @db.ObjectId
+    token       String @unique
+    prefix      String @unique
+    description String @default("")
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    userId String
+}
+
+model DesignSystemToken {
+    id          String @id @default(auto()) @map("_id") @db.ObjectId
+    token       String @unique
+    prefix      String @unique
+    description String @default("")
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    DesignSystem   DesignSystem @relation(fields: [designSystemId], references: [id])
+    designSystemId String       @db.ObjectId
 }

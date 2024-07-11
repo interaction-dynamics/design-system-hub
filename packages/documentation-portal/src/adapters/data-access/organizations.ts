@@ -2,8 +2,6 @@ import { Organization } from '@/domain/entities/organization'
 import { db } from '@/lib/db'
 
 export async function findAllOrganizationsByUserId(userId: string) {
-  console.log('userId', userId)
-
   const memberships = await db.organizationMembership.findMany({
     where: {
       userId,

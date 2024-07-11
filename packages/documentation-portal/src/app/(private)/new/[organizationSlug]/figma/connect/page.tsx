@@ -32,7 +32,7 @@ export default function NewDesignSystemFigmaPage({ params }: Props) {
       </CardContent>
       <CardFooter>
         <SkipButton
-          href={`/new/${params.organizationSlug}/repository/connect`}
+          href={`/new/${params.organizationSlug}/repository/create`}
         />
       </CardFooter>
     </Card>

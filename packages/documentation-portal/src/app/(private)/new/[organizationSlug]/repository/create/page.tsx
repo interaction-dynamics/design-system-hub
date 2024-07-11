@@ -2,16 +2,15 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { productName } from '@/config/names'
-import { SkipButton } from '../../../_components/skip-button'
+import Link from 'next/link'
 
 interface Props {
-  params: { designSystemSlug: string; organizationSlug: string }
+  params: { organizationSlug: string }
 }
 
 export default function NewDesignSystemFigmaPage({ params }: Props) {
@@ -26,14 +25,15 @@ export default function NewDesignSystemFigmaPage({ params }: Props) {
       </CardHeader>
       <CardContent>
         <p className="p-10 flex items-center justify-center">
-          <Button>Code</Button>
+          <Button>
+            <Link
+              href={`/new/${params.organizationSlug}/repository/create/in-progress`}
+            >
+              Connect code
+            </Link>
+          </Button>
         </p>
       </CardContent>
-      <CardFooter>
-        <SkipButton
-          href={`/new/${params.organizationSlug}/setup/${params.designSystemSlug}`}
-        />
-      </CardFooter>
     </Card>
   )
 }

@@ -147,12 +147,12 @@ export function FormInput({
                   </FormItem>
                   <FormItem className="flex items-center space-x-3 space-y-0">
                     <FormControl>
-                      <RadioGroupItem value="private" />
+                      <RadioGroupItem value="private" disabled />
                     </FormControl>
                     <FormLabel className="font-normal">Private</FormLabel>
                     <FormDescription>
                       Only members of the organization and invited users will be
-                      able to access the design system.
+                      able to access the design system. It will come later
                     </FormDescription>
                   </FormItem>
                 </RadioGroup>

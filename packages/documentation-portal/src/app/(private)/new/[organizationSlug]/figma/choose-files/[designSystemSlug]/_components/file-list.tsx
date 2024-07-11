@@ -42,6 +42,8 @@ export function FileList({
   const isValidUrl = (url: string) => {
     if (files.some((file) => file.url === newUrl)) return false
 
+    if (!url.startsWith('https://www.figma.com/design/')) return false
+
     try {
       new URL(url)
       return true
@@ -51,6 +53,8 @@ export function FileList({
   }
 
   const addFile = async (url: string) => {
+    if (!url || !isValidUrl(url)) return
+
     const fileKey = url
       .replace('https://www.figma.com/design/', '')
       .split('/')[0]
@@ -233,7 +237,7 @@ export function FileList({
               ></path>
             </svg>
           )}
-          Add files to design systems
+          Add files to design system
         </Button>
       </div>
       <HowToFindFileUrlDialog open={open} onOpenChange={setOpen} />

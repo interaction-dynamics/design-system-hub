@@ -69,7 +69,7 @@ export function TeamSwitcher({ organizations, organizationSlug }: Props) {
               </CommandItem>
             ))}
             <CommandSeparator />
-            <CommandItem className="cursor-pointer">
+            <CommandItem className="cursor-pointer" disabled>
               <CirclePlus className={cn('mr-2 h-4 w-4 opacity-100')} />
               Create new team
             </CommandItem>

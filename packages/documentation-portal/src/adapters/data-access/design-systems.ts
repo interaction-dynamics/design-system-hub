@@ -13,7 +13,7 @@ export async function createEmptyDesignSystem(organizationId: string) {
     data: {
       name: 'Empty Design System',
       slug: (Math.random() + 1).toString(36).substring(7),
-      isPublic: false,
+      isPublic: true,
       providers: {},
       organizationId,
     },
@@ -28,7 +28,7 @@ export async function createDesignSystem(
     data: {
       name: designSystem.name,
       slug: designSystem.slug,
-      isPublic: false,
+      isPublic: true,
       providers: {},
     },
   })

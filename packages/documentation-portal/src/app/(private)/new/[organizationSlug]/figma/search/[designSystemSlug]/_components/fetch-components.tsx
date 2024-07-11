@@ -2,7 +2,7 @@ import { findDesignSystemBySlug } from '@/adapters/data-access/design-systems'
 import { findFigmaDesignSystemCredentials } from '@/adapters/data-access/figma-design-system-credentials'
 import { findFigmaFilesByDesignSystemId } from '@/adapters/data-access/figma-file'
 import { findFigmaComponents } from '@/adapters/providers/figma/actions/design-system'
-import { FetchIndicator } from './fetch-indicator'
+import { FetchIndicator } from '../../../../_components/fetch-indicator'
 import {
   createComponent,
   findComponentByName,
@@ -21,18 +21,11 @@ interface Props {
 
 const cachedSync = cache(
   async (designSystemId: string, accessToken: string) => {
-    console.log('cachedSync', designSystemId, accessToken)
-
     const files = await findFigmaFilesByDesignSystemId(designSystemId)
 
     const fileKeys = files.map((file) => file.fileKey)
 
     const components = await findFigmaComponents(fileKeys, accessToken)
-
-    console.log(
-      'components',
-      components.map((c) => c.name)
-    )
 
     await Promise.all(
       components.map(async (component) =>

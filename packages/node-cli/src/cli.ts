@@ -5,9 +5,9 @@ import chalk from 'chalk'
 
 import packageJson from '../package.json'
 import { extractDesignSystem } from './actions/extract-design-system'
-import { isConnected, login, logout } from './actions/login'
-import { printWarning } from './adapters/prompt'
-import { link } from './actions/link'
+// import { isConnected, login, logout } from './actions/login'
+// import { printWarning } from './adapters/prompt'
+// import { link } from './actions/link'
 import { sync } from './actions/sync'
 
 const program = new Command()
@@ -17,48 +17,51 @@ program
   .description(packageJson.description)
   .version(packageJson.version)
 
-program
-  .command('login')
-  .description('Login')
-  .action(async () => {
-    if (await isConnected()) {
-      printWarning('You are already logged in. Run `logout` command to logout.')
-      return
-    }
+// program
+//   .command('login')
+//   .description('Login')
+//   .option('--token <token>', 'user token')
+//   .action(async options => {
+//     if (await isConnected()) {
+//       printWarning('You are already logged in. Run `logout` command to logout.')
+//       return
+//     }
 
-    await login()
-  })
+//     await login(options.token)
+//   })
 
-program
-  .command('logout')
-  .description('Logout')
-  .action(async () => {
-    await logout()
-  })
+// program
+//   .command('logout')
+//   .description('Logout')
+//   .action(async () => {
+//     await logout()
+//   })
 
-program
-  .command('link')
-  .description('Link')
-  .argument('[directory]', 'design system directory')
-  .option(
-    '--cwd <project_path>',
-    'path to the project directory',
-    process.cwd(),
-  )
-  .action(async (str, options) => {
-    await link(options.cwd, str)
-  })
+// program
+//   .command('link')
+//   .description('Link')
+//   .argument('[directory]', 'design system directory')
+//   .option(
+//     '--cwd <project_path>',
+//     'path to the project directory',
+//     process.cwd(),
+//   )
+//   .action(async (str, options) => {
+//     await link(options.cwd, str)
+//   })
 
 program
   .command('sync')
-  .description('Sync')
+  .description('Synchronize the design system with the Design System Hub')
   .option(
-    '--cwd <project_path>',
-    'path to the project directory',
+    '--cwd <design_system_path>',
+    'path to the design system directory',
     process.cwd(),
   )
+  .option('--token <token>', 'project token')
+
   .action(async options => {
-    await sync(options.cwd)
+    await sync(options.cwd, options.token)
   })
 
 const logSummary = (s: string) => console.warn(chalk.yellow.bold(s))
@@ -72,8 +75,8 @@ program
   .option('--json', 'display the output with json format')
   .option('--summary', 'show only the summary')
   .option(
-    '--cwd <project_path>',
-    'path to the project directory',
+    '--cwd <design_system_path>',
+    'path to the design system directory',
     process.cwd(),
   )
   .action(async options => {

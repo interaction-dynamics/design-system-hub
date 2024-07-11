@@ -5,11 +5,10 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { FetchComponents } from './_components/fetch-components'
+import { Accordion } from '@/components/ui/accordion'
 import { Suspense } from 'react'
 import { FetchIndicator } from '../../../_components/fetch-indicator'
-import { Accordion } from '@/components/ui/accordion'
-import { FetchStyles } from './_components/fetch-styles'
+import { ComponentList } from './_components/component-list'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 
@@ -17,13 +16,13 @@ interface Props {
   params: { designSystemSlug: string; organizationSlug: string }
 }
 
-export default function NewDesignSystemFigmaPage({ params }: Props) {
+export default async function NewDesignSystemFigmaPage({ params }: Props) {
   return (
     <Card>
       <CardHeader>
         <CardTitle className="text-2xl">Detecting design system</CardTitle>
         <CardDescription>
-          We extract your design system from Figma.
+          We extract your design system from your code.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -31,18 +30,13 @@ export default function NewDesignSystemFigmaPage({ params }: Props) {
           <Suspense
             fallback={<FetchIndicator loading title="Searching components" />}
           >
-            <FetchComponents designSystemSlug={params.designSystemSlug} />
-          </Suspense>
-          <Suspense
-            fallback={<FetchIndicator loading title="Searching styles" />}
-          >
-            <FetchStyles designSystemSlug={params.designSystemSlug} />
+            <ComponentList designSystemSlug={params.designSystemSlug} />
           </Suspense>
         </Accordion>
         <div className="flex justify-end mt-5">
           <Button asChild>
             <Link
-              href={`/new/${params.organizationSlug}/repository/${params.designSystemSlug}/connect`}
+              href={`/new/${params.organizationSlug}/setup/${params.designSystemSlug}`}
             >
               Let&apos;s continue
             </Link>

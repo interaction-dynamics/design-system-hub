@@ -1,25 +1,20 @@
-import { Authentication } from '../domain/entities/authentication'
 import { DesignSystem } from '../domain/entities/design-system'
 import { Organization } from '../domain/entities/organization'
 
 const API_URL = 'http://localhost:3000/api/'
 
-export async function authenticate(email: string): Promise<Authentication> {
+export async function postLogin(token: string): Promise<{ success: boolean }> {
   const response = await fetch(`${API_URL}/cli/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ email }),
+    body: JSON.stringify({ token }),
   })
 
   const result = await response.json()
 
-  const { token } = result as { token: string }
-
-  return {
-    token,
-  }
+  return result as { success: boolean }
 }
 
 export async function requestOrganizations(
@@ -74,8 +69,6 @@ export async function requestDesignSystems(
 
 export async function postDesignSystem(
   token: string,
-  organizationId: string,
-  designSystemId: string,
   designSystem: DesignSystem,
 ) {
   const response = await fetch(`${API_URL}/sync/code`, {
@@ -84,7 +77,7 @@ export async function postDesignSystem(
       'Content-Type': 'application/json',
       Authorization: `Token ${token}`,
     },
-    body: JSON.stringify({ organizationId, designSystemId, designSystem }),
+    body: JSON.stringify({ designSystem }),
   })
 
   if (response.status === 401) {
@@ -95,3 +88,27 @@ export async function postDesignSystem(
 
   return result?.success
 }
+
+// export async function postDesignSystem(
+//   token: string,
+//   organizationId: string,
+//   designSystemId: string,
+//   designSystem: DesignSystem,
+// ) {
+//   const response = await fetch(`${API_URL}/sync/code`, {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//       Authorization: `Token ${token}`,
+//     },
+//     body: JSON.stringify({ organizationId, designSystemId, designSystem }),
+//   })
+
+//   if (response.status === 401) {
+//     throw new Error('Unauthorized')
+//   }
+
+//   const result = (await response.json()) as { success: boolean }
+
+//   return result?.success
+// }

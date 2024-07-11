@@ -6,10 +6,10 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { SkipButton } from '../../../_components/skip-button'
 import { FileListServer } from './_components/file-list-server'
 import { Suspense } from 'react'
 import { Skeleton } from '@/components/ui/skeleton'
+import SkipFigmaButton from '../../_components/skip-figma-button'
 
 interface Props {
   params: { designSystemSlug: string; organizationSlug: string }
@@ -33,11 +33,6 @@ export default async function Page({ params }: Props) {
           />
         </Suspense>
       </CardContent>
-      <CardFooter>
-        <SkipButton
-          href={`/new/${params.organizationSlug}/repository/connect`}
-        />
-      </CardFooter>
     </Card>
   )
 }

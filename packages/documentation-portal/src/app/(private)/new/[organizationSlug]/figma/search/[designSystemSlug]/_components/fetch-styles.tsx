@@ -1,7 +1,7 @@
 import { findDesignSystemBySlug } from '@/adapters/data-access/design-systems'
 import { findFigmaDesignSystemCredentials } from '@/adapters/data-access/figma-design-system-credentials'
 import { findFigmaFilesByDesignSystemId } from '@/adapters/data-access/figma-file'
-import { FetchIndicator } from './fetch-indicator'
+import { FetchIndicator } from '../../../../_components/fetch-indicator'
 import { fetchStyles } from '@/adapters/providers/figma/actions/styles'
 import { deleteStyles, insertStyles } from '@/adapters/data-access/styles'
 import { syncStyles } from '@/domain/use-cases/sync-styles'

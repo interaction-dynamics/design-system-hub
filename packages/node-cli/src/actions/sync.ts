@@ -1,11 +1,5 @@
 import { relative } from 'node:path'
-import {
-  pushDesignSystem,
-  findDesignSystem,
-} from '../domain/use-cases/design-system'
-import { readConfig } from '../domain/use-cases/config'
-import { readMetadataFile } from '../domain/use-cases/metadata'
-import { Config } from '../domain/entities/config'
+import { findDesignSystem } from '../domain/use-cases/design-system'
 import { findRemoteUrl, findRootPath } from '../adapters/git'
 import { findPackageConfig } from '../adapters/package'
 import { detectComponents } from '../adapters/react-ast'
@@ -19,16 +13,8 @@ async function detectPages(projectPath: string) {
   return findPages({ projectPath }, { readFile, isDirectory, listFiles })
 }
 
-export async function sync(projectPath: string) {
-  const config = await readConfig<Config>(
-    { projectPath },
-    {
-      readMetadataFile: (filePath: string) =>
-        readMetadataFile({ filePath }, { readFile }),
-    },
-  )
-
-  const { token } = await readGlobalConfig()
+export async function sync(targetPath: string, designSystemToken?: string) {
+  const token = designSystemToken ?? (await readGlobalConfig()).token
 
   if (!token) {
     printWarning('You are not logged in. Run `ds login` command to login.')
@@ -36,24 +22,23 @@ export async function sync(projectPath: string) {
   }
 
   try {
-    await pushDesignSystem(
-      { projectPath, config, token },
-      {
-        findDesignSystem: async (targetPath: string) =>
-          findDesignSystem({
-            options: { targetPath },
-            context: {
-              findRepositoryUrl: findRemoteUrl,
-              findProject: findPackageConfig,
-              findRootPath,
-              getRelativePath: relative,
-              detectComponents,
-              detectPages,
-            },
-          }),
-        postDesignSystem,
+    const designSystem = await findDesignSystem({
+      options: { targetPath },
+      context: {
+        findRepositoryUrl: findRemoteUrl,
+        findProject: findPackageConfig,
+        findRootPath,
+        getRelativePath: relative,
+        detectComponents,
+        detectPages,
       },
-    )
+    })
+
+    const answer = await postDesignSystem(token, designSystem)
+
+    if (!answer) {
+      throw new Error('Failed to push design system')
+    }
 
     printText('Sync successful')
   } catch (error) {

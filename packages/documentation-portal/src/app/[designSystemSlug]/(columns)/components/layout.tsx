@@ -34,7 +34,7 @@ export default async function ComponentsLayout({
     }) ?? []
 
   const flags = links.map((link) => (
-    <Suspense>
+    <Suspense key={link.href}>
       <NavigationComponentFlags {...link.metadata} />
     </Suspense>
   ))

@@ -1,10 +1,14 @@
 {
-  "name": "node-cli",
-  "description": "The CLI to interact with the Design System Manager from the code",
-  "keywords": [],
+  "name": "dshub",
+  "description": "The CLI to find the components in a design system. It also interacts with the Design System Hub from the code.",
+  "keywords": [
+    "cli",
+    "design system",
+    "design system hub"
+  ],
   "version": "0.1.0",
   "bin": {
-    "contributing-generator": "./dist/index.js"
+    "dshub": "./dist/index.js"
   },
   "scripts": {
     "cli": "tsx ./src/cli.ts",

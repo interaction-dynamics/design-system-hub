@@ -4,8 +4,7 @@ import { LayoutWithLeftSidebar } from '@/components/organisms/layout-with-left-s
 import LeftSideBar from '@/components/organisms/left-sidebar'
 
 interface FoundationsPageProps extends PropsWithChildren {
-  params: any
-  slug: string
+  params: { designSystemSlug: string }
 }
 
 const foundations = [

@@ -6,7 +6,7 @@
     "design system",
     "design system hub"
   ],
-  "version": "0.1.0",
+  "version": "0.1.1",
   "bin": {
     "dshub": "./dist/index.js"
   },

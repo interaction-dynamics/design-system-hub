@@ -12,6 +12,8 @@ import {
 import { LoadingButton } from '@/components/atoms/loading-button'
 import { FetchIndicator } from '@/components/organisms/fetch-indicator'
 import { Accordion } from '@/components/ui/accordion'
+import { Component } from '@/domain/entities/component'
+import { Style } from '@/domain/entities/style'
 
 async function syncFigmaDesignSystem(url: string) {
   return fetch(url, {
@@ -55,11 +57,11 @@ export function FigmaSettings({ designSystemId }: { designSystemId: string }) {
             <Accordion type="single" collapsible>
               <FetchIndicator
                 title={`${data.components.length} components found`}
-                details={data.components.map((c) => c.name)}
+                details={data.components.map((c: Component) => c.name)}
               />
               <FetchIndicator
                 title={`${data.styles.length} styles found`}
-                details={data.styles.map((c) => c.name)}
+                details={data.styles.map((c: Style) => c.name)}
               />
             </Accordion>
           </CardFooter>

@@ -1,10 +1,10 @@
+import { notFound } from 'next/navigation'
 import {
   findPartialComponents,
   findComponent,
 } from '@/adapters/data-access/components'
 import { findDesignSystemBySlug } from '@/adapters/data-access/design-systems'
-import { notFound } from 'next/navigation'
-import { FetchIndicator } from '../../../../_components/fetch-indicator'
+import { FetchIndicator } from '@/components/organisms/fetch-indicator'
 
 export async function ComponentList({
   designSystemSlug,

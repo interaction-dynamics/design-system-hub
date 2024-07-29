@@ -65,6 +65,14 @@ export async function UserMenu() {
         </DropdownMenuItem> */}
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
+          <a
+            className="cursor-pointer"
+            href="mailto:support@interaction-dynamics.io"
+          >
+            Support
+          </a>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
           <Link className="cursor-pointer" href="/">
             Home Page
           </Link>

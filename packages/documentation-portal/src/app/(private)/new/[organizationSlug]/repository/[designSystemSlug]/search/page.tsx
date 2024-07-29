@@ -1,3 +1,5 @@
+import { Suspense } from 'react'
+import Link from 'next/link'
 import {
   Card,
   CardContent,
@@ -6,11 +8,9 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { Accordion } from '@/components/ui/accordion'
-import { Suspense } from 'react'
-import { FetchIndicator } from '../../../_components/fetch-indicator'
 import { ComponentList } from './_components/component-list'
 import { Button } from '@/components/ui/button'
-import Link from 'next/link'
+import { FetchIndicator } from '@/components/organisms/fetch-indicator'
 
 interface Props {
   params: { designSystemSlug: string; organizationSlug: string }

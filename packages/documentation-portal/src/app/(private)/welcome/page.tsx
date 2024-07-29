@@ -9,11 +9,9 @@ export default async function Welcome() {
     <div className="container py-10 flex flex-col items-center">
       <Card className="max-w-md">
         <CardHeader>
-          <CardTitle>
-            <Typography variant="h1" className="text-center">
-              Welcome
-            </Typography>
-          </CardTitle>
+          <Typography variant="h1" className="text-center">
+            Welcome
+          </Typography>
         </CardHeader>
         <CardContent>
           <Typography variant="p">
@@ -21,7 +19,7 @@ export default async function Welcome() {
             systems that is currently in development. You are entering the beta
             which may contain bugs.
           </Typography>
-          <Typography variant="p" className="mt-2">
+          <Typography variant="p" as="div" className="mt-2">
             We kindly suggest you to:
             <ul>
               <li>- Report any issue you experience</li>

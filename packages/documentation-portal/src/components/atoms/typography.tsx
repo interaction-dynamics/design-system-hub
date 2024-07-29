@@ -5,6 +5,7 @@ export interface TypographyProps {
   variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span'
   className?: string
   id?: string
+  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div'
 }
 
 const styles = {
@@ -23,8 +24,9 @@ export default function Typography({
   variant = 'p',
   className,
   id,
+  as: component,
 }: TypographyProps) {
-  const Component = variant
+  const Component = component ?? variant
 
   return (
     <Component className={cn(styles[variant] ?? '', className)} id={id}>

@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react'
 import { currentUser } from '@clerk/nextjs/server'
 
-import { SignUpButton, SignInButton } from '@clerk/nextjs'
+// import { SignUpButton, SignInButton } from '@clerk/nextjs'
 import Header from '@/components/atoms/header'
 import { Button } from '@/components/ui/button'
 import Footer from '@/components/atoms/footer'
@@ -29,14 +29,14 @@ export default async function DesignSystemLayout({
                 </>
               ) : (
                 <>
-                  <Button size="sm" variant="outline">
+                  {/* <Button size="sm" variant="outline">
                     <SignInButton fallbackRedirectUrl="/dashboard">
                       Sign in
                     </SignInButton>
                   </Button>
                   <Button size="sm" asChild>
                     <SignUpButton>Get started</SignUpButton>
-                  </Button>
+                  </Button> */}
                 </>
               )}
             </div>

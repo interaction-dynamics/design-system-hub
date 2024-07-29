@@ -2,7 +2,6 @@ import { findDesignSystemBySlug } from '@/adapters/data-access/design-systems'
 import { findFigmaDesignSystemCredentials } from '@/adapters/data-access/figma-design-system-credentials'
 import { findFigmaFilesByDesignSystemId } from '@/adapters/data-access/figma-file'
 import { findFigmaComponents } from '@/adapters/providers/figma/actions/design-system'
-import { FetchIndicator } from '../../../../_components/fetch-indicator'
 import {
   createComponent,
   findComponentByName,
@@ -14,6 +13,7 @@ import {
 } from '@/adapters/data-access/component-variants'
 import { syncComponent } from '@/domain/use-cases/sync-component'
 import { cache } from 'react'
+import { FetchIndicator } from '@/components/organisms/fetch-indicator'
 
 interface Props {
   designSystemSlug: string

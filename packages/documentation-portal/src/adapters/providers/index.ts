@@ -12,5 +12,5 @@ export function getProvider(providerId: string) {
 }
 
 export function getProviders() {
-  return Object.values(providers)
+  return Object.entries(providers)
 }

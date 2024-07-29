@@ -5,6 +5,7 @@ import { validateCodeComponent } from './types/code-component'
 import { DesignSystem } from '@/domain/entities/design-system'
 import { getLinks } from './utils/get-links'
 import { getComponentFlags } from './utils/get-component-flags'
+import { FigmaSettings } from '../figma/components/figma-settings'
 
 export const code: Provider = {
   name: 'Repository',
@@ -36,5 +37,9 @@ export const code: Provider = {
 
   getStyleViewers() {
     return []
+  },
+
+  getSettings() {
+    return FigmaSettings
   },
 }

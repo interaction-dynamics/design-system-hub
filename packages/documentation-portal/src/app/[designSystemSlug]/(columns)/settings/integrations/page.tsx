@@ -3,6 +3,7 @@ import { getProviders } from '@/adapters/providers'
 import Typography from '@/components/atoms/typography'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 interface GeneralSettingsPageProps {
@@ -22,7 +23,7 @@ export default async function GeneralSettingsPage({
     <div>
       <Typography variant="h1">Integrations</Typography>
       <div className="space-y-5 mt-5">
-        {providers.map((provider) => (
+        {providers.map(([providerId, provider]) => (
           <Card key={provider.name}>
             <CardContent className="py-4">
               <div className="flex items-center justify-between">
@@ -32,7 +33,13 @@ export default async function GeneralSettingsPage({
                     {provider.description}
                   </div>
                 </div>
-                <Button variant="outline">Configure</Button>
+                <Button variant="outline" asChild>
+                  <Link
+                    href={`/${params.designSystemSlug}/settings/integrations/${providerId}`}
+                  >
+                    Configure
+                  </Link>
+                </Button>
               </div>
             </CardContent>
           </Card>

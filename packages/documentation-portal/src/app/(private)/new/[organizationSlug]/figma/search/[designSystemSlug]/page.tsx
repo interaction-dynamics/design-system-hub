@@ -7,11 +7,11 @@ import {
 } from '@/components/ui/card'
 import { FetchComponents } from './_components/fetch-components'
 import { Suspense } from 'react'
-import { FetchIndicator } from '../../../_components/fetch-indicator'
 import { Accordion } from '@/components/ui/accordion'
 import { FetchStyles } from './_components/fetch-styles'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
+import { FetchIndicator } from '@/components/organisms/fetch-indicator'
 
 interface Props {
   params: { designSystemSlug: string; organizationSlug: string }

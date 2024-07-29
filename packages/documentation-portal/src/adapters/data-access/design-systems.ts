@@ -151,12 +151,44 @@ export const findDesignSystemById = cache(
   }
 )
 
-export async function updateDesignSystem<T extends object>(
+export async function updateDesignSystem(
   designSystemId: string,
   value: Partial<DesignSystem>
 ) {
   await db.designSystem.update({
     data: value,
+    where: { id: designSystemId },
+  })
+}
+
+export async function deleteDesignSystem(designSystemId: string) {
+  await db.style.deleteMany({
+    where: { designSystemId },
+  })
+
+  const components = await db.component.findMany({
+    where: { designSystemId },
+  })
+
+  for (const component of components) {
+    await db.componentVariant.deleteMany({
+      where: { componentId: component.id },
+    })
+  }
+
+  await db.component.deleteMany({
+    where: { designSystemId },
+  })
+
+  await db.figmaDesignSystemCredentials.deleteMany({
+    where: { designSystemId },
+  })
+
+  await db.designSystemToken.deleteMany({
+    where: { designSystemId },
+  })
+
+  await db.designSystem.deleteMany({
     where: { id: designSystemId },
   })
 }

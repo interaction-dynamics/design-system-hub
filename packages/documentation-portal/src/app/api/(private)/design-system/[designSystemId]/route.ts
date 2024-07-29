@@ -1,4 +1,7 @@
-import { updateDesignSystem } from '@/adapters/data-access/design-systems'
+import {
+  deleteDesignSystem,
+  updateDesignSystem,
+} from '@/adapters/data-access/design-systems'
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library'
 import { NextRequest } from 'next/server'
 import z from 'zod'
@@ -28,6 +31,19 @@ export async function PUT(
     ) {
       return Response.json({ success: false, reason: 'slug_duplicated' })
     }
+    return Response.json({ success: false })
+  }
+}
+
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { designSystemId: string } }
+) {
+  try {
+    await deleteDesignSystem(params.designSystemId)
+
+    return Response.json({ success: true })
+  } catch (error: unknown) {
     return Response.json({ success: false })
   }
 }

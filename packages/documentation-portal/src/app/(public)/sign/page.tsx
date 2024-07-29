@@ -16,10 +16,10 @@ export default async function SignLayout() {
       <Typography variant="p">
         Notice that only people who receive an access can sign up.
       </Typography>
-      <Button size="lg" variant="default">
+      <Button size="lg" variant="default" asChild>
         <SignInButton>Sign in</SignInButton>
       </Button>
-      <Button size="lg" variant="default">
+      <Button size="lg" variant="default" asChild>
         <SignUpButton>Sign Up</SignUpButton>
       </Button>
     </div>

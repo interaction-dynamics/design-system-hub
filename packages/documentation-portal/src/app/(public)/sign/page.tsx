@@ -1,11 +1,10 @@
-import { PropsWithChildren } from 'react'
 import { currentUser } from '@clerk/nextjs/server'
 
 import { SignUpButton, SignInButton } from '@clerk/nextjs'
 import { Button } from '@/components/ui/button'
 import Typography from '@/components/atoms/typography'
 
-export default async function SignLayout({ children }: PropsWithChildren) {
+export default async function SignLayout() {
   const user = await currentUser()
 
   return (

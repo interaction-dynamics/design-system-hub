@@ -108,6 +108,27 @@ export const findDesignSystemBySlug = cache(
   }
 )
 
+export const findDesignSystemAndOrganizationBySlug = cache(
+  async (
+    slug: string
+  ): Promise<(DesignSystem & { organizationId: string | null }) | null> => {
+    const designSystemDao = await db.designSystem.findUnique({
+      where: { slug },
+    })
+
+    if (!designSystemDao) return null
+
+    return {
+      id: designSystemDao.id,
+      name: designSystemDao.name,
+      slug: designSystemDao.slug,
+      providers: designSystemDao.providers,
+      isPublic: designSystemDao.isPublic,
+      organizationId: designSystemDao.organizationId,
+    }
+  }
+)
+
 export const findAllDesignSystemsByOrganizationId = cache(
   async (
     organizationId: string

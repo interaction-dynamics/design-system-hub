@@ -1,12 +1,12 @@
 import { initAuth } from '../domain/use-cases/authentication'
 import { printText, text } from '../adapters/prompt'
 import { writeGlobalConfig, readGlobalConfig } from '../adapters/global-store'
-import { authenticate } from '../adapters/rest-api'
+import { postLogin } from '../adapters/rest-api'
 
-export async function login() {
-  const chooseEmail = () => text(`Enter your email:`)
+export async function login(token?: string) {
+  const getToken = () => text(`Enter the token:`)
 
-  initAuth({ chooseEmail, authenticate, writeGlobalConfig })
+  await initAuth({ token }, { getToken, postLogin, writeGlobalConfig })
 
   printText('Login successful')
 }

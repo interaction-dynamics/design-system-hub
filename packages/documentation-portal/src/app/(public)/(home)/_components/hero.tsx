@@ -1,14 +1,18 @@
 import { BorderBeam } from '@/components/magicui/border-beam'
 import { Button } from '@/components/ui/button'
+import { SignUpButton } from '@clerk/nextjs'
 
 import Image from 'next/image'
 import { BetaFlag } from './beta-flag'
 import Link from 'next/link'
 import { demoLink } from '../_utils/demo-link'
 import { useBetaLink } from '../_utils/use-beta-link'
+import { currentUser } from '@clerk/nextjs/server'
 
-export function Hero() {
+export async function Hero() {
   const betaLink = useBetaLink()
+
+  const user = await currentUser()
 
   return (
     <div className="pt-20 flex flex-col items-start gap-10">
@@ -25,11 +29,17 @@ export function Hero() {
           faster.
         </p>
         <div className="flex items-center gap-4">
-          <Button size="lg" asChild>
-            <Link href={demoLink}>Try demo</Link>
-          </Button>
+          {user ? (
+            <Button size="lg" asChild>
+              <Link href="/dashboard">Start Building for free</Link>
+            </Button>
+          ) : (
+            <Button size="lg" asChild>
+              <Link href={betaLink}>Request Access</Link>
+            </Button>
+          )}
           <Button size="lg" variant="outline" asChild>
-            <a href={betaLink}>Request Access</a>
+            <Link href={demoLink}>Try demo</Link>
           </Button>
         </div>
       </div>

@@ -1,17 +1,24 @@
 import { Authentication } from '../entities/authentication'
 
-export async function initAuth({
-  chooseEmail,
-  authenticate,
-  writeGlobalConfig,
-}: {
-  chooseEmail: () => Promise<string>
-  authenticate: (email: string) => Promise<Authentication>
-  writeGlobalConfig: (config: Authentication) => Promise<void>
-}) {
-  const email = await chooseEmail()
+export async function initAuth(
+  { token: initialToken }: { token: string },
+  {
+    getToken,
+    postLogin,
+    writeGlobalConfig,
+  }: {
+    getToken: () => Promise<string>
+    postLogin: (email: string) => Promise<{ success: boolean }>
+    writeGlobalConfig: (config: Authentication) => Promise<void>
+  },
+) {
+  const token = initialToken ?? (await getToken())
 
-  const auth: Authentication = await authenticate(email)
+  const { success } = await postLogin(token)
 
-  await writeGlobalConfig(auth)
+  if (success) {
+    await writeGlobalConfig({ token })
+  } else {
+    throw new Error('Authentication failed')
+  }
 }

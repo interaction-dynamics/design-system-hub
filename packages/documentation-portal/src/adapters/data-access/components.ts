@@ -26,7 +26,7 @@ export const findComponent = cache(
     designSystem: DesignSystemDao,
     componentSlug: string
   ): Promise<Component> => {
-    const componentDao = await db.component.findUniqueOrThrow({
+    const componentDao = await db.component.findFirstOrThrow({
       where: { designSystemId: designSystem.id, slug: componentSlug },
       include: { variants: true },
     })

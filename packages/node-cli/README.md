@@ -2,23 +2,22 @@
 
 This is a simple CLI tool to detect the react components. It will soon include features to synchronize the components with the online documentation.
 
-## Installation
-
-```bash
-pnpm install
-```
-
 ## Getting started
 
 ```bash
-pnpm cli dev <path to design system>
+# for just checking the detected component
+npx dshub dev --cwd <path to design system>
 
-# For example
-pnpm cli dev ../../examples/zero-config/src/libs
+# for synchronizing the detected components with the online documentation
+npx dshub sync --token <token> --cwd <path to design system> # check the online documentation for the token.
+```
 
+The output is:
+
+```yaml
 provider:
   relativePath: examples/zero-config/src/libs
-  url: git@github.com:interaction-dynamics/design-system-manager.git
+  url: git@github.com:interaction-dynamics/design-system-hub.git
 components:
   - name: Button
     path: atoms/button.tsx
@@ -70,5 +69,15 @@ components:
 3 components found.
 8 properties found.
 2 / 11 descriptions found.
+```
 
+## Development
+
+```bash
+pnpm install
+
+pnpm cli dev <path to design system>
+
+# For example
+pnpm cli dev ../../examples/zero-config/src/libs
 ```

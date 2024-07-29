@@ -13,6 +13,7 @@ export async function GET(request: NextRequest) {
     {
       id: '1',
       name: 'Organization 1',
+      slug: 'test',
     },
   ]
 

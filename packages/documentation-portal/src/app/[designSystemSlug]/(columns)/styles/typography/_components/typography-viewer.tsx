@@ -28,7 +28,7 @@ export function TypographyViewer({ style }: { style: TypographyStyle }) {
           <Viewer style={style} key={index} />
         ))}
       </div>
-      <div className="mt-2">
+      <div className="mb-4 mt-8">
         <CodeBlock language="css">
           <div>font-family: &quot;{style.metadata.fontFamily}&quot;;</div>
           <div>font-size: {style.metadata.fontSize}px;</div>

@@ -116,6 +116,7 @@ export default function parseFigmaFiles(figmaFiles: HttpFigmaFile[]): {
 
     return {
       designSystem: {
+        isPublic: false,
         id: 'foo',
         name: figmaResponse.name,
         slug: generateSlug(figmaResponse.name),
@@ -132,6 +133,7 @@ export default function parseFigmaFiles(figmaFiles: HttpFigmaFile[]): {
       name: '',
       slug: '',
       providers: {},
+      isPublic: false,
     },
     pages: [],
     figmaComponents: [],

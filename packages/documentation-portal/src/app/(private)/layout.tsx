@@ -1,7 +1,5 @@
 import { PropsWithChildren } from 'react'
 import Header from '@/components/atoms/header'
-import { Button } from '@/components/ui/button'
-import Link from 'next/link'
 import Footer from '@/components/atoms/footer'
 import { UserMenu } from '@/components/organisms/user-menu'
 

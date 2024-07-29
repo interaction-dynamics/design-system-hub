@@ -15,9 +15,9 @@ export function Features() {
             A nexus for designers and developers
           </h2>
           <p className="mt-4 text-left  text-base/6 text-neutral-200">
-            DesignSystemHub aggregate all the guidelines, tokens, colors,
+            DesignSystemHub aggregates all the guidelines, tokens, colors,
             typography and components in a documentation site. Both developers
-            and designers can make use of it without changing their habits.
+            and designers can sync faster without changing their habits.
           </p>
         </div>
         <Image
@@ -63,9 +63,10 @@ export function Features() {
             No more desynchronization between Figma and the code
           </h2>
           <p className="mt-4 max-w-[26rem] text-left  text-base/6 text-neutral-200">
-            DesignSystemHub will show you a warning as soon as a component is in
-            Figma but not in the code or vice versa. It will help you to
-            maintain your design system in sync and will save hours of work.
+            DesignSystemHub will show you a warning as soon as a component is
+            not synchronized between Figma and your code. It will help you to
+            maintain your design system in sync, save hours of work and release
+            more valuable features.
           </p>
         </div>
         {/* <Image

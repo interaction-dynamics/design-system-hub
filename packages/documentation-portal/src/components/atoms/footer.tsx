@@ -11,7 +11,7 @@ interface FooterProps extends PropsWithChildren {
 
 const socials = [
   {
-    href: 'https://github.com/interaction-dynamics/design-system-manager',
+    href: 'https://github.com/interaction-dynamics/design-system-hub',
     icon: (
       <svg
         height="18"
@@ -114,7 +114,7 @@ export default function Footer({ children, className }: FooterProps) {
           <Typography variant="p">
             Powered by{' '}
             <a
-              href="https://github.com/interaction-dynamics/design-system-manager"
+              href="https://github.com/interaction-dynamics/design-system-hub"
               className="underline hover:text-primary"
             >
               {productName}

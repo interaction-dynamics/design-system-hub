@@ -11,10 +11,11 @@ import {
   findComponentByName,
   updateComponent,
 } from '@/adapters/data-access/components'
+import { getDesignSystemToken } from '@/adapters/http/design-system-token'
 
 const validator = z.object({
-  designSystemId: z.string(),
-  organizationId: z.string(),
+  // designSystemId: z.string(),
+  // organizationId: z.string(),
   designSystem: z.object({
     provider: z.object({
       relativePath: z.string(),
@@ -40,8 +41,8 @@ const validator = z.object({
 })
 
 interface ReturnedDesignSystem {
-  designSystemId: string
-  organizationId: string
+  // designSystemId: string
+  // organizationId: string
   designSystem: {
     provider: {
       relativePath: string
@@ -65,9 +66,9 @@ interface ReturnedDesignSystem {
 }
 
 export async function POST(request: NextRequest) {
-  const user = await getUser(request)
+  const designSystemToken = await getDesignSystemToken(request)
 
-  if (!user) {
+  if (!designSystemToken) {
     return Response.json({ error: 'Forbidden' }, { status: 401 })
   }
 
@@ -79,9 +80,15 @@ export async function POST(request: NextRequest) {
 
   const { designSystem } = body
 
-  const foundDesignSystem = await findDesignSystemById(body.designSystemId)
+  const foundDesignSystem = await findDesignSystemById(
+    designSystemToken.designSystemId
+  )
 
-  await updateDesignSystem(body.designSystemId, {
+  if (!foundDesignSystem) {
+    return Response.json({ error: 'Design System not found' }, { status: 404 })
+  }
+
+  await updateDesignSystem(foundDesignSystem.id, {
     providers: {
       ...(foundDesignSystem?.providers ?? {}),
       code: {
@@ -93,12 +100,12 @@ export async function POST(request: NextRequest) {
 
   designSystem.components.forEach(async (component) => {
     const foundComponent = await findComponentByName(
-      body.designSystemId,
+      foundDesignSystem.id,
       component.name
     )
 
     if (foundComponent) {
-      await updateComponent(body.designSystemId, component.name, {
+      await updateComponent(foundDesignSystem.id, component.name, {
         providers: {
           ...foundComponent.providers,
           code: {
@@ -119,7 +126,7 @@ export async function POST(request: NextRequest) {
         }),
       })
     } else {
-      await createComponent(body.designSystemId, {
+      await createComponent(foundDesignSystem.id, {
         name: component.name,
         providers: {
           code: {

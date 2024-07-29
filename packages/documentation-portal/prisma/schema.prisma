@@ -30,12 +30,12 @@ model ComponentVariant {
     Component   Component? @relation(fields: [componentId], references: [id])
     componentId String?    @db.ObjectId
 
-    @@unique([componentId, slug], name: "componentVariantSlug")
+    // @@unique([componentId, slug], name: "componentVariantSlug")
 }
 
 model Component {
     id   String @id @default(auto()) @map("_id") @db.ObjectId
-    slug String @unique
+    slug String
     name String
 
     properties Property[]
@@ -46,38 +46,28 @@ model Component {
 
     DesignSystem   DesignSystem? @relation(fields: [designSystemId], references: [id])
     designSystemId String?       @db.ObjectId
+
+    // @@unique([slug, designSystemId])
 }
 
 model DesignSystem {
-    id               String                         @id @default(auto()) @map("_id") @db.ObjectId
-    slug             String                         @unique
-    name             String
-    components       Component[]
-    createdAt        DateTime                       @default(now())
-    updatedAt        DateTime                       @updatedAt
-    providers        Json
+    id         String      @id @default(auto()) @map("_id") @db.ObjectId
+    slug       String      @unique
+    name       String
+    components Component[]
+    createdAt  DateTime    @default(now())
+    updatedAt  DateTime    @updatedAt
+    providers  Json
+
+    isPublic         Boolean
     pages            Page[]
     styles           Style[]
     figmaCredentials FigmaDesignSystemCredentials[]
-}
+    FigmaFile        FigmaFile[]
 
-model User {
-    id        String   @id @default(auto()) @map("_id") @db.ObjectId
-    email     String   @unique
-    name      String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-    tokens    Token[]
-}
-
-model Token {
-    id          String   @id @default(auto()) @map("_id") @db.ObjectId
-    token       String   @unique
-    description String   @default("")
-    User        User?    @relation(fields: [userId], references: [id])
-    userId      String?  @db.ObjectId
-    createdAt   DateTime @default(now())
-    updatedAt   DateTime @updatedAt
+    Organization       Organization?       @relation(fields: [organizationId], references: [id])
+    organizationId     String?             @db.ObjectId
+    designSystemTokens DesignSystemToken[]
 }
 
 model Page {
@@ -109,11 +99,65 @@ model Style {
 
 model FigmaDesignSystemCredentials {
     id             String @id @default(auto()) @map("_id") @db.ObjectId
-    userId         String
+    userId         Int
     accessToken    String
     expirationDate String
     refreshToken   String
 
     DesignSystem   DesignSystem? @relation(fields: [designSystemId], references: [id])
     designSystemId String?       @db.ObjectId
+}
+
+model FigmaFile {
+    id      String @id @default(auto()) @map("_id") @db.ObjectId
+    fileKey String
+
+    DesignSystem   DesignSystem? @relation(fields: [designSystemId], references: [id])
+    designSystemId String?       @db.ObjectId
+}
+
+model Organization {
+    id           String                   @id @default(auto()) @map("_id") @db.ObjectId
+    name         String
+    slug         String
+    createdAt    DateTime                 @default(now())
+    updatedAt    DateTime                 @updatedAt
+    members      OrganizationMembership[]
+    ownerId      String
+    DesignSystem DesignSystem[]
+}
+
+model OrganizationMembership {
+    id             String       @id @default(auto()) @map("_id") @db.ObjectId
+    organization   Organization @relation(fields: [organizationId], references: [id])
+    organizationId String       @db.ObjectId
+    userId         String
+    role           String
+    createdAt      DateTime     @default(now())
+    updatedAt      DateTime     @updatedAt
+}
+
+model UserToken {
+    id          String @id @default(auto()) @map("_id") @db.ObjectId
+    token       String @unique
+    prefix      String @unique
+    description String @default("")
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    userId String
+}
+
+model DesignSystemToken {
+    id          String @id @default(auto()) @map("_id") @db.ObjectId
+    token       String @unique
+    prefix      String @unique
+    description String @default("")
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    DesignSystem   DesignSystem @relation(fields: [designSystemId], references: [id])
+    designSystemId String       @db.ObjectId
 }

@@ -22,6 +22,9 @@ export interface Flag {
 }
 
 export default interface Provider {
+  name: string
+  description: string
+
   type: 'design' | 'development'
 
   getDescription(component: Component | ComponentVariant): string
@@ -38,4 +41,6 @@ export default interface Provider {
   getComponentFlags(component: Component | ComponentVariant): Flag[]
 
   getStyleViewers(style: Style): StyleViewer[]
+
+  getSettings(): (props: { designSystemId: string }) => JSX.Element
 }

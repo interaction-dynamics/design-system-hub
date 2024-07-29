@@ -14,7 +14,7 @@ export function ElevationViewer({ style }: { style: ElevationStyle }) {
           }}
         ></div>
       </div>
-      <div className="mt-2">
+      <div className="mb-4 mt-8">
         <CodeBlock language="css">box-shadow: {boxShadow};</CodeBlock>
       </div>
     </div>

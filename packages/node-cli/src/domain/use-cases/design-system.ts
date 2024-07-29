@@ -1,5 +1,3 @@
-import path from 'node:path'
-
 import { Component } from '../entities/component'
 import { DesignSystem } from '../entities/design-system'
 import { Organization } from '../entities/organization'
@@ -176,39 +174,4 @@ export async function linkDesignSystem(
       designSystemPath: getRelativePath(projectPath, targetPath),
     },
   })
-}
-
-export async function pushDesignSystem(
-  {
-    projectPath,
-    config,
-    token,
-  }: { projectPath: string; config: Config; token: string },
-  {
-    findDesignSystem,
-    postDesignSystem,
-  }: {
-    findDesignSystem: (targetPath: string) => Promise<DesignSystem>
-    postDesignSystem: (
-      token: string,
-      organizationId: string,
-      designSystemId: string,
-      designSystem: DesignSystem,
-    ) => Promise<boolean>
-  },
-) {
-  const designSystem = await findDesignSystem(
-    path.join(projectPath, config.designSystemPath),
-  )
-
-  const answer = await postDesignSystem(
-    token,
-    config.organizationId,
-    config.designSystemId,
-    designSystem,
-  )
-
-  if (!answer) {
-    throw new Error('Failed to push design system')
-  }
 }

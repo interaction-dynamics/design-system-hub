@@ -16,5 +16,8 @@ export default async function RedirectToFirstComponentPage({
   if (!designSystem) redirect('/')
   const partialComponents = await findPartialComponents(designSystem)
 
-  redirect(`components/${partialComponents?.[0].slug}`)
+  if (partialComponents?.length > 0)
+    redirect(`components/${partialComponents?.[0].slug}`)
+
+  return <>No Components</>
 }

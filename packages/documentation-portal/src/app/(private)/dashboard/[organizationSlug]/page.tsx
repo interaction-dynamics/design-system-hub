@@ -24,11 +24,11 @@ export default function DashboardPage({ params }: Props) {
     <div className="container py-10">
       <div>
         <div className="flex items-stretch gap-4">
-          <Suspense
+          {/* <Suspense
             fallback={<Skeleton className="rounded h-[36px] w-[200px]" />}
           >
             <TeamSwitcherServer organizationSlug={params.organizationSlug} />
-          </Suspense>
+          </Suspense> */}
           <Button asChild>
             <Link href={`/new/${params.organizationSlug}`}>
               <CirclePlus className="mr-2 h-4 w-4 opacity-100" />

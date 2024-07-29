@@ -25,5 +25,4 @@ export async function findUserTokenByToken(
     token: token.token,
     description: token.description,
   }
-
 }

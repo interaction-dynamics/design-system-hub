@@ -26,3 +26,20 @@ export async function findDesignSystemTokenByToken(
     description: token.description,
   }
 }
+
+export async function findDesignSystenToken(
+  designSystemId: string
+): Promise<DesignSystemToken | null> {
+  const token = await db.designSystemToken.findFirst({
+    where: { designSystemId },
+  })
+
+  if (!token) return null
+
+  return {
+    designSystemId: token.designSystemId,
+    prefix: token.prefix,
+    token: token.token,
+    description: token.description,
+  }
+}

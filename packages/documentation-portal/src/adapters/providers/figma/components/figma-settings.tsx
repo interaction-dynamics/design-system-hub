@@ -3,7 +3,6 @@
 import useSWRMutation from 'swr/mutation'
 import {
   Card,
-  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,

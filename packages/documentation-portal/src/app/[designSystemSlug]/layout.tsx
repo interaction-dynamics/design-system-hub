@@ -28,6 +28,8 @@ export default async function DesignSystemLayout({
 
   const { userId } = auth()
 
+  console.log('userId', userId)
+
   const hasSettings =
     userId &&
     (

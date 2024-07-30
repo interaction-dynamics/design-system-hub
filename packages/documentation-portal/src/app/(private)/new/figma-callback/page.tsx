@@ -2,7 +2,6 @@ import { generateAccessToken } from '@/adapters/providers/figma/actions/credenti
 import { createEmptyDesignSystem } from '@/adapters/data-access/design-systems'
 import { createFigmaDesignSystemCredentials } from '@/adapters/data-access/figma-design-system-credentials'
 import { notFound, redirect } from 'next/navigation'
-import { getFigmaCallbackUrl } from '../_utils/url'
 import { auth } from '@clerk/nextjs/server'
 import { findOrganizationbySlug } from '@/adapters/data-access/organizations'
 
@@ -13,12 +12,9 @@ export default async function Page({
 }) {
   const newSearchParams = new URLSearchParams(searchParams)
 
-  const organizationSlug = searchParams.state
+  const { organizationSlug, callbackUrl } = JSON.parse(searchParams.state)
 
-  const credentials = await generateAccessToken(
-    getFigmaCallbackUrl(),
-    searchParams.code
-  )
+  const credentials = await generateAccessToken(callbackUrl, searchParams.code)
 
   const { userId } = auth()
 

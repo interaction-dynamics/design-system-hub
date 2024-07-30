@@ -11,7 +11,12 @@ interface Props {
 export function ConnectFigmaButton({ organizationSlug }: Props) {
   // https://www.figma.com/developers/api#register-oauth2
   const onClick = async () => {
-    const url = generateOauthUrl(organizationSlug, getFigmaCallbackUrl())
+    const callbackUrl = getFigmaCallbackUrl()
+
+    const url = generateOauthUrl(
+      JSON.stringify({ organizationSlug, callbackUrl }),
+      callbackUrl
+    )
 
     window.location.href = url.toString()
   }

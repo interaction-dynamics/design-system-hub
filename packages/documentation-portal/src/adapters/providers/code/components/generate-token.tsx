@@ -41,7 +41,7 @@ export function GenerateToken({ designSystemId }: Props) {
           </Typography>
           <CodeBlock language="bash">{command}</CodeBlock>
           <Typography variant="p" className="mt-2">
-            This command won't be visible again, please save it.
+            This command won&apos;t be visible again, please save it.
           </Typography>
         </div>
       ) : (

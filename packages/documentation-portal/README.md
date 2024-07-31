@@ -16,3 +16,5 @@ pnpm dev
 - [MongoDB](https://www.mongodb.com/)
 - [Clerk](https://clerk.com/)
 - [Figma API](https://www.figma.com/developers/api)
+- [Prisma](https://www.prisma.io/)
+- [AWS](https://aws.amazon.com/)

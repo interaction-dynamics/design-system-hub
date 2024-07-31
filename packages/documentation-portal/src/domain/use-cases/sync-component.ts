@@ -46,8 +46,6 @@ export async function syncComponent(
       },
     })
 
-    console.log('deleteComponentVariants', foundComponent.id)
-
     await deleteComponentVariants(foundComponent.id)
 
     if (component.variants) {

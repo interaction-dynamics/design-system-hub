@@ -42,5 +42,7 @@ export default interface Provider {
 
   getStyleViewers(style: Style): StyleViewer[]
 
-  getSettings(): (props: { designSystemId: string }) => JSX.Element
+  getSettings(): (props: {
+    designSystemId: string
+  }) => Promise<JSX.Element> | JSX.Element
 }

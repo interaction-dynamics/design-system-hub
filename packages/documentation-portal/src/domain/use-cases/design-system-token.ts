@@ -50,8 +50,6 @@ export async function isValidDesignSystemToken(
     ) => Promise<DesignSystemToken | null>
   }
 ) {
-  console.log('designSystemToken', designSystemToken)
-
   if (!isDesignSystemToken({ token: designSystemToken })) return false
 
   const [prefix, token] = designSystemToken.split('-')

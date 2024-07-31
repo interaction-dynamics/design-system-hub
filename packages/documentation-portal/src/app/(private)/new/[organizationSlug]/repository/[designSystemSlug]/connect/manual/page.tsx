@@ -15,6 +15,7 @@ import { findDesignSystemBySlug } from '@/adapters/data-access/design-systems'
 import { createDesignSystemToken } from '@/adapters/data-access/design-system-token'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
+import { getSyncCommand } from '@/adapters/providers/code/utils/get-commands'
 
 interface Props {
   params: { designSystemSlug: string; organizationSlug: string }
@@ -30,7 +31,7 @@ export default async function NewDesignSystemFigmaPage({ params }: Props) {
     { createDesignSystemToken }
   )
 
-  const command = `npx dshub sync --token ${designSystemToken} --cwd <designSystemPath>`
+  const command = getSyncCommand(designSystemToken)
 
   return (
     <Card>

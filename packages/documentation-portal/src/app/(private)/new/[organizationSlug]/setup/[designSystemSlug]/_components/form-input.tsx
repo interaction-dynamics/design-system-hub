@@ -142,7 +142,7 @@ export function FormInput({
                     </FormControl>
                     <FormLabel className="font-normal">Public</FormLabel>
                     <FormDescription>
-                      Everybody will be access to the design system.
+                      Everybody will be able to access your design system.
                     </FormDescription>
                   </FormItem>
                   <FormItem className="flex items-center space-x-3 space-y-0">

@@ -14,6 +14,8 @@ import {
 import { syncComponent } from '@/domain/use-cases/sync-component'
 import { cache } from 'react'
 import { FetchIndicator } from '@/components/organisms/fetch-indicator'
+import { replaceThumbnailUrl } from '@/adapters/providers/figma/actions/design-system/replace-thumbnail-url'
+import { copyAsset } from '@/adapters/storage/assets'
 
 interface Props {
   designSystemSlug: string
@@ -28,8 +30,13 @@ const cachedSync = cache(
     const components = await findFigmaComponents(fileKeys, accessToken)
 
     await Promise.all(
-      components.map(async (component) =>
-        syncComponent(
+      components.map(async (componentWithOrlThumbnailUrl) => {
+        const component = await replaceThumbnailUrl(
+          { component: componentWithOrlThumbnailUrl },
+          { copyAsset }
+        )
+
+        return syncComponent(
           { designSystemId: designSystemId, component },
           {
             findComponentByName,
@@ -39,7 +46,7 @@ const cachedSync = cache(
             createComponent,
           }
         )
-      )
+      })
     )
 
     return components

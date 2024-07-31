@@ -15,6 +15,8 @@ import Link from 'next/link'
 export async function UserMenu() {
   const user = await currentUser()
 
+  console.log('user', user?.id)
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>

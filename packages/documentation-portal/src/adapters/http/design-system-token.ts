@@ -6,12 +6,6 @@ import { findDesignSystemTokenByToken } from '@/adapters/data-access/design-syst
 export async function getDesignSystemToken(request: NextRequest) {
   const authorization = request.headers.get('Authorization') ?? ''
 
-  console.log(
-    'authorization',
-    authorization,
-    authorization.trim().startsWith('Token')
-  )
-
   if (!authorization.trim().startsWith('Token')) return undefined
 
   const token = authorization?.replace('Token ', '') ?? ''

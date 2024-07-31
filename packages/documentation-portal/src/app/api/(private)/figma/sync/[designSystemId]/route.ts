@@ -17,6 +17,8 @@ import { findFigmaComponents } from '@/adapters/providers/figma/actions/design-s
 import { findFigmaDesignSystemCredentials } from '@/adapters/data-access/figma-design-system-credentials'
 import { syncComponent } from '@/domain/use-cases/sync-component'
 import { syncStyles } from '@/domain/use-cases/sync-styles'
+import { replaceThumbnailUrl } from '@/adapters/providers/figma/actions/design-system/replace-thumbnail-url'
+import { copyAsset } from '@/adapters/storage/assets'
 
 export async function POST(
   request: NextRequest,
@@ -33,8 +35,13 @@ export async function POST(
   const components = await findFigmaComponents(fileKeys, accessToken)
 
   await Promise.all(
-    components.map(async (component) =>
-      syncComponent(
+    components.map(async (componentWithOrlThumbnailUrl) => {
+      const component = await replaceThumbnailUrl(
+        { component: componentWithOrlThumbnailUrl },
+        { copyAsset }
+      )
+
+      return syncComponent(
         { designSystemId: designSystemId, component },
         {
           findComponentByName,
@@ -44,7 +51,7 @@ export async function POST(
           createComponent,
         }
       )
-    )
+    })
   )
 
   const styles = await fetchStyles(fileKeys, accessToken)

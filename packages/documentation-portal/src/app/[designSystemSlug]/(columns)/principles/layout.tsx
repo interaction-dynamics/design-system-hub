@@ -1,10 +1,8 @@
 import { notFound } from 'next/navigation'
-import { PropsWithChildren, Suspense } from 'react'
+import { PropsWithChildren } from 'react'
 import { LayoutWithLeftSidebar } from '@/components/organisms/layout-with-left-sidebar'
 import LeftSideBar from '@/components/organisms/left-sidebar'
 import { findDesignSystemBySlug } from '@/adapters/data-access/design-systems'
-import { findPartialComponents } from '@/adapters/data-access/components'
-import { NavigationComponentFlags } from './[componentSlug]/_components/navigation-component-flags'
 import { findAllPages } from '@/adapters/data-access/page'
 
 interface ComponentPageProps extends PropsWithChildren {

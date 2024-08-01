@@ -75,7 +75,8 @@ model Page {
     title     String
     path      String
     slug      String
-    providers Json
+    provider  String
+    content   String
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
     order     Int

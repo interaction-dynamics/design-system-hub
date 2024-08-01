@@ -86,8 +86,6 @@ async function findComponentsInFile(fileKey: string, oAuthToken: string) {
     .slice()
     .sort(byName)
 
-  console.log('findComponentsInFile', components)
-
   return components
 }
 

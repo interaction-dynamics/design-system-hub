@@ -1,7 +1,7 @@
 import { DesignSystem } from '../domain/entities/design-system'
 import { Organization } from '../domain/entities/organization'
 
-const API_URL = 'http://localhost:3000/api/'
+const API_URL = process.env.DSHUB_HOST ?? 'https://design-system-hub.com/api'
 
 export async function postLogin(token: string): Promise<{ success: boolean }> {
   const response = await fetch(`${API_URL}/cli/login`, {
@@ -71,7 +71,7 @@ export async function postDesignSystem(
   token: string,
   designSystem: DesignSystem,
 ) {
-  const response = await fetch(`${API_URL}/sync/code`, {
+  const response = await fetch(`${API_URL}/code/sync`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -88,27 +88,3 @@ export async function postDesignSystem(
 
   return result?.success
 }
-
-// export async function postDesignSystem(
-//   token: string,
-//   organizationId: string,
-//   designSystemId: string,
-//   designSystem: DesignSystem,
-// ) {
-//   const response = await fetch(`${API_URL}/sync/code`, {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//       Authorization: `Token ${token}`,
-//     },
-//     body: JSON.stringify({ organizationId, designSystemId, designSystem }),
-//   })
-
-//   if (response.status === 401) {
-//     throw new Error('Unauthorized')
-//   }
-
-//   const result = (await response.json()) as { success: boolean }
-
-//   return result?.success
-// }

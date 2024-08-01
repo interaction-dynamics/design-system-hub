@@ -317,5 +317,25 @@ describe('extractDesignSystem', () => {
         })
       })
     })
+
+    describe('pages', () => {
+      it('should find all pages', async () => {
+        const designSystem = await extractDesignSystem(dirPath)
+
+        expect(designSystem.pages).toHaveLength(2)
+      })
+
+      it('should return page accessibility', async () => {
+        const designSystem = await extractDesignSystem(dirPath)
+
+        expect(designSystem.pages[0].path).toEqual('accessibility.md')
+      })
+
+      it('should return page internationalization', async () => {
+        const designSystem = await extractDesignSystem(dirPath)
+
+        expect(designSystem.pages[1].path).toEqual('internationalization.md')
+      })
+    })
   })
 })

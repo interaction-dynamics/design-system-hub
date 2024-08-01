@@ -322,19 +322,25 @@ describe('extractDesignSystem', () => {
       it('should find all pages', async () => {
         const designSystem = await extractDesignSystem(dirPath)
 
-        expect(designSystem.pages).toHaveLength(2)
+        expect(designSystem.pages).toHaveLength(3)
+      })
+
+      it('should return page how it works', async () => {
+        const designSystem = await extractDesignSystem(dirPath)
+
+        expect(designSystem.pages[0].path).toEqual('00-how-it-works.md')
       })
 
       it('should return page accessibility', async () => {
         const designSystem = await extractDesignSystem(dirPath)
 
-        expect(designSystem.pages[0].path).toEqual('accessibility.md')
+        expect(designSystem.pages[1].path).toEqual('accessibility.md')
       })
 
       it('should return page internationalization', async () => {
         const designSystem = await extractDesignSystem(dirPath)
 
-        expect(designSystem.pages[1].path).toEqual('internationalization.md')
+        expect(designSystem.pages[2].path).toEqual('internationalization.md')
       })
     })
   })

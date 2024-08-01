@@ -12,6 +12,7 @@ import {
   updateComponent,
 } from '@/adapters/data-access/components'
 import { getDesignSystemToken } from '@/adapters/http/design-system-token'
+import { createPage, deletePages } from '@/adapters/data-access/page'
 
 const validator = z.object({
   // designSystemId: z.string(),
@@ -21,6 +22,12 @@ const validator = z.object({
       relativePath: z.string(),
       url: z.string(),
     }),
+    pages: z.array(
+      z.object({
+        path: z.string(),
+        content: z.string(),
+      })
+    ),
     components: z.array(
       z.object({
         name: z.string(),
@@ -62,6 +69,7 @@ interface ReturnedDesignSystem {
         defaultValue: string | undefined
       }[]
     }>
+    pages: Array<{ path: string; content: string }>
   }
 }
 
@@ -147,6 +155,18 @@ export async function POST(request: NextRequest) {
         }),
       })
     }
+  })
+
+  await deletePages(foundDesignSystem.id)
+
+  designSystem.pages.forEach(async (page, index) => {
+    await createPage(
+      page.path,
+      'code',
+      page.content,
+      foundDesignSystem.id,
+      index
+    )
   })
 
   return Response.json({ status: 'ok', success: true })

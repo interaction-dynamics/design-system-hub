@@ -1,7 +1,8 @@
 import { DesignSystem } from '../domain/entities/design-system'
 import { Organization } from '../domain/entities/organization'
 
-const API_URL = process.env.DSHUB_HOST ?? 'https://design-system-hub.com/api'
+const API_URL =
+  process.env.DSHUB_HOST ?? 'https://beta.design-system-hub.com/api'
 
 export async function postLogin(token: string): Promise<{ success: boolean }> {
   const response = await fetch(`${API_URL}/cli/login`, {

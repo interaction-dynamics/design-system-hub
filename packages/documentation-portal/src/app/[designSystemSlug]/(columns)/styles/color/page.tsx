@@ -8,6 +8,7 @@ import { ColorStyle, Style } from '@/domain/entities/style'
 import { useConvertToHex } from './_utils/useConvertToHex'
 import { PageNavigation } from '@/components/organisms/page-navigation'
 import generateSlug from '@/lib/generate-slug'
+import RightSideBar from '@/components/organisms/right-sidebar'
 
 export interface PageProps {
   params: any
@@ -43,7 +44,11 @@ export default async function ColorPage({ params }: PageProps) {
     <Main
       title="Color"
       description="Color distinguishes our brand and reinforces consistent experiences across products."
-      rightSideBar={<PageNavigation links={links} />}
+      rightSideBar={
+        <RightSideBar>
+          <PageNavigation links={links} />
+        </RightSideBar>
+      }
     >
       <Typography variant="h2" id="palette">
         Palette

@@ -16,5 +16,7 @@ export default async function RedirectToFirstComponentPage({
   if (!designSystem) notFound()
   const pages = await findAllPages(designSystem.id)
 
-  redirect(`principles/${pages[0].slug}`)
+  if (pages.length > 0) redirect(`principles/${pages[0].slug}`)
+
+  return <>No page yet</>
 }

@@ -8,6 +8,7 @@ import { TypographyViewer } from './_components/typography-viewer'
 import { PageNavigation } from '@/components/organisms/page-navigation'
 import { byAlphabeticalOrder } from '../_utils/sort'
 import generateSlug from '@/lib/generate-slug'
+import RightSideBar from '@/components/organisms/right-sidebar'
 
 export interface PageProps {
   params: any
@@ -32,7 +33,11 @@ export default async function TypographyPage({ params }: PageProps) {
     <Main
       title="Typography"
       description="Typography is our system of fonts and text styles. It enhances communication, reinforces brand, and guides users' emotions."
-      rightSideBar={<PageNavigation links={links} />}
+      rightSideBar={
+        <RightSideBar>
+          <PageNavigation links={links} />
+        </RightSideBar>
+      }
     >
       {styles.map((style, index) => (
         <div key={style.name}>

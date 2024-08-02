@@ -17,10 +17,10 @@ export default async function FoundationPage({ params }: PageProps) {
   const pages = await findPagesBySlug(params.principleSlug, designSystem.id)
 
   return (
-    <>
+    <div className="pb-10">
       {pages.map((page) => (
         <Markdown key={page.id}>{page.content}</Markdown>
       ))}
-    </>
+    </div>
   )
 }

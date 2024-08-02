@@ -4,7 +4,7 @@ import { PartialComponent } from '@/domain/entities/partial-component'
 import { db } from '@/lib/db'
 import { DesignSystemDao } from './design-systems'
 import { Component } from '@/domain/entities/component'
-import generateSlug from '@/lib/generate-slug'
+import { generateSlug } from '@/lib/generate-slug'
 
 export const findPartialComponents = cache(
   async (designSystem: DesignSystemDao): Promise<PartialComponent[]> => {

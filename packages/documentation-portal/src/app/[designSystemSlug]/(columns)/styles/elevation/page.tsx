@@ -7,7 +7,7 @@ import { byAlphabeticalOrder } from '../_utils/sort'
 import { PageNavigation } from '@/components/organisms/page-navigation'
 import { Fragment } from 'react'
 import Typography from '@/components/atoms/typography'
-import generateSlug from '@/lib/generate-slug'
+import { generateSlug } from '@/lib/generate-slug'
 import { ElevationViewer } from './_component/elevation-viewer'
 import RightSideBar from '@/components/organisms/right-sidebar'
 

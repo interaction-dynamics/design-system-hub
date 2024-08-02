@@ -7,7 +7,7 @@ import { notFound } from 'next/navigation'
 import { TypographyViewer } from './_components/typography-viewer'
 import { PageNavigation } from '@/components/organisms/page-navigation'
 import { byAlphabeticalOrder } from '../_utils/sort'
-import generateSlug from '@/lib/generate-slug'
+import { generateSlug } from '@/lib/generate-slug'
 import RightSideBar from '@/components/organisms/right-sidebar'
 
 export interface PageProps {

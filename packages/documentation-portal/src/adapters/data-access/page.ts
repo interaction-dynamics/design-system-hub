@@ -1,6 +1,6 @@
 import { db } from '@/lib/db'
 import { cleanPageTitle } from '@/domain/use-cases/page'
-import generateSlug from '@/lib/generate-slug'
+import { generateSlug } from '@/lib/generate-slug'
 
 export const createPage = async (
   filePath: string,

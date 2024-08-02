@@ -9,6 +9,7 @@ import { Fragment } from 'react'
 import Typography from '@/components/atoms/typography'
 import generateSlug from '@/lib/generate-slug'
 import { ElevationViewer } from './_component/elevation-viewer'
+import RightSideBar from '@/components/organisms/right-sidebar'
 
 export interface PageProps {
   params: any
@@ -33,7 +34,11 @@ export default async function ElevationPage({ params }: PageProps) {
     <Main
       title="Elevation"
       description="Elevations are layered surfaces that form the foundation of UI."
-      rightSideBar={<PageNavigation links={links} />}
+      rightSideBar={
+        <RightSideBar>
+          <PageNavigation links={links} />
+        </RightSideBar>
+      }
     >
       {styles.map((style, index) => (
         <Fragment key={style.name}>

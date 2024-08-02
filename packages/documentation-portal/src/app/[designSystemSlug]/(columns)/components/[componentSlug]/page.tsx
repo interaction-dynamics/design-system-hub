@@ -8,10 +8,10 @@ import { getDescription } from '@/domain/use-cases/ui-merge-providers'
 import ComponentViewer from './_components/component-viewer'
 import { findDesignSystemBySlug } from '@/adapters/data-access/design-systems'
 import { findComponent } from '@/adapters/data-access/components'
-import { NavigationInFile } from './_components/navigation-in-file'
 import { PropertiesTable } from './_components/properties-table'
 import { ComponentFlags } from './_components/component-flags'
 import { ComponentDescription } from './_components/component-description'
+import { PageNavigation } from '@/components/organisms/page-navigation'
 
 export interface ComponentPageProps {
   params: any
@@ -27,6 +27,25 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
 
   if (!component) notFound()
 
+  const links = [
+    ...(component.variants.length > 0
+      ? [
+          {
+            name: 'Variants',
+            slug: 'variants',
+            links: component.variants.map((v) => ({
+              name: v.name,
+              slug: v.slug,
+            })),
+          },
+        ]
+      : []),
+    {
+      name: 'Props',
+      slug: 'props',
+    },
+  ]
+
   return (
     <Main
       pageSlug={componentSlug}
@@ -34,7 +53,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
       description={<ComponentDescription component={component} />}
       rightSideBar={
         <RightSideBar>
-          <NavigationInFile component={component} />
+          <PageNavigation links={links} />
         </RightSideBar>
       }
       flags={<ComponentFlags component={component} />}

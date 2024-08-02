@@ -18,7 +18,7 @@ function RecursiveNavigation({ links }: Props) {
           <li className="mt-0 pt-2">
             <a
               href={`#${link.slug}`}
-              className="inline-block no-underline transition-colors hover:text-foreground text-muted-foreground"
+              className="text-sm inline-block no-underline transition-colors hover:text-foreground text-muted-foreground"
             >
               {link.name}
             </a>
@@ -39,7 +39,7 @@ function RecursiveNavigation({ links }: Props) {
 export function PageNavigation({ links }: Props) {
   return (
     <div>
-      <p className="font-medium text-primary">On This Page</p>
+      <p className="font-medium text-primary text-sm">On This Page</p>
       <ul className="m-0 list-none text-muted">
         <RecursiveNavigation links={links} />
       </ul>

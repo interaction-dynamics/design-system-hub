@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation'
 import { byAlphabeticalOrder } from '../_utils/sort'
 import Typography from '@/components/atoms/typography'
 import { PageNavigation } from '@/components/organisms/page-navigation'
+import RightSideBar from '@/components/organisms/right-sidebar'
 
 export interface PageProps {
   params: any
@@ -30,7 +31,11 @@ export default async function SpacingPage({ params }: PageProps) {
     <Main
       title="Spacing"
       description="A spacing system simplifies the creation of page layouts and UI."
-      rightSideBar={<PageNavigation links={links} />}
+      rightSideBar={
+        <RightSideBar>
+          <PageNavigation links={links} />
+        </RightSideBar>
+      }
     >
       <div>
         {styles.map((style) => (

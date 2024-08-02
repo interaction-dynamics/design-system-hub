@@ -3,7 +3,7 @@ import parseFigmaComponent from './parseFigmaComponent'
 import { PartialComponent } from '@/domain/entities/partial-component'
 import { HttpFigmaComponent } from './fetchFigmaComponent'
 import { PartialHttpFigmaComponent } from './parseFigmaFiles'
-import generateSlug from '@/lib/generate-slug'
+import { generateSlug } from '@/lib/generate-slug'
 
 const cleanVariantName = (name: string) => name.replace(/.*=/, '')
 

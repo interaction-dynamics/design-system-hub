@@ -1,4 +1,4 @@
-import generateSlug from '@/lib/generate-slug'
+import { generateSlug } from '@/lib/generate-slug'
 import { FigmaComponent } from '../../../types/figma-component'
 import { GetComponentResult } from 'figma-api/lib/api-types'
 

@@ -1,3 +1,3 @@
-const generateSlug = (name: string) => name.toLowerCase().replace(/\s/g, '-')
-
-export default generateSlug
+export function generateSlug(name: string) {
+  return name.toLowerCase().replace(/\s/g, '-')
+}

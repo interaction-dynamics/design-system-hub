@@ -1,6 +1,6 @@
 import { DesignSystem } from '@/domain/entities/design-system'
 import { DocumentNode, HttpFigmaFile } from './fetchFigmaFiles'
-import generateSlug from '@/lib/generate-slug'
+import { generateSlug } from '@/lib/generate-slug'
 import { FigmaPartialComponentProvider } from '../../types/figma-partial-component-provider'
 import { Page } from '@/domain/entities/page'
 

@@ -1,4 +1,4 @@
-import generateSlug from '@/lib/generate-slug'
+import { generateSlug } from '@/lib/generate-slug'
 import {
   GetComponentResult,
   GetComponentSetResult,

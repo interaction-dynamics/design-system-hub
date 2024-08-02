@@ -1,4 +1,4 @@
-import generateSlug from '../generate-slug'
+import { generateSlug } from '../generate-slug'
 
 describe('generateSlug', () => {
   it('should generate a slug from a string', () => {

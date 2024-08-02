@@ -7,7 +7,7 @@ import { useGroupByColor } from './_utils/useGroupByColor'
 import { ColorStyle, Style } from '@/domain/entities/style'
 import { useConvertToHex } from './_utils/useConvertToHex'
 import { PageNavigation } from '@/components/organisms/page-navigation'
-import generateSlug from '@/lib/generate-slug'
+import { generateSlug } from '@/lib/generate-slug'
 import RightSideBar from '@/components/organisms/right-sidebar'
 
 export interface PageProps {

@@ -1,5 +1,5 @@
 import { HttpFigmaComponent } from './fetchFigmaComponent'
-import generateSlug from '@/lib/generate-slug'
+import { generateSlug } from '@/lib/generate-slug'
 import { FigmaComponent } from '../../types/figma-component'
 import { PartialHttpFigmaComponent } from './parseFigmaFiles'
 

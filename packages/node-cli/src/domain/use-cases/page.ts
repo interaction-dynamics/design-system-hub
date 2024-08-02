@@ -1,7 +1,7 @@
 import path from 'node:path'
 import { Page } from '../entities/page'
 
-const POSSIBLE_PATHS = ['docs/design-system/guidelines']
+const POSSIBLE_PATHS = ['docs/design-system/principles']
 
 export async function findPages(
   { projectPath }: { projectPath: string },

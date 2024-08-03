@@ -10,9 +10,10 @@ npx dshub dev --cwd <path to design system>
 
 # for synchronizing the detected components with the online documentation
 npx dshub sync --token <token> --cwd <path to design system> # check the online documentation for the token.
+
 ```
 
-The output is:
+The output of `npx dshub dev --cwd <path to design system>` will be something like this:
 
 ```yaml
 provider:

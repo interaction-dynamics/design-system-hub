@@ -1,6 +1,11 @@
+/**
+ * This is a credential token to access the design system
+ */
 export interface DesignSystemToken {
-  token: string
+  /** not encrypted to identify the token*/
   prefix: string
+  /** encrypted token */
+  token: string
   description: string
   designSystemId: string
 }

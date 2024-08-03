@@ -1,4 +1,9 @@
-import { ColorStyle, ElevationStyle, Style } from '../entities/style'
+import {
+  ColorStyle,
+  ElevationStyle,
+  Style,
+  TypographyStyle,
+} from '../entities/style'
 
 function aggregateTokenRecursive(
   acc: Record<string, any>,
@@ -36,6 +41,7 @@ function buildToken<IStyle extends Style>(func: (style: IStyle) => any) {
 export function generateDesignTokens({ styles }: { styles: Style[] }) {
   const colors = styles
     .filter((style) => style.type === 'color')
+    .map((s) => s as ColorStyle)
     .reduce(
       buildToken((style) => style.metadata.color),
       { $type: 'color' }
@@ -43,6 +49,7 @@ export function generateDesignTokens({ styles }: { styles: Style[] }) {
 
   const shadows = styles
     .filter((style) => style.type === 'elevation')
+    .map((s) => s as ElevationStyle)
     .reduce(
       buildToken((style) => ({
         color: style.metadata.color,
@@ -55,6 +62,7 @@ export function generateDesignTokens({ styles }: { styles: Style[] }) {
 
   const typography = styles
     .filter((style) => style.type === 'typography')
+    .map((s) => s as TypographyStyle)
     .reduce(
       buildToken((style) => ({
         fontFamily: style.metadata.fontFamily,

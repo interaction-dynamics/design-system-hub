@@ -22,3 +22,8 @@ export const insertStyles = async (
 
 export const getStyles = async <T>(designSystemId: string, type: string) =>
   (await db.style.findMany({ where: { designSystemId, type } })) as Array<T>
+
+export const findAllStyles = async (designSystemId: string) =>
+  (await db.style.findMany({
+    where: { designSystemId },
+  })) as unknown as Array<Style>

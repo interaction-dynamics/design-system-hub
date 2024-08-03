@@ -6,6 +6,7 @@ const defaultDesignSystem: DesignSystem = {
   slug: 'design-system',
   name: 'Design System',
   providers: {},
+  isPublic: false,
 }
 
 export const mockDesignSystem = buildMock<DesignSystem>(defaultDesignSystem)

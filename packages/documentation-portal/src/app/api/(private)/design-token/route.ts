@@ -14,5 +14,5 @@ export async function GET(request: NextRequest) {
 
   const tokens = generateDesignTokens({ styles })
 
-  return Response.json({ tokens })
+  return Response.json({ tokens, success: true })
 }

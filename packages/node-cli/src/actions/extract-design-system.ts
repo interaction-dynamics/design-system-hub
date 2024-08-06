@@ -4,7 +4,7 @@ import { DesignSystem } from '../domain/entities/design-system'
 import { findRemoteUrl, findRootPath } from '../adapters/git'
 import { findPackageConfig } from '../adapters/package'
 import { detectComponents } from '../adapters/react-ast'
-import { findDesignSystem } from '../domain/use-cases/design-system'
+import { detectDesignSystem } from '../domain/use-cases/design-system'
 import { findPages } from '../domain/use-cases/page'
 import { isDirectory, listFiles, readFile } from '../adapters/file-system'
 
@@ -15,7 +15,7 @@ async function detectPages(projectPath: string) {
 export async function extractDesignSystem(
   targetPath: string,
 ): Promise<DesignSystem> {
-  return findDesignSystem({
+  return detectDesignSystem({
     options: { targetPath },
     context: {
       findRepositoryUrl: findRemoteUrl,

@@ -19,7 +19,7 @@ interface Arguments {
   }
 }
 
-export async function findDesignSystem({
+export async function detectDesignSystem({
   options: { targetPath },
   context: {
     findRepositoryUrl,

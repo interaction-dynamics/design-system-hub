@@ -11,6 +11,7 @@ import { extractDesignSystem } from './actions/extract-design-system'
 // import { printWarning } from './adapters/prompt'
 // import { link } from './actions/link'
 import { sync } from './actions/sync'
+import { pull } from './actions/pull'
 
 const program = new Command()
 
@@ -52,18 +53,37 @@ program
 //     await link(options.cwd, str)
 //   })
 
+const name = 'Design System Hub'
+
 program
   .command('sync')
-  .description('Synchronize the design system with the Design System Hub')
+  .description(`Synchronize the design system with the ${name}`)
   .option(
     '--cwd <design_system_path>',
     'path to the design system directory',
     process.cwd(),
   )
   .option('--token <token>', 'project token')
-
   .action(async options => {
     await sync(options.cwd, options.token)
+  })
+
+program
+  .command('pull')
+  .description(`Pull tokens from the ${name}`)
+  .option(
+    '--cwd <design_system_path>',
+    'path to the design system directory',
+    process.cwd(),
+  )
+  .option('--token <token>', 'project token')
+  .action(async options => {
+    const tokenFiles = await pull(options.cwd, options.token)
+
+    tokenFiles.forEach(({ filename }) => {
+      // eslint-disable-next-line no-console
+      console.log(`Token file created: ${filename}`)
+    })
   })
 
 const logSummary = (s: string) => console.warn(chalk.yellow.bold(s))

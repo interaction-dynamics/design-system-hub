@@ -6,9 +6,9 @@
     "design system",
     "design system hub"
   ],
-  "version": "0.2.1",
+  "version": "0.3.0",
   "bin": {
-    "dshub": "./dist/index.js"
+    "dshub": "dist/index.js"
   },
   "scripts": {
     "cli": "tsx ./src/cli.ts",

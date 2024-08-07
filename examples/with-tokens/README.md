@@ -1,9 +1,8 @@
 # Examples with tokens
 
-
 ```bash
 
-p cli pull --token <token> --cwd .
+p cli pull --token <token> --cwd src/libs
 
 npx style-dictionary build
 ```

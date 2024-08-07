@@ -1,5 +1,5 @@
 import { relative } from 'node:path'
-import { findDesignSystem } from '../domain/use-cases/design-system'
+import { detectDesignSystem } from '../domain/use-cases/design-system'
 import { findRemoteUrl, findRootPath } from '../adapters/git'
 import { findPackageConfig } from '../adapters/package'
 import { detectComponents } from '../adapters/react-ast'
@@ -22,7 +22,7 @@ export async function sync(targetPath: string, designSystemToken?: string) {
   }
 
   try {
-    const designSystem = await findDesignSystem({
+    const designSystem = await detectDesignSystem({
       options: { targetPath },
       context: {
         findRepositoryUrl: findRemoteUrl,

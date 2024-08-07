@@ -69,7 +69,6 @@ export function generateDesignTokens({ styles }: { styles: Style[] }) {
         fontSize: style.metadata.fontSize,
         fontWeight: style.metadata.fontWeight,
         lineHeight: style.metadata.lineHeight,
-        letterSpacing: style.metadata.letterSpacing,
       })),
       { $type: 'typography' }
     )

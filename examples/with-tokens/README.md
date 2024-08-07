@@ -1,8 +1,9 @@
-# Basic Style Dictionary
-
-This example code is bare-bones to show you what this framework can do. If you have the style-dictionary module installed globally, you can `cd` into this directory and run:
+# Examples with tokens
 
 ```bash
+
+p cli pull --token <token> --cwd src/libs
+
 npx style-dictionary build
 ```
 

@@ -89,3 +89,24 @@ export async function postDesignSystem(
 
   return result?.success
 }
+
+export async function fetchDesignTokens({ token }: { token: string }) {
+  const response = await fetch(`${API_URL}/design-token`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Token ${token}`,
+    },
+  })
+
+  if (response.status === 401) {
+    throw new Error('Unauthorized')
+  }
+
+  const result = (await response.json()) as {
+    success: boolean
+    tokens: Record<string, unknown>
+  }
+
+  return result?.tokens
+}

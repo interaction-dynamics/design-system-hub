@@ -32,3 +32,9 @@ export async function findPackageConfigPath(
 
   throw new Error('Impossible to find package.json')
 }
+
+export async function findProjectPath(targetPath: string): Promise<string> {
+  const packageConfig = await findPackageConfigPath(targetPath)
+
+  return path.dirname(packageConfig)
+}

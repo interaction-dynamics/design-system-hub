@@ -33,10 +33,12 @@ export default async function ColorPage({ params }: PageProps) {
     {
       name: 'Palette',
       slug: 'palette',
-      links: Object.keys(colorsByGroup).sort().map((group) => ({
-        name: group,
-        slug: generateSlug(group),
-      })),
+      links: Object.keys(colorsByGroup)
+        .sort()
+        .map((group) => ({
+          name: group,
+          slug: generateSlug(group),
+        })),
     },
   ]
 

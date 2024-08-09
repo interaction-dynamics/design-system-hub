@@ -1,19 +1,25 @@
 # Node-cli
 
-This is a simple CLI tool to detect the react components. It will soon include features to synchronize the components with the online documentation.
+A CLI tool to detect the react components. It will soon include features to synchronize the components with the online documentation.
 
 ## Getting started
 
 ```bash
 # for just checking the detected component
-npx dshub dev --cwd <path to design system>
+npx dshub@latest dev --cwd <path to design system>
 
 # for synchronizing the detected components with the online documentation
-npx dshub sync --token <token> --cwd <path to design system> # check the online documentation for the token.
+npx dshub@latest sync --token <token> --cwd <path to design system> # check the online documentation for the token.
+
+npx dshub@latest pull --token <token> --cwd <path to design system> # check the online documentation for the token.
+
+# If you use a personal instant of design system hub you can use the following command
+
+DSHUB_HOST=<host> npx dshub@latest sync --token <token> --cwd <path to design system> # check the online documentation for the token.
 
 ```
 
-The output of `npx dshub dev --cwd <path to design system>` will be something like this:
+The output of `npx dshub@latest dev --cwd <path to design system>` will be something like this:
 
 ```yaml
 provider:
@@ -66,10 +72,22 @@ components:
         type: React.ReactNode
         optional: false
         description: ""
+pages:
+  - path: 00-how-it-works.md
+    content: >
+      # How it works
 
+      ...
+  - path: accessibility.md
+    content: >
+      ...
+  - path: internationzalization.md
+    content: >
+      ...
 3 components found.
 8 properties found.
 2 / 11 descriptions found.
+3 pages found.
 ```
 
 ## Development

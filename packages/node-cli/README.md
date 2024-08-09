@@ -82,3 +82,7 @@ pnpm cli dev <path to design system>
 # For example
 pnpm cli dev ../../examples/zero-config/src/libs
 ```
+
+## Technologies
+
+- [Style-dictionary](https://v4.styledictionary.com/)

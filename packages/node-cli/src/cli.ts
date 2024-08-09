@@ -12,6 +12,7 @@ import { extractDesignSystem } from './actions/extract-design-system'
 // import { link } from './actions/link'
 import { sync } from './actions/sync'
 import { pull } from './actions/pull'
+import { install } from './actions/install'
 
 const program = new Command()
 
@@ -81,9 +82,25 @@ program
     const tokenFiles = await pull(options.cwd, options.token)
 
     tokenFiles.forEach(({ filename }) => {
-      // eslint-disable-next-line no-console
-      console.log(`Token file created: ${filename}`)
+      logInfo(`Token file created: ${filename}`)
     })
+
+    const library = await install(options.cwd)
+
+    logInfo(`Installed styles for ${library.name}`)
+  })
+
+program
+  .command('install')
+  .option(
+    '--cwd <design_system_path>',
+    'path to the design system directory',
+    process.cwd(),
+  )
+  .action(async options => {
+    const library = await install(options.cwd)
+
+    logInfo(`Installed styles for ${library.name}`)
   })
 
 const logSummary = (s: string) => console.warn(chalk.yellow.bold(s))

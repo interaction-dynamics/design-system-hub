@@ -1,15 +1,17 @@
 export interface Props {
   /** The content of the button */
   children: React.ReactNode
-  /** @deprecated */
   variant: 'primary' | 'black' | 'basic'
   onClick?: () => void | Promise<void>
 }
 
 /**
  * A Button component
- * @deprecated
  */
-export function ButtonLegacy({ children, onClick = () => {} }: Props) {
-  return <button onClick={onClick}>{children}</button>
+export function Button({ children, onClick = () => {} }: Props) {
+  return (
+    <button onClick={onClick} className='bg-primary-500 text-white px-2'>
+      {children}
+    </button>
+  )
 }

@@ -1,8 +1,8 @@
-# Examples with tokens
+# Example with tokens in Tailwind CSS
 
 ```bash
 
-p cli pull --token <token> --cwd src/libs
+npx dshub pull --token <token> --cwd src/libs
 
 npx style-dictionary build
 ```

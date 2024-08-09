@@ -40,3 +40,5 @@ next-env.d.ts
 logo*.svg
 
 .design-system
+
+.parcel-cache

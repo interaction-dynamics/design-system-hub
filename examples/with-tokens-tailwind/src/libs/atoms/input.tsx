@@ -6,15 +6,15 @@ export default function Input({
   onChange = () => {},
   placeholder,
 }: {
-  value: string | number
-  onChange: (value: string) => void
-  placeholder?: string
+  value: string | number;
+  onChange: (value: string) => void;
+  placeholder?: string;
 }) {
   return (
     <input
       value={value}
-      onChange={e => onChange(e.target.value)}
+      onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
     />
-  )
+  );
 }

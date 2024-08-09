@@ -22,6 +22,8 @@
     "commander": "^12.1.0",
     "configstore": "^6.0.0",
     "enquirer": "^2.4.1",
+    "sd-tailwindcss-transformer": "^1.4.6",
+    "style-dictionary": "^4.0.1",
     "typescript": "^5.4.5",
     "yaml": "^2.4.3"
   },

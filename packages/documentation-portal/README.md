@@ -5,6 +5,8 @@
 ```bash
 pnpm install
 
+cp .env.example .env.local # and fill the .env.local file
+
 pnpm dev
 ```
 
@@ -17,4 +19,4 @@ pnpm dev
 - [Clerk](https://clerk.com/)
 - [Figma API](https://www.figma.com/developers/api)
 - [Prisma](https://www.prisma.io/)
-- [AWS](https://aws.amazon.com/)
+- [AWS](https://aws.amazon.com/) for the image storage

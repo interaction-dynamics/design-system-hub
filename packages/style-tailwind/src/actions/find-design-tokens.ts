@@ -1,23 +1,17 @@
-import fs from 'node:fs/promises'
+import fs from 'node:fs'
 import { AllDesignTokens } from '../entities/design-token'
 import path from 'node:path'
 
-export async function findDesignTokens(
-  tokenPath: string,
-): Promise<AllDesignTokens> {
-  const files = await fs.readdir(tokenPath)
+export function findDesignTokens(tokenPath: string): AllDesignTokens {
+  const files = fs.readdirSync(tokenPath)
 
-  const promises = files
+  const contents = files
     .filter(f => f.startsWith('colors'))
     .filter(f => f.endsWith('.json'))
-    .map(async file => ({
+    .map(file => ({
       name: file.replace('.json', ''),
-      content: JSON.parse(
-        await fs.readFile(path.join(tokenPath, file), 'utf-8'),
-      ),
+      content: JSON.parse(fs.readFileSync(path.join(tokenPath, file), 'utf-8')),
     }))
-
-  const contents = await Promise.all(promises)
 
   return contents.reduce((acc, { name, content }) => {
     return {

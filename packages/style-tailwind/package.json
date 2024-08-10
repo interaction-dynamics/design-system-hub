@@ -6,7 +6,7 @@
     "design system",
     "design system hub"
   ],
-  "main": "dist/lib.js",
+  "main": "dist/index.js",
   "version": "0.1.0",
   "scripts": {
     "lib": "tsx ./src/lib.ts",

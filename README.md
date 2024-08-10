@@ -25,7 +25,9 @@ The project is composed of multiple packages:
 - [documentation-portal](./packages/documentation-portal/README.md): the website that will host the design systems [STARTED]
 - a figma integration to extract the component from figma [DONE]
 - a figma plugin that will help check the code from Figma (see development status, etc) [NOT STARTED]
-- a cli [dshub](./packages//node-cli/README.md) to extract the components from the code [STARTED]
+- a cli [dshub](./packages/node-cli/README.md) to extract the components from the code [STARTED]
+- a [tailwind plugin](./packages/style-tailwind/README.md) to set the theme from design tokens [STARTED]
+- a cli to extract the components from the code [STARTED]
 - a VS Code plugin to help the developer to use the design system [NOT STARTED]
 - a eslint plugin to check the code against the design system [NOT STARTED]
 

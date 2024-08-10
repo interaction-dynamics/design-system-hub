@@ -1,0 +1,21 @@
+{
+  "typography": {
+    "$type": "typography",
+    "h2": {
+      "$value": {
+        "fontFamily": "Geist",
+        "fontSize": 30,
+        "fontWeight": 600,
+        "lineHeight": 1
+      }
+    },
+    "h1": {
+      "$value": {
+        "fontFamily": "Geist",
+        "fontSize": 39,
+        "fontWeight": 700,
+        "lineHeight": 1
+      }
+    }
+  }
+}

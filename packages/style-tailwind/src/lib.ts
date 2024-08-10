@@ -5,5 +5,5 @@ import { findDesignTokens } from './actions/find-design-tokens'
 export function generateTailwindConfig(folderName: string = '.tokens') {
   const tokenPath = path.join(process.cwd(), folderName)
 
-  return findDesignTokens(tokenPath).then(generateTailwindTheme)
+  return generateTailwindTheme(findDesignTokens(tokenPath))
 }

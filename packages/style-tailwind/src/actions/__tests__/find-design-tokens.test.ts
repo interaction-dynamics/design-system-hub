@@ -2,18 +2,18 @@ import path from 'node:path'
 import { findDesignTokens } from '../find-design-tokens'
 
 describe('findDesignTokens', () => {
-  it('should return empty object', async () => {
+  it('should return empty object', () => {
     const tokenPath = path.join(__dirname, '../__fixtures__/empty')
 
-    const result = await findDesignTokens(tokenPath)
+    const result = findDesignTokens(tokenPath)
 
     expect(result).toEqual({})
   })
 
-  it('should return tokens', async () => {
+  it('should return tokens', () => {
     const tokenPath = path.join(__dirname, '../__fixtures__/with-tokens')
 
-    const result = await findDesignTokens(tokenPath)
+    const result = findDesignTokens(tokenPath)
 
     expect(result).toEqual({
       colors: {

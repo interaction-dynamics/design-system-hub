@@ -16,6 +16,18 @@ This package is designed to work with the [dshub](../node-cli/README.md) CLI too
 
 Once you have run `dshub pull` and have the file `src/tailwind.css` in your project, you can set up tailwind to use CSS variables automatically.
 
+Import the file `src/tailwind.css` your index.ts
+
+```ts
+
+import './tailwind.css`
+
+//...
+
+```
+
+Then you can override the tailwind config with the generated tokens.
+
 ```ts
 // tailwind.config.js
 
@@ -24,9 +36,7 @@ import { generateTailwindConfig } from '@design-system-hub/tailwind'
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{html,js,ts,jsx,tsx}'],
-  theme: {
-    extends: generateTailwindConfig(),
-  },
+  theme: generateTailwindConfig(),
   plugins: [],
 }
 ```

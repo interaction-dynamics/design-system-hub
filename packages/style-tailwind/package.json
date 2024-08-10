@@ -1,5 +1,5 @@
 {
-  "name": "@design-systems-hub/tailwind",
+  "name": "@design-system-hub/tailwind",
   "description": "A library to override tailwind theme using design tokens",
   "keywords": [
     "tailwind",
@@ -14,6 +14,9 @@
     "test": "jest",
     "lint": "eslint .",
     "format": "prettier --check ."
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "dependencies": {
     "tailwindcss": "^3.4.1",

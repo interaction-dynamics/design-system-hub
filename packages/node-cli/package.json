@@ -10,6 +10,9 @@
   "bin": {
     "dshub": "dist/index.js"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "cli": "tsx ./src/cli.ts",
     "build": "ncc build ./src/cli.ts -o dist",

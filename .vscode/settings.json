@@ -1,5 +1,5 @@
 {
   "eslint.workingDirectories": [
-    "./packages/node-cli", 
+    "./apps/node-cli", 
   ],
 }

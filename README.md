@@ -12,21 +12,21 @@ It can replace Storybook and much more.
 
 ![image](https://github.com/interaction-dynamics/design-system-hub/assets/4005226/e8118830-1d55-47ff-b248-8c69634ae384)
 
-> It is a work in progress and is not ready for production yet. But you can access the private beta by registering at [design-system-hub.com](https://design-system-hub.com) This is built in public so feel free to check our [wiki](https://github.com/interaction-dynamics/design-system-hub/wiki) for more information. 
+> It is a work in progress and is not ready for production yet. But you can access the private beta by registering at [design-system-hub.com](https://design-system-hub.com) This is built in public so feel free to check our [wiki](https://github.com/interaction-dynamics/design-system-hub/wiki) for more information.
 
 ## Getting started
 
-If you want to start using this tool, you can follow the instructions in [packages/documentation-portal/README.md](./packages/documentation-portal/README.md).
+If you want to start using this tool, you can follow the instructions in [apps/documentation-portal/README.md](./apps/documentation-portal/README.md).
 
 ## Roadmap
 
-The project is composed of multiple packages:
+The project is composed of multiple apps:
 
-- [documentation-portal](./packages/documentation-portal/README.md): the website that will host the design systems [STARTED]
+- [documentation-portal](./apps/documentation-portal/README.md): the website that will host the design systems [STARTED]
 - a figma integration to extract the component from figma [DONE]
 - a figma plugin that will help check the code from Figma (see development status, etc) [NOT STARTED]
-- a cli [dshub](./packages/node-cli/README.md) to extract the components from the code [STARTED]
-- a [tailwind plugin](./packages/style-tailwind/README.md) to set the theme from design tokens [STARTED]
+- a cli [dshub](./apps/node-cli/README.md) to extract the components from the code [STARTED]
+- a [tailwind plugin](./apps/style-tailwind/README.md) to set the theme from design tokens [STARTED]
 - a cli to extract the components from the code [STARTED]
 - a VS Code plugin to help the developer to use the design system [NOT STARTED]
 - a eslint plugin to check the code against the design system [NOT STARTED]

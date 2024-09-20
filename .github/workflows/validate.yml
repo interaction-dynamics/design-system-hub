@@ -45,13 +45,13 @@ jobs:
         run: |
           pnpm format
           pnpm lint
-        working-directory: packages/documentation-portal
+        working-directory: apps/documentation-portal
       - name: Test ✅
         run: pnpm test:ci --coverage
-        working-directory: packages/documentation-portal
+        working-directory: apps/documentation-portal
       - name: Build ⚙️
         run: pnpm build
-        working-directory: packages/documentation-portal
+        working-directory: apps/documentation-portal
   node-cli:
     runs-on: ubuntu-latest
     steps:
@@ -84,13 +84,13 @@ jobs:
         run: |
           pnpm format
           pnpm lint
-        working-directory: packages/node-cli
+        working-directory: apps/node-cli
       - name: Test ✅
         run: pnpm test
-        working-directory: packages/node-cli
+        working-directory: apps/node-cli
       - name: Build ⚙️
         run: pnpm build
-        working-directory: packages/node-cli
+        working-directory: apps/node-cli
   style-tailwind:
     runs-on: ubuntu-latest
     steps:
@@ -123,13 +123,13 @@ jobs:
         run: |
           pnpm format
           pnpm lint
-        working-directory: packages/style-tailwind
+        working-directory: apps/style-tailwind
       - name: Test ✅
         run: pnpm test
-        working-directory: packages/style-tailwind
+        working-directory: apps/style-tailwind
       - name: Build ⚙️
         run: pnpm build
-        working-directory: packages/style-tailwind
+        working-directory: apps/style-tailwind
   global:
     runs-on: ubuntu-latest
     steps:

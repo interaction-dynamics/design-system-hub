@@ -123,13 +123,13 @@ jobs:
         run: |
           pnpm format
           pnpm lint
-        working-directory: packages/style-tailwind
+        working-directory: apps/style-tailwind
       - name: Test ✅
         run: pnpm test
-        working-directory: packages/style-tailwind
+        working-directory: apps/style-tailwind
       - name: Build ⚙️
         run: pnpm build
-        working-directory: packages/style-tailwind
+        working-directory: apps/style-tailwind
   global:
     runs-on: ubuntu-latest
     steps:

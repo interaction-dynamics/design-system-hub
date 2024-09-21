@@ -1,5 +1,6 @@
 {
   "eslint.workingDirectories": [
-    "./apps/node-cli", 
+    "./apps/node-cli",
+    "./packages/node-react-parser"
   ],
 }

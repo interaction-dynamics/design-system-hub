@@ -127,9 +127,6 @@ jobs:
       - name: Test ✅
         run: pnpm test
         working-directory: packages/node-react-parser
-      - name: Build ⚙️
-        run: pnpm build
-        working-directory: packages/node-react-parser
   style-tailwind:
     runs-on: ubuntu-latest
     steps:

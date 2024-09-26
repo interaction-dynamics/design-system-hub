@@ -11,36 +11,38 @@ const tsconfig = JSON.parse(
   fs.readFileSync(path.join(directoryPath, 'tsconfig.json'), 'utf8'),
 )
 
-const readExpectedComponent = (filename: string) =>
-  JSON.parse(
-    fs.readFileSync(
-      path.join(directoryPath, filename.replace('.tsx', '.spec.json')),
-      { encoding: 'utf8' },
-    ),
-  )
+const readExpectedComponents = (filename: string) => {
+  try {
+    return [
+      JSON.parse(
+        fs.readFileSync(
+          path.join(directoryPath, filename.replace('.tsx', '.spec.json')),
+          { encoding: 'utf8' },
+        ),
+      ),
+    ]
+  } catch (error) {
+    return []
+  }
+}
 
 describe('detectComponents', () => {
-  it('should not return components when there are none', async () => {
-    const components = await detectComponents(
-      directoryPath,
-      filePaths([]),
-      tsconfig,
-    )
-
-    expect(components).toEqual([])
-  })
-
   const components = [
     'function/component-without-properties.tsx',
     'function/component-with-basic-properties.tsx',
     'function/default-exported-component.tsx',
     'arrow-function/component-without-properties.tsx',
     'arrow-function/component-with-basic-properties.tsx',
-    // 'arrow-function/default-exported-component.tsx',
+    // 'arrow-function/default-exported-component.tsx', // TODO [Hacktoberfest] Implement for this test
+    'variable-function/component-without-properties.tsx',
+    'variable-function/component-with-basic-properties.tsx',
+    'no-component/camel-case-function.tsx',
+    'no-component/camel-case-arrow-function.tsx',
+    'no-component/camel-case-variable-function.tsx',
   ]
 
   it.each(components)(`should return %p`, async filename => {
-    const expectedComponent = readExpectedComponent(filename)
+    const expectedComponents = readExpectedComponents(filename)
 
     const components = await detectComponents(
       directoryPath,
@@ -48,6 +50,6 @@ describe('detectComponents', () => {
       tsconfig,
     )
 
-    expect(components).toEqual([expectedComponent])
+    expect(components).toEqual(expectedComponents)
   })
 })

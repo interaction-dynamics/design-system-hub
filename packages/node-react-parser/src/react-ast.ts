@@ -29,16 +29,30 @@ export async function detectComponents(
     .sort((a, b) => `${a.path}/${a.name}`.localeCompare(`${b.path}/${b.name}`))
 }
 
-function isReactComponent(
-  declaration: ts.Declaration,
-): declaration is ts.FunctionDeclaration {
-  if (!ts.isFunctionDeclaration(declaration)) return false
+function getProperties(
+  parameter: ts.ParameterDeclaration,
+  checker: ts.TypeChecker,
+) {
+  const propertyTypes = parameter
+    ? getPropertyTypes(parameter.type, checker)
+    : []
 
-  const componentNameRegex = /^[A-Z][A-Za-z]+/
+  return propertyTypes.map(type => {
+    const parameterProperty = (
+      parameter.name as ts.ObjectBindingPattern
+    ).elements.find((p: ts.BindingElement) => p.name.getText() === type.name)
 
-  if (!componentNameRegex.test(declaration.name.text)) return false
-
-  return true
+    return {
+      name: type.name,
+      type: type.type,
+      ...(type.description ? { description: type.description } : {}),
+      ...(parameterProperty?.initializer
+        ? { defaultValue: parameterProperty?.initializer.getText() }
+        : {}),
+      ...(type.deprecated ? { deprecated: true } : {}),
+      ...(type.optional ? { optional: true } : {}),
+    }
+  })
 }
 
 function getPropertyTypes(
@@ -90,78 +104,81 @@ function getReactComponents(
   symbol: ts.Symbol,
   checker: ts.TypeChecker,
 ): Component[] {
-  const component = findComponentNameAndParameter(symbol)
-
-  if (!component) return []
-
-  const { name, parameter, isDeprecated } = component
-
-  const propertyTypes = parameter
-    ? getPropertyTypes(parameter.type, checker)
-    : []
-
-  const properties = propertyTypes.map(type => {
-    const parameterProperty = (
-      parameter.name as ts.ObjectBindingPattern
-    ).elements.find((p: ts.BindingElement) => p.name.getText() === type.name)
-
-    return {
-      name: type.name,
-      type: type.type,
-      ...(type.description ? { description: type.description } : {}),
-      ...(parameterProperty?.initializer
-        ? { defaultValue: parameterProperty?.initializer.getText() }
-        : {}),
-      ...(type.deprecated ? { deprecated: true } : {}),
-      ...(type.optional ? { optional: true } : {}),
-    }
-  })
-
-  return [
-    {
-      name,
-      path: filePath,
-      description:
-        ts.displayPartsToString(symbol.getDocumentationComment(checker)) ?? '',
-      properties,
-      ...(isDeprecated ? { deprecated: true } : {}),
-    },
-  ]
-}
-
-function findComponentNameAndParameter(symbol: ts.Symbol):
-  | {
-      name: string
-      parameter: ts.ParameterDeclaration | undefined
-      isDeprecated: boolean
-    }
-  | undefined {
-  const declaration = symbol.declarations[0]
-
   const isDeprecated = symbol
     .getJsDocTags()
     .some(tag => tag.name === 'deprecated')
 
-  if (isReactComponent(declaration)) {
+  return symbol.declarations.flatMap(declaration => {
+    const component = findComponentNameAndParameter(declaration)
+
+    if (!component) return []
+
+    const { name, parameter } = component
+
+    return [
+      {
+        name,
+        path: filePath,
+        description:
+          ts.displayPartsToString(symbol.getDocumentationComment(checker)) ??
+          '',
+        properties: getProperties(parameter, checker),
+        ...(isDeprecated ? { deprecated: true } : {}),
+      },
+    ]
+  })
+}
+
+const isPascalCase = (name: string) => /^[A-Z][A-Za-z]+/.test(name)
+
+function findComponentNameAndParameter(declaration: ts.Declaration) {
+  // export function Foo () {
+  if (
+    ts.isFunctionDeclaration(declaration) &&
+    isPascalCase(declaration.name.getText())
+  ) {
     return {
       name: declaration.name.getText(),
       parameter: declaration.parameters[0],
-      isDeprecated,
     }
   }
 
-  if (ts.isVariableDeclaration(declaration)) {
-    if (
-      ts.isFunctionDeclaration(declaration.initializer) ||
-      ts.isArrowFunction(declaration.initializer)
-    ) {
-      return {
-        name: declaration.name.getText(),
-        parameter: declaration.initializer?.parameters?.[0],
-        isDeprecated,
-      }
+  // export const Foo = () => {
+  if (
+    ts.isVariableDeclaration(declaration) &&
+    ts.isArrowFunction(declaration.initializer) &&
+    isPascalCase(declaration.name.getText())
+  ) {
+    return {
+      name: declaration.name.getText(),
+      parameter: declaration.initializer?.parameters?.[0],
     }
   }
 
-  return undefined
+  // export const Foo = function () {
+  if (
+    ts.isVariableDeclaration(declaration) &&
+    ts.isFunctionExpression(declaration.initializer) &&
+    isPascalCase(declaration.name.getText())
+  ) {
+    return {
+      name: declaration.name.getText(),
+      parameter: declaration.initializer?.parameters?.[0],
+    }
+  }
+
+  return null
+
+  // export default Foo; const Foo = () => {
+  // if (
+  //   ts.isVariableDeclaration(declaration)
+  //   // ts.isArrowFunction(declaration.initializer) &&
+  //   // isPascalCase(declaration.name.getText())
+  // ) {
+  //   console.log('declaration')
+  //   return {
+  //     name: declaration.name.getText(),
+  //     parameter: null, // declaration.initializer?.parameters?.[0],
+  //   }
+  // }
 }

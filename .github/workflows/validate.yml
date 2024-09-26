@@ -129,7 +129,7 @@ jobs:
         working-directory: packages/node-reacter-parser
       - name: Build ⚙️
         run: pnpm build
-         working-directory: packages/node-reacter-parser
+        working-directory: packages/node-reacter-parser
   style-tailwind:
     runs-on: ubuntu-latest
     steps:

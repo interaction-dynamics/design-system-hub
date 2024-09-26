@@ -123,7 +123,7 @@ jobs:
         run: |
           pnpm format
           pnpm lint
-          working-directory: packages/node-react-parser
+        working-directory: packages/node-react-parser
       - name: Test ✅
         run: pnpm test
         working-directory: packages/node-react-parser

@@ -91,7 +91,7 @@ jobs:
       - name: Build ⚙️
         run: pnpm build
         working-directory: apps/node-cli
-  node-reacter-parser:
+  node-react-parser:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -123,13 +123,13 @@ jobs:
         run: |
           pnpm format
           pnpm lint
-          working-directory: packages/node-reacter-parser
+          working-directory: packages/node-react-parser
       - name: Test ✅
         run: pnpm test
-        working-directory: packages/node-reacter-parser
+        working-directory: packages/node-react-parser
       - name: Build ⚙️
         run: pnpm build
-        working-directory: packages/node-reacter-parser
+        working-directory: packages/node-react-parser
   style-tailwind:
     runs-on: ubuntu-latest
     steps:

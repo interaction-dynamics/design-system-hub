@@ -29,6 +29,9 @@ export default tseslint.config(
     files: ['**/*.{test,spec}.tsx?'],
     ...jest.configs['flat/recommended'],
   },
+  {
+    ignores: ['**/__fixtures__/*'],
+  },
   ...tseslint.configs.recommended,
   eslintPluginPrettierRecommended,
 )

@@ -1,0 +1,3 @@
+- any:
+  - changed-files:
+    - hacktoberfest-accepted: ['./packages/node-react-parser/**/*']

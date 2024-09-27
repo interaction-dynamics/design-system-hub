@@ -1,5 +1,5 @@
 import { listTsxFiles, readTsConfigFile } from './adapters/file-system'
-import { detectComponents } from './react-ast'
+import { parseComponents } from './react-ast'
 import { Component } from './entities/component'
 
 export async function findComponents(
@@ -9,5 +9,5 @@ export async function findComponents(
   const filenames = await listTsxFiles(directoryPath)
   const compilerOptions = await readTsConfigFile(projectDirectory)
 
-  return await detectComponents(directoryPath, filenames, compilerOptions)
+  return await parseComponents(directoryPath, filenames, compilerOptions)
 }

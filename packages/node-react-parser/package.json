@@ -10,7 +10,7 @@
   "main": "./src/index.ts",
   "version": "0.1.0",
   "scripts": {
-    "cli": "tsx ./src/index.ts",
+    "demo": "tsx ./src/__demo__/cli.ts",
     "test": "jest",
     "lint": "eslint .",
     "format": "prettier --check ."

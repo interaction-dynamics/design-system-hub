@@ -1,5 +1,5 @@
 import path from 'node:path'
-import { detectComponents } from '../react-ast'
+import { parseComponents } from '../react-ast'
 import fs from 'node:fs'
 
 const directoryPath = path.join(__dirname, '../__fixtures__/all-use-cases')
@@ -26,7 +26,7 @@ const readExpectedComponents = (filename: string) => {
   }
 }
 
-describe('detectComponents', () => {
+describe('parseComponents', () => {
   const components = [
     'function/component-without-properties.tsx',
     'function/component-with-basic-properties.tsx',
@@ -44,7 +44,7 @@ describe('detectComponents', () => {
   it.each(components)(`should return %p`, async filename => {
     const expectedComponents = readExpectedComponents(filename)
 
-    const components = await detectComponents(
+    const components = await parseComponents(
       directoryPath,
       filePaths([filename]),
       tsconfig,

@@ -1,9 +1,9 @@
 import { relative } from 'node:path'
 import { Component } from './entities/component'
-import * as ts from 'typescript'
+import ts from 'typescript'
 import { Property } from './entities/property'
 
-export async function detectComponents(
+export async function parseComponents(
   directoryPath: string,
   filenames: string[],
   compilerOptions: ts.CompilerOptions,

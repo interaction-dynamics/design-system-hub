@@ -64,9 +64,14 @@ program
     'path to the design system directory',
     process.cwd(),
   )
+  .option('--verbose', 'activate verbose mode')
   .option('--token <token>', 'project token')
   .action(async options => {
-    await sync(options.cwd, options.token)
+    const designSystem = await sync(options.cwd, options.token)
+
+    if (options.verbose) {
+      logInfo(yaml.stringify(designSystem))
+    }
   })
 
 program

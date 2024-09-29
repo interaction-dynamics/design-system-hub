@@ -41,6 +41,8 @@ export async function sync(targetPath: string, designSystemToken?: string) {
     }
 
     printText('Sync successful')
+
+    return designSystem
   } catch (error) {
     if (error.message === 'Unauthorized') {
       printWarning('Invalid token. Run `ds login` command to login.')

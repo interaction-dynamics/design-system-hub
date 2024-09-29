@@ -36,7 +36,7 @@ describe('getLinks', () => {
     const designSystem = mockDesignSystem({
       providers: {
         code: {
-          url: 'git@github.com:interaction-dynamics/design-system-hub.git',
+          url: 'https://github.com/interaction-dynamics/design-system-hub.git',
           relativePath: 'examples/zero-config',
         },
       },
@@ -59,6 +59,29 @@ describe('getLinks', () => {
         order: 5,
       },
     ])
+  })
+
+  it('should return nothing when trying to hack', () => {
+    const designSystem = mockDesignSystem({
+      providers: {
+        code: {
+          url: 'https://github.commit.com:interaction-dynamics/design-system-hub.git',
+          relativePath: 'examples/zero-config',
+        },
+      },
+    })
+
+    const component = mockComponent({
+      providers: {
+        code: {
+          path: 'src/libs/atoms/input.tsx',
+        },
+      },
+    })
+
+    const links = getLinks(component, designSystem)
+
+    expect(links).toEqual([])
   })
 
   it('should return gitlab link', () => {

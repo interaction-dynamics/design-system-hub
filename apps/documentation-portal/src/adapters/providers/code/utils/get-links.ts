@@ -3,7 +3,8 @@ import { CodeComponent } from '../types/code-component'
 
 const github = {
   name: 'GitHub',
-  match: (url: string) => url.includes('github.com'),
+  match: (url: string) =>
+    url.startsWith('git@github.com') || url.startsWith('https://github.com/'),
   getLink: (path: string, designSystem: DesignSystem) => {
     const url = designSystem.providers.code.url
 
@@ -19,7 +20,8 @@ const github = {
         return `https://github.com/${owner}/${repoWithoutGit}/blob/main/${designSystem.providers.code.relativePath}/${path}`
       }
     } else if (url.startsWith('https://')) {
-      return `${url}/blob/main/${designSystem.providers.code.relativePath}/${path}`
+      const repositoryPath = url.replace(/\.git$/, '')
+      return `${repositoryPath}/blob/main/${designSystem.providers.code.relativePath}/${path}`
     }
 
     return ''

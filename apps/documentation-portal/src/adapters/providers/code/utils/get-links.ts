@@ -3,7 +3,8 @@ import { CodeComponent } from '../types/code-component'
 
 const github = {
   name: 'GitHub',
-  match: (url: string) => url.includes('github.com'),
+  match: (url: string) =>
+    url.startsWith('git@github.com') || url.startsWith('https://github.com'),
   getLink: (path: string, designSystem: DesignSystem) => {
     const url = designSystem.providers.code.url
 

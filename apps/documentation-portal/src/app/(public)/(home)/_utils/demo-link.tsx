@@ -1,1 +1,1 @@
-export const demoLink = '/example-design-system---with-variants'
+export const demoLink = '/demo'

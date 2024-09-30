@@ -5,7 +5,7 @@ import { Component } from './entities/component'
 export async function findComponents(
   projectDirectory: string,
   directoryPath: string,
-): Promise<Component[]> {
+): Promise<{ components: Component[] }> {
   const filenames = await listTsxFiles(directoryPath)
   const compilerOptions = await readTsConfigFile(projectDirectory)
 

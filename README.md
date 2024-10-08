@@ -4,7 +4,7 @@
 
 ![horizontal_deep_pink](https://github.com/user-attachments/assets/5f8025c8-301f-4746-8383-951e9bf3c8d2)
 
-Hacktoberfest is there. We are looking for contributors to help us build the future of design systems. If you are interested, please check our [Hacktoberfest page](https://github.com/interaction-dynamics/design-system-hub/discussions/90).
+Hacktoberfest is there! We are looking for contributors to help us build the future of design systems. If you are interested, please check our [Hacktoberfest page](https://github.com/interaction-dynamics/design-system-hub/discussions/90).
 
 [[Demo]](https://design-system-hub.com/example-design-system---with-variants/components/button)
 

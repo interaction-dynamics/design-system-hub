@@ -7,7 +7,7 @@ describe('findComponents', () => {
     const dirPath = projectPath
 
     it('should return 0 component', async () => {
-      const components = await findComponents(projectPath, dirPath)
+      const { components } = await findComponents(projectPath, dirPath)
 
       expect(components).toHaveLength(0)
     })
@@ -18,13 +18,13 @@ describe('findComponents', () => {
     const dirPath = projectPath
 
     it('should return 1 component', async () => {
-      const components = await findComponents(projectPath, dirPath)
+      const { components } = await findComponents(projectPath, dirPath)
 
       expect(components).toHaveLength(1)
     })
 
     it('should return 1 component with name ', async () => {
-      const components = await findComponents(projectPath, dirPath)
+      const { components } = await findComponents(projectPath, dirPath)
 
       expect(components[0]).toEqual({
         description: '',
@@ -43,13 +43,13 @@ describe('findComponents', () => {
     const dirPath = projectPath
 
     it('should return 1 component', async () => {
-      const components = await findComponents(projectPath, dirPath)
+      const { components } = await findComponents(projectPath, dirPath)
 
       expect(components).toHaveLength(1)
     })
 
     it('should return 1 component with name ', async () => {
-      const components = await findComponents(projectPath, dirPath)
+      const { components } = await findComponents(projectPath, dirPath)
 
       expect(components[0]).toEqual({
         description: '',

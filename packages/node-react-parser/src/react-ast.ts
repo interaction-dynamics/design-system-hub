@@ -7,13 +7,13 @@ export async function parseComponents(
   directoryPath: string,
   filenames: string[],
   compilerOptions: ts.CompilerOptions,
-): Promise<Component[]> {
+): Promise<{ components: Component[] }> {
   const host = ts.createCompilerHost(compilerOptions)
 
   const program = ts.createProgram(filenames, compilerOptions, host)
   const checker = program.getTypeChecker()
 
-  return filenames
+  const components = filenames
     .flatMap(filePath => {
       const sourceFile = program.getSourceFile(filePath)
 
@@ -27,6 +27,8 @@ export async function parseComponents(
       path: relative(directoryPath, component.path),
     }))
     .sort((a, b) => `${a.path}/${a.name}`.localeCompare(`${b.path}/${b.name}`))
+
+  return { components }
 }
 
 function getProperties(

@@ -1,0 +1,23 @@
+{
+  "components": [
+    {
+      "name": "Button",
+      "path": "src/libs/atoms/button.tsx",
+      "description": "",
+      "properties": [
+        {
+          "name": "one",
+          "type": "string"
+        },
+        {
+          "name": "two",
+          "type": "number"
+        },
+        {
+          "name": "three",
+          "type": "boolean"
+        }
+      ]
+    }
+  ]
+}

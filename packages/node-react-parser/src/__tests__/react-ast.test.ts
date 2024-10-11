@@ -45,7 +45,7 @@ describe('parseComponents', () => {
   it.each(components)(`should return %p`, async filename => {
     const expectedComponents = readExpectedComponents(filename)
 
-    const components = await parseComponents(
+    const { components } = await parseComponents(
       directoryPath,
       filePaths([filename]),
       tsconfig,

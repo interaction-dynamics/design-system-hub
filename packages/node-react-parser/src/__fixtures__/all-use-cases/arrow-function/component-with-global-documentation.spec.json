@@ -1,0 +1,11 @@
+{
+  "name": "Foo",
+  "path": "arrow-function/component-with-global-documentation.tsx",
+  "description": "A Button component",
+  "properties": [
+    {
+      "name": "children",
+      "type": "React.ReactNode"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "name": "Foo",
+  "path": "arrow-function/component-with-global-deprecated.tsx",
+  "description": "A Button component",
+  "deprecated": true,
+  "properties": []
+}

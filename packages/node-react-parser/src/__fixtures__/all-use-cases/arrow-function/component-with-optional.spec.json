@@ -1,0 +1,12 @@
+{
+  "name": "Foo",
+  "path": "arrow-function/component-with-optional.tsx",
+  "description": "",
+  "properties": [
+    {
+      "name": "onClick",
+      "type": "() => void | Promise<void>",
+      "optional": true
+    }
+  ]
+}

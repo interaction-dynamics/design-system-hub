@@ -1,0 +1,13 @@
+{
+  "name": "Foo",
+  "path": "arrow-function/component-with-default-value.tsx",
+  "description": "",
+  "properties": [
+    {
+      "name": "onClick",
+      "type": "() => void | Promise<void>",
+      "defaultValue": "() => {}",
+      "optional": true
+    }
+  ]
+}

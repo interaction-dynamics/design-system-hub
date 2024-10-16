@@ -1,0 +1,12 @@
+{
+  "name": "Foo",
+  "path": "arrow-function/component-with-property-documentation.tsx",
+  "description": "",
+  "properties": [
+    {
+      "name": "children",
+      "type": "React.ReactNode",
+      "description": "The content of the button"
+    }
+  ]
+}

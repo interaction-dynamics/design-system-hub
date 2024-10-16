@@ -1,0 +1,12 @@
+{
+  "name": "Foo",
+  "path": "arrow-function/component-with-property-deprecated.tsx",
+  "description": "",
+  "properties": [
+    {
+      "name": "variant",
+      "type": "'primary' | 'black' | 'basic'",
+      "deprecated": true
+    }
+  ]
+}

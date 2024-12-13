@@ -58,7 +58,7 @@ export function ComponentViewer({ component, containers }: Props) {
   }, [component, containers])
 
   return (
-    <div className='flex items-center'>
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
       {Export && Export[component.name](properties)}
     </div>
   )

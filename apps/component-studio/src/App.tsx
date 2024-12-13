@@ -58,11 +58,11 @@ export default function App() {
         <ResizablePanel defaultSize={20} maxSize={30}>
           <SidebarContent>
             <SidebarGroup>
-              <SidebarGroupLabel>Application</SidebarGroupLabel>
+              <SidebarGroupLabel>Components</SidebarGroupLabel>
               <SidebarGroupContent>
                 <SidebarMenu>
                   {components.map(c => (
-                    <SidebarMenuItem key={c.ame}>
+                    <SidebarMenuItem key={c.path}>
                       <SidebarMenuButton onClick={() => setComponent(c)}>
                         {c.name}
                       </SidebarMenuButton>

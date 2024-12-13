@@ -1,0 +1,12 @@
+build
+old
+api/lib
+api/src/**/__fixtures__/**/*.html
+api/src/**/__fixtures__/**/*.json
+CHANGELOG.md
+public/icons/*.json
+.cache
+coverage
+playwright-report
+pnpm-lock.yaml
+dist

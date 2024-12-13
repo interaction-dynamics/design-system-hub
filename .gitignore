@@ -42,3 +42,4 @@ logo*.svg
 .design-system
 
 .parcel-cache
+dist

@@ -8,12 +8,11 @@ import {
 import { useProperties } from './hooks/use-properties'
 import { useEffect, useMemo, useState } from 'react'
 import { PropertyEditor } from './components/property-editor'
+import { ComponentRenderer } from './components/component-renderer'
 
 export interface PlaygroundProps {
   component: Component
 }
-
-const HOST = 'http://localhost:5555'
 
 export function Playground({ component }: PlaygroundProps) {
   const defaultProperties = useProperties(component.properties)
@@ -23,21 +22,10 @@ export function Playground({ component }: PlaygroundProps) {
     setProperties(defaultProperties)
   }, [component.properties])
 
-  const url = useMemo(() => {
-    const path = `${HOST}/${component.path}`
-    const url = new URL(path)
-    url.searchParams.set('props', JSON.stringify(properties))
-
-    return url.toString()
-  }, [properties, component.path])
-
   return (
     <>
       <ResizablePanel>
-        <div>
-          <h1>{component.name}</h1>
-          <p>{component.description}</p>
-        </div>
+        <ComponentRenderer component={component} properties={properties} />
       </ResizablePanel>
       <ResizableHandle />
       <ResizablePanel defaultSize={20} maxSize={30} minSize={10}>

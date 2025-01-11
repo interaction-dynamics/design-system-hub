@@ -1,3 +1,5 @@
+'use client'
+
 import { useId, useState } from 'react'
 import { Label } from '@/components/ui/label'
 import { Badge } from '@/components/ui/badge'
@@ -7,7 +9,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
-import { findComponent } from './utils/find-component'
+import { findPropertyEditor } from './utils/find-property-editor'
 
 export interface PropertyEditorProps {
   type: string
@@ -23,7 +25,7 @@ export function PropertyEditor(props: PropertyEditorProps) {
   const { name, type, deprecated, description } = props
 
   const id = useId()
-  const Component = findComponent(type)
+  const PropertyEditorComponent = findPropertyEditor(type, name)
 
   const [showDescription, setShowDescription] = useState(false)
 
@@ -61,7 +63,7 @@ export function PropertyEditor(props: PropertyEditorProps) {
           <div className='text-muted-foreground text-sm'>{description}</div>
         </div>
       )}
-      <Component id={id} {...props} />
+      <PropertyEditorComponent id={id} {...props} />
     </div>
   )
 }

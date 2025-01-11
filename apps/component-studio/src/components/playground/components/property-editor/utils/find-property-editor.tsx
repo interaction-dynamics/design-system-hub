@@ -1,11 +1,12 @@
 import { PropertyEditorInput } from '../components/property-editor-input'
 import { PropertyEditorNotImplemented } from '../components/property-editor-not-implemented'
 import { PropertyEditorReactNode } from '../components/property-editor-react-node'
+import { PropertyEditorCallback } from '../components/property-editor-callback'
 
-export function findComponent(type: string) {
-  // if (type.includes('() => void')) {
-  //   return PropertyEditorVoidFunction
-  // }
+export function findPropertyEditor(type: string, name: string) {
+  if (type.match(/\(.*\) \=\> void/) && name.startsWith('on')) {
+    return PropertyEditorCallback
+  }
 
   if (type === 'string' || type === 'number') {
     return PropertyEditorInput

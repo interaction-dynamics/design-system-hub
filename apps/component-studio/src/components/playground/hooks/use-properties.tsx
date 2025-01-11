@@ -1,6 +1,4 @@
 import { Property } from '@/entities/property'
-import { useToast } from '@/hooks/use-toast'
-import { useEffect } from 'react'
 
 const findDefaultValue = (property: Property) => {
   if (property.type.includes('() => void')) {
@@ -21,25 +19,6 @@ const findDefaultValue = (property: Property) => {
 }
 
 export function useProperties(properties: Property[]): Record<string, any> {
-  const { toast } = useToast()
-
-  useEffect(() => {
-    const callback = event => {
-      if (event.data.type === 'callback') {
-        toast({
-          title: `${event.data.source} triggered`,
-          // description: 'Click here for more details about the arguments',
-        })
-      }
-    }
-
-    window.addEventListener('message', callback)
-
-    return () => {
-      window.removeEventListener('message', callback)
-    }
-  }, [])
-
   return properties.reduce(
     (acc, property) => ({
       ...acc,

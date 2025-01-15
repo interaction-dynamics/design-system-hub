@@ -32,11 +32,11 @@ function buildPropertiesValues(properties: Property[]): PropertiesValues {
 }
 
 export function useProperties(
-  component: Component
+  properties: Property[]
 ): [PropertiesValues, React.Dispatch<React.SetStateAction<PropertiesValues>>] {
   const defaultPropertiesValues = useMemo(() => {
-    return buildPropertiesValues(component.properties)
-  }, [component.properties])
+    return buildPropertiesValues(properties)
+  }, [properties])
 
   const [propertiesValues, setPropertiesValues] = useState(
     defaultPropertiesValues

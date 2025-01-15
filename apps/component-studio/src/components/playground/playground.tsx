@@ -15,7 +15,9 @@ export interface PlaygroundProps {
 }
 
 export function Playground({ component }: PlaygroundProps) {
-  const [propertiesValues, setPropertiesValues] = useProperties(component)
+  const [propertiesValues, setPropertiesValues] = useProperties(
+    component.properties
+  )
 
   return (
     <>

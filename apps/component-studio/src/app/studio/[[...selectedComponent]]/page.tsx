@@ -24,14 +24,22 @@ const isSelectedComponent =
     component.name === selectedComponentName &&
     component.path === selectedComponentPath
 
+const isSelectedDefaultComponent =
+  (defaultComponent: Component) => (component: Component) =>
+    component.name === defaultComponent.name &&
+    component.path === defaultComponent.path
+
 export default async function StudioPage({ params }: StudioPageProps) {
   const [selectedComponentName, ...selectedComponentPaths] =
     (await params).selectedComponent || []
 
-  const isSelected = isSelectedComponent(
-    selectedComponentName,
-    selectedComponentPaths.join('/')
-  )
+  const isSelected =
+    selectedComponentPaths.length > 0
+      ? isSelectedComponent(
+          selectedComponentName,
+          selectedComponentPaths.join('/')
+        )
+      : isSelectedDefaultComponent(components[0])
 
   const selectedComponent = components.find((c: Component) => isSelected(c))
 

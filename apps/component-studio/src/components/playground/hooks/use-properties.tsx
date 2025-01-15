@@ -1,4 +1,7 @@
 import { Property } from '@/entities/property'
+import { useEffect, useMemo, useState } from 'react'
+import { PropertiesValues } from '../components/component-renderer/types/properties-values'
+import { Component } from '@/entities/component'
 
 const findDefaultValue = (property: Property) => {
   if (property.type.includes('() => void')) {
@@ -6,7 +9,7 @@ const findDefaultValue = (property: Property) => {
   }
   switch (property.type) {
     case 'string':
-      return ''
+      return 'foo'
     case 'number':
       return 0
     case 'boolean':
@@ -18,7 +21,7 @@ const findDefaultValue = (property: Property) => {
   }
 }
 
-export function useProperties(properties: Property[]): Record<string, any> {
+function buildPropertiesValues(properties: Property[]): PropertiesValues {
   return properties.reduce(
     (acc, property) => ({
       ...acc,
@@ -26,4 +29,22 @@ export function useProperties(properties: Property[]): Record<string, any> {
     }),
     {}
   )
+}
+
+export function useProperties(
+  component: Component
+): [PropertiesValues, React.Dispatch<React.SetStateAction<PropertiesValues>>] {
+  const defaultPropertiesValues = useMemo(() => {
+    return buildPropertiesValues(component.properties)
+  }, [component.properties])
+
+  const [propertiesValues, setPropertiesValues] = useState(
+    defaultPropertiesValues
+  )
+
+  useEffect(() => {
+    setPropertiesValues(defaultPropertiesValues)
+  }, [defaultPropertiesValues])
+
+  return [propertiesValues, setPropertiesValues]
 }

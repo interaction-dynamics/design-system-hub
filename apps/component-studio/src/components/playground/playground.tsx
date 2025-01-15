@@ -15,17 +15,15 @@ export interface PlaygroundProps {
 }
 
 export function Playground({ component }: PlaygroundProps) {
-  const defaultProperties = useProperties(component.properties)
-  const [properties, setProperties] = useState(defaultProperties)
-
-  useEffect(() => {
-    setProperties(defaultProperties)
-  }, [component.properties])
+  const [propertiesValues, setPropertiesValues] = useProperties(component)
 
   return (
     <>
       <ResizablePanel>
-        <ComponentRenderer component={component} properties={properties} />
+        <ComponentRenderer
+          component={component}
+          properties={propertiesValues}
+        />
       </ResizablePanel>
       <ResizableHandle />
       <ResizablePanel defaultSize={20} maxSize={30} minSize={10}>
@@ -37,10 +35,10 @@ export function Playground({ component }: PlaygroundProps) {
               deprecated={property.deprecated}
               name={property.name}
               defaultValue={property.defaultValue}
-              value={properties[property.name]}
+              value={propertiesValues[property.name]}
               description={property.description ?? ''}
               onChange={(name, value) =>
-                setProperties(p => ({ ...p, [name]: value }))
+                setPropertiesValues(p => ({ ...p, [name]: value }))
               }
             />
           ))}

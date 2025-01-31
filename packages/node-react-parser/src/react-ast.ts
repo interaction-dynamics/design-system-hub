@@ -18,6 +18,7 @@ export async function parseComponents(
       const sourceFile = program.getSourceFile(filePath)
 
       const sourceFileSymbol = checker.getSymbolAtLocation(sourceFile)
+      console.log('sourceFileSymbol', sourceFileSymbol)
       const exports = checker.getExportsOfModule(sourceFileSymbol)
 
       return exports.flatMap(e => getReactComponents(filePath, e, checker))
@@ -40,17 +41,23 @@ function getProperties(
     : []
 
   return propertyTypes.map(type => {
-    const parameterProperty = (
-      parameter.name as ts.ObjectBindingPattern
-    ).elements.find((p: ts.BindingElement) => p.name.getText() === type.name)
+    // console.log('parameter', parameter, type)
+
+    // const elements = parameter.name as ts.ObjectBindingPattern
+
+    // console.log('elements', elements)
+
+    // const parameterProperty = elements.elements.find(
+    //   (p: ts.BindingElement) => p.name.getText() === type.name,
+    // )
 
     return {
       name: type.name,
       type: type.type,
       ...(type.description ? { description: type.description } : {}),
-      ...(parameterProperty?.initializer
-        ? { defaultValue: parameterProperty?.initializer.getText() }
-        : {}),
+      // ...(parameterProperty?.initializer
+      //   ? { defaultValue: parameterProperty?.initializer.getText() }
+      //   : {}),
       ...(type.deprecated ? { deprecated: true } : {}),
       ...(type.optional ? { optional: true } : {}),
     }

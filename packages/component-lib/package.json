@@ -1,5 +1,5 @@
 {
-  "name": "component-playground",
+  "name": "component-renderer",
   "main": "lib/index.tsx",
   "scripts": {
     "cli": "tsx ./src/cli.ts",

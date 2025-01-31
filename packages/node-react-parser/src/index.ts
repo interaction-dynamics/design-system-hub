@@ -2,6 +2,9 @@ import { listTsxFiles, readTsConfigFile } from './adapters/file-system'
 import { parseComponents } from './react-ast'
 import { Component } from './entities/component'
 
+export type { Component } from './entities/component'
+export type { Property } from './entities/property'
+
 export async function findComponents(
   projectDirectory: string,
   directoryPath: string,

@@ -13,6 +13,7 @@ import { extractDesignSystem } from './actions/extract-design-system'
 import { sync } from './actions/sync'
 import { pull } from './actions/pull'
 import { install } from './actions/install'
+import { startStudio } from './actions/start-studio'
 
 const program = new Command()
 
@@ -57,6 +58,7 @@ program
 const name = 'Design System Hub'
 
 program
+  .name('dshub')
   .command('sync')
   .description(`Synchronize the design system with the ${name}`)
   .option(
@@ -146,6 +148,16 @@ program
 
       logSummary(`${designSystem.pages.length} pages found.`)
     }
+  })
+
+program
+  .command('studio')
+  .description('Start the design system studio')
+  .argument('[directory]', 'design system directory', process.cwd())
+  .action(async directory => {
+    const targetPath = path.resolve(process.cwd(), directory)
+
+    startStudio(targetPath)
   })
 
 program.parse()

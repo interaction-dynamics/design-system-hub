@@ -1,0 +1,98 @@
+{
+  "components": [
+    {
+      "name": "App",
+      "path": "src/app.tsx",
+      "description": "",
+      "properties": []
+    },
+    {
+      "name": "ButtonLegacy",
+      "path": "src/libs/atoms/button-legacy.tsx",
+      "description": "A Button component",
+      "properties": [
+        {
+          "name": "children",
+          "type": "React.ReactNode",
+          "description": "The content of the button"
+        },
+        {
+          "name": "variant",
+          "type": "\"primary\" | \"black\" | \"basic\"",
+          "deprecated": true
+        },
+        {
+          "name": "onClick",
+          "type": "() => void | Promise<void>",
+          "defaultValue": "() => {}",
+          "optional": true
+        }
+      ],
+      "deprecated": true
+    },
+    {
+      "name": "Button",
+      "path": "src/libs/atoms/button.tsx",
+      "description": "A Button component",
+      "properties": [
+        {
+          "name": "children",
+          "type": "React.ReactNode",
+          "description": "The content of the button"
+        },
+        {
+          "name": "variant",
+          "type": "'primary' | 'black' | 'basic'"
+        },
+        {
+          "name": "onClick",
+          "type": "() => void | Promise<void>",
+          "defaultValue": "() => {}",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "name": "Input",
+      "path": "src/libs/atoms/input.tsx",
+      "description": "A description of the Input component",
+      "properties": [
+        {
+          "name": "value",
+          "type": "string | number"
+        },
+        {
+          "name": "onChange",
+          "type": "(value: string) => void",
+          "defaultValue": "() => {}"
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "name": "Card",
+      "path": "src/libs/molecules/card.tsx",
+      "description": "",
+      "properties": [
+        {
+          "name": "title",
+          "type": "React.ReactNode"
+        },
+        {
+          "name": "description",
+          "type": "React.ReactNode"
+        }
+      ]
+    },
+    {
+      "name": "Icon",
+      "path": "src/libs/molecules/icon.tsx",
+      "description": "Work in progress\n\n> Please don't use this component yet, it's still in development.",
+      "properties": []
+    }
+  ]
+}

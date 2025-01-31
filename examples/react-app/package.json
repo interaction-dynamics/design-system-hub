@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "parcel",
     "build": "parcel build --public-url ./",
+    "dshub": "",
     "doc": "parcel dshub/index.html --port 5555"
   },
   "dependencies": {

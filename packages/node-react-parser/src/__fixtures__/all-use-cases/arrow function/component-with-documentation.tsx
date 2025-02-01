@@ -10,6 +10,6 @@ export interface Props {
  * A Button component
  * @deprecated
  */
-export function Foo({ children, onClick = () => {} }: Props) {
+export const Foo = ({ children, onClick = () => {} }: Props) => {
   return <button onClick={onClick}>{children}</button>
 }

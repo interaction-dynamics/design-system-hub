@@ -1,0 +1,19 @@
+{
+  "name": "Foo",
+  "path": "arrow-function/component-with-basic-properties.tsx",
+  "description": "",
+  "properties": [
+    {
+      "name": "one",
+      "type": "string"
+    },
+    {
+      "name": "two",
+      "type": "number"
+    },
+    {
+      "name": "three",
+      "type": "boolean"
+    }
+  ]
+}

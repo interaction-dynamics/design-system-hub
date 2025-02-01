@@ -1,0 +1,10 @@
+{
+  "name": "Foo",
+  "description": "",
+  "properties": [
+    {
+      "name": "one",
+      "type": "VoidFunction"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "Foo",
+  "description": "A Button component",
+  "properties": [
+    {
+      "description": "The content of the button",
+      "name": "children",
+      "type": "React.ReactNode"
+    },
+    {
+      "deprecated": true,
+      "name": "variant",
+      "type": "'primary' | 'black' | 'basic'"
+    },
+    {
+      "defaultValue": "() => {}",
+      "name": "onClick",
+      "optional": true,
+      "type": "() => void | Promise<void>"
+    }
+  ],
+  "deprecated": true
+}

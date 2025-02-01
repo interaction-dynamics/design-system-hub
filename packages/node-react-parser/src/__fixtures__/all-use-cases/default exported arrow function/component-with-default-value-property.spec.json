@@ -1,0 +1,12 @@
+{
+  "name": "Foo",
+  "path": "arrow-function/component-with-default-value-property.tsx",
+  "description": "",
+  "properties": [
+    {
+      "name": "one",
+      "type": "VoidFunction",
+      "defaultValue": "() => {}"
+    }
+  ]
+}

@@ -8,8 +8,6 @@ export interface Props {
 /**
  * A Button component
  */
-export function Button(props: Props) {
-  const { children, onClick = () => {} } = props
-
+export function Button({ children, onClick = () => {} }: Props) {
   return <button onClick={onClick}>{children}</button>
 }

@@ -11,7 +11,7 @@ const tsconfig = JSON.parse(
   fs.readFileSync(path.join(directoryPath, 'tsconfig.json'), 'utf8'),
 )
 
-const readExpectedComponents = (filename: string) => {
+const readExpectedComponents = async (filename: string) => {
   try {
     return [
       JSON.parse(
@@ -31,6 +31,7 @@ describe('parseComponents', () => {
     'function/component-without-properties.tsx',
     'function/component-with-basic-properties.tsx',
     'function/default-exported-component.tsx',
+    'function/component-with-default-value-property.tsx',
     'arrow-function/component-without-properties.tsx',
     'arrow-function/component-with-basic-properties.tsx',
     // 'arrow-function/default-exported-component.tsx', // TODO [Hacktoberfest] Implement for this test
@@ -38,13 +39,16 @@ describe('parseComponents', () => {
     'arrow-function/component-with-default-value-property.tsx',
     'variable-function/component-without-properties.tsx',
     'variable-function/component-with-basic-properties.tsx',
+    'variable-function/component-with-default-value-property.tsx',
     'no-component/camel-case-function.tsx',
     'no-component/camel-case-arrow-function.tsx',
     'no-component/camel-case-variable-function.tsx',
   ]
 
   it.each(components)(`should return %p`, async filename => {
-    const expectedComponents = readExpectedComponents(filename)
+    const expectedComponents = (await readExpectedComponents(filename)).map(
+      expected => ({ ...expected, path: filename }),
+    )
 
     const { components } = await parseComponents(
       directoryPath,

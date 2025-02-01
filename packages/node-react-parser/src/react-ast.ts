@@ -18,7 +18,6 @@ export async function parseComponents(
       const sourceFile = program.getSourceFile(filePath)
 
       const sourceFileSymbol = checker.getSymbolAtLocation(sourceFile)
-      console.log('sourceFileSymbol', sourceFileSymbol)
       const exports = checker.getExportsOfModule(sourceFileSymbol)
 
       return exports.flatMap(e => getReactComponents(filePath, e, checker))
@@ -32,6 +31,27 @@ export async function parseComponents(
   return { components }
 }
 
+export function getDefaultValue(
+  parameter: ts.ParameterDeclaration,
+  name: string,
+) {
+  try {
+    const elements = parameter.name as ts.ObjectBindingPattern
+
+    const parameterProperty = elements.elements.find(
+      (p: ts.BindingElement) => p.name.getText() === name,
+    )
+
+    return {
+      ...(parameterProperty?.initializer
+        ? { defaultValue: parameterProperty?.initializer.getText() }
+        : {}),
+    }
+  } catch {
+    return {}
+  }
+}
+
 function getProperties(
   parameter: ts.ParameterDeclaration,
   checker: ts.TypeChecker,
@@ -41,23 +61,11 @@ function getProperties(
     : []
 
   return propertyTypes.map(type => {
-    // console.log('parameter', parameter, type)
-
-    // const elements = parameter.name as ts.ObjectBindingPattern
-
-    // console.log('elements', elements)
-
-    // const parameterProperty = elements.elements.find(
-    //   (p: ts.BindingElement) => p.name.getText() === type.name,
-    // )
-
     return {
       name: type.name,
       type: type.type,
       ...(type.description ? { description: type.description } : {}),
-      // ...(parameterProperty?.initializer
-      //   ? { defaultValue: parameterProperty?.initializer.getText() }
-      //   : {}),
+      ...getDefaultValue(parameter, type.name),
       ...(type.deprecated ? { deprecated: true } : {}),
       ...(type.optional ? { optional: true } : {}),
     }

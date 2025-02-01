@@ -1,6 +1,6 @@
 import { relative } from 'node:path'
 import { Component } from './entities/component'
-import ts from 'typescript'
+import ts, { Declaration } from 'typescript'
 import { Property } from './entities/property'
 
 export async function parseComponents(
@@ -18,9 +18,12 @@ export async function parseComponents(
       const sourceFile = program.getSourceFile(filePath)
 
       const sourceFileSymbol = checker.getSymbolAtLocation(sourceFile)
+
       const exports = checker.getExportsOfModule(sourceFileSymbol)
 
-      return exports.flatMap(e => getReactComponents(filePath, e, checker))
+      return exports.flatMap(symbol =>
+        getReactComponents(filePath, symbol, checker, sourceFileSymbol),
+      )
     })
     .map(component => ({
       ...component,
@@ -120,13 +123,20 @@ function getReactComponents(
   filePath: string,
   symbol: ts.Symbol,
   checker: ts.TypeChecker,
+  sourceFileSymbol: ts.Symbol,
 ): Component[] {
   const isDeprecated = symbol
     .getJsDocTags()
     .some(tag => tag.name === 'deprecated')
 
   return symbol.declarations.flatMap(declaration => {
-    const component = findComponentNameAndParameter(declaration)
+    const component = findComponentNameAndParameter(
+      declaration,
+      checker,
+      sourceFileSymbol,
+    )
+
+    // console.log('getFullText', filePath, symbol.valueDeclaration?.getFullText())
 
     if (!component) return []
 
@@ -148,7 +158,11 @@ function getReactComponents(
 
 const isPascalCase = (name: string) => /^[A-Z][A-Za-z]+/.test(name)
 
-function findComponentNameAndParameter(declaration: ts.Declaration) {
+function findComponentNameAndParameter(
+  declaration: ts.Declaration,
+  checker: ts.TypeChecker,
+  sourceFileSymbol: ts.Symbol,
+) {
   // export function Foo () {
   if (
     ts.isFunctionDeclaration(declaration) &&
@@ -184,18 +198,27 @@ function findComponentNameAndParameter(declaration: ts.Declaration) {
     }
   }
 
-  return null
-
   // export default Foo; const Foo = () => {
-  // if (
-  //   ts.isVariableDeclaration(declaration)
-  //   // ts.isArrowFunction(declaration.initializer) &&
-  //   // isPascalCase(declaration.name.getText())
-  // ) {
-  //   console.log('declaration')
-  //   return {
-  //     name: declaration.name.getText(),
-  //     parameter: null, // declaration.initializer?.parameters?.[0],
-  //   }
-  // }
+  if (
+    ts.isExportAssignment(declaration) &&
+    isPascalCase(declaration.expression.getText())
+  ) {
+    const declarations = declaration.expression
+      .getSourceFile()
+      .statements.flatMap(state =>
+        ts.isVariableStatement(state) ? state.declarationList.declarations : [],
+      )
+
+    const foundComponents = declarations?.map(d =>
+      findComponentNameAndParameter(d, checker, sourceFileSymbol),
+    )
+
+    const realComponent = foundComponents
+      .filter(Boolean)
+      .find(({ name }) => name === declaration.expression.getText())
+
+    return realComponent
+  }
+
+  return null
 }

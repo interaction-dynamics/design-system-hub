@@ -27,12 +27,11 @@ const readExpectedComponents = async (filename: string) => {
 }
 
 const ignoreFiles = [
-  // 'arrow function/component-with-documentation.tsx',
-  'default exported arrow function/component-with-basic-properties.tsx',
-  'default exported arrow function/component-with-default-value-property.tsx',
-  'default exported arrow function/component-with-documentation.tsx',
-  'default exported arrow function/component-with-internal-default-value-property.tsx',
-  'default exported arrow function/component-without-properties.tsx',
+  'default exported arrow function/basic-properties.tsx',
+  'default exported arrow function/default-value-property.tsx',
+  'default exported arrow function/full-documentation.tsx',
+  'default exported arrow function/internal-default-value-property.tsx',
+  'default exported arrow function/without-properties.tsx',
 ]
 
 describe('parseComponents', () => {

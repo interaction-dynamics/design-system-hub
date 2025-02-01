@@ -1,6 +1,6 @@
 import { relative } from 'node:path'
 import { Component } from './entities/component'
-import ts, { Declaration } from 'typescript'
+import ts from 'typescript'
 import { Property } from './entities/property'
 
 export async function parseComponents(
@@ -133,22 +133,19 @@ function getReactComponents(
     const component = findComponentNameAndParameter(
       declaration,
       checker,
+      symbol,
       sourceFileSymbol,
     )
 
-    // console.log('getFullText', filePath, symbol.valueDeclaration?.getFullText())
-
     if (!component) return []
 
-    const { name, parameter } = component
+    const { name, parameter, description, isDeprecated } = component
 
     return [
       {
         name,
         path: filePath,
-        description:
-          ts.displayPartsToString(symbol.getDocumentationComment(checker)) ??
-          '',
+        description,
         properties: getProperties(parameter, checker),
         ...(isDeprecated ? { deprecated: true } : {}),
       },
@@ -161,6 +158,7 @@ const isPascalCase = (name: string) => /^[A-Z][A-Za-z]+/.test(name)
 function findComponentNameAndParameter(
   declaration: ts.Declaration,
   checker: ts.TypeChecker,
+  symbol: ts.Symbol | undefined,
   sourceFileSymbol: ts.Symbol,
 ) {
   // export function Foo () {
@@ -171,6 +169,16 @@ function findComponentNameAndParameter(
     return {
       name: declaration.name.getText(),
       parameter: declaration.parameters[0],
+      isDeprecated: checker
+        .getTypeAtLocation(declaration)
+        .symbol.getJsDocTags()
+        .some(tag => tag.name === 'deprecated'),
+      description:
+        ts.displayPartsToString(
+          checker
+            .getTypeAtLocation(declaration)
+            .symbol?.getDocumentationComment(checker),
+        ) ?? '',
     }
   }
 
@@ -183,6 +191,16 @@ function findComponentNameAndParameter(
     return {
       name: declaration.name.getText(),
       parameter: declaration.initializer?.parameters?.[0],
+      isDeprecated: checker
+        .getTypeAtLocation(declaration.initializer)
+        .symbol.getJsDocTags()
+        .some(tag => tag.name === 'deprecated'),
+      description:
+        ts.displayPartsToString(
+          checker
+            .getTypeAtLocation(declaration.initializer)
+            .symbol?.getDocumentationComment(checker),
+        ) ?? '',
     }
   }
 
@@ -195,6 +213,16 @@ function findComponentNameAndParameter(
     return {
       name: declaration.name.getText(),
       parameter: declaration.initializer?.parameters?.[0],
+      isDeprecated: checker
+        .getTypeAtLocation(declaration)
+        .symbol.getJsDocTags()
+        .some(tag => tag.name === 'deprecated'),
+      description:
+        ts.displayPartsToString(
+          checker
+            .getTypeAtLocation(declaration)
+            .symbol?.getDocumentationComment(checker),
+        ) ?? '',
     }
   }
 
@@ -205,15 +233,23 @@ function findComponentNameAndParameter(
   ) {
     const declarations = declaration.expression
       .getSourceFile()
-      .statements.flatMap(state =>
-        ts.isVariableStatement(state) ? state.declarationList.declarations : [],
+      .statements.filter(state => ts.isVariableStatement(state))
+      .flatMap(state =>
+        ts.isVariableStatement(state)
+          ? state.declarationList.declarations.map(d => ({
+              declaration: d,
+              symbol: undefined,
+            }))
+          : ([] as {
+              declaration: ts.VariableDeclaration
+              symbol: ts.Symbol
+            }[]),
       )
 
-    const foundComponents = declarations?.map(d =>
-      findComponentNameAndParameter(d, checker, sourceFileSymbol),
-    )
-
-    const realComponent = foundComponents
+    const realComponent = declarations
+      ?.map(({ declaration: d }) =>
+        findComponentNameAndParameter(d, checker, undefined, sourceFileSymbol),
+      )
       .filter(Boolean)
       .find(({ name }) => name === declaration.expression.getText())
 

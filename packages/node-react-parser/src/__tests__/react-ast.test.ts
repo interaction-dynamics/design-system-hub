@@ -30,6 +30,7 @@ const ignoreFiles = [
   // 'arrow function/component-with-documentation.tsx',
   'default exported arrow function/component-with-basic-properties.tsx',
   'default exported arrow function/component-with-default-value-property.tsx',
+  'default exported arrow function/component-with-documentation.tsx',
   'default exported arrow function/component-with-internal-default-value-property.tsx',
   'default exported arrow function/component-without-properties.tsx',
 ]

@@ -26,26 +26,19 @@ const readExpectedComponents = async (filename: string) => {
   }
 }
 
-describe('parseComponents', () => {
-  const components = [
-    'function/component-without-properties.tsx',
-    'function/component-with-basic-properties.tsx',
-    'function/default-exported-component.tsx',
-    'function/component-with-default-value-property.tsx',
-    'arrow-function/component-without-properties.tsx',
-    'arrow-function/component-with-basic-properties.tsx',
-    // 'arrow-function/default-exported-component.tsx', // TODO [Hacktoberfest] Implement for this test
-    // 'arrow-function/component-with-documentation.tsx', // TODO [Hacktoberfest] Implement for this test
-    'arrow-function/component-with-default-value-property.tsx',
-    'variable-function/component-without-properties.tsx',
-    'variable-function/component-with-basic-properties.tsx',
-    'variable-function/component-with-default-value-property.tsx',
-    'no-component/camel-case-function.tsx',
-    'no-component/camel-case-arrow-function.tsx',
-    'no-component/camel-case-variable-function.tsx',
-  ]
+const ignoreFiles = [
+  'arrow-function/default-exported-component.tsx', // TODO [Hacktoberfest] Implement for this test
+  'arrow-function/component-with-documentation.tsx', // TODO [Hacktoberfest] Implement for this test
+]
 
-  it.each(components)(`should return %p`, async filename => {
+describe('parseComponents', () => {
+  const componentFiles = fs
+    .readdirSync(directoryPath, { recursive: true })
+    .filter(file => (typeof file === 'string' ? file.endsWith('.tsx') : false))
+    .map(filename => filename as string)
+    .filter(filename => !ignoreFiles.includes(filename))
+
+  it.each(componentFiles)(`should return %p`, async filename => {
     const expectedComponents = (await readExpectedComponents(filename)).map(
       expected => ({ ...expected, path: filename }),
     )

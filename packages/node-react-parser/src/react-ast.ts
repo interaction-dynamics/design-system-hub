@@ -125,15 +125,10 @@ function getReactComponents(
   checker: ts.TypeChecker,
   sourceFileSymbol: ts.Symbol,
 ): Component[] {
-  const isDeprecated = symbol
-    .getJsDocTags()
-    .some(tag => tag.name === 'deprecated')
-
   return symbol.declarations.flatMap(declaration => {
     const component = findComponentNameAndParameter(
       declaration,
       checker,
-      symbol,
       sourceFileSymbol,
     )
 
@@ -158,7 +153,6 @@ const isPascalCase = (name: string) => /^[A-Z][A-Za-z]+/.test(name)
 function findComponentNameAndParameter(
   declaration: ts.Declaration,
   checker: ts.TypeChecker,
-  symbol: ts.Symbol | undefined,
   sourceFileSymbol: ts.Symbol,
 ) {
   // export function Foo () {
@@ -248,10 +242,39 @@ function findComponentNameAndParameter(
 
     const realComponent = declarations
       ?.map(({ declaration: d }) =>
-        findComponentNameAndParameter(d, checker, undefined, sourceFileSymbol),
+        findComponentNameAndParameter(d, checker, sourceFileSymbol),
       )
       .filter(Boolean)
       .find(({ name }) => name === declaration.expression.getText())
+
+    return realComponent
+  }
+
+  if (
+    ts.isExportSpecifier(declaration) &&
+    isPascalCase(declaration.getText())
+  ) {
+    const declarations = declaration
+      .getSourceFile()
+      .statements.filter(state => ts.isVariableStatement(state))
+      .flatMap(state =>
+        ts.isVariableStatement(state)
+          ? state.declarationList.declarations.map(d => ({
+              declaration: d,
+              symbol: undefined,
+            }))
+          : ([] as {
+              declaration: ts.VariableDeclaration
+              symbol: ts.Symbol
+            }[]),
+      )
+
+    const realComponent = declarations
+      ?.map(({ declaration: d }) =>
+        findComponentNameAndParameter(d, checker, sourceFileSymbol),
+      )
+      .filter(Boolean)
+      .find(({ name }) => name === declaration.getText())
 
     return realComponent
   }

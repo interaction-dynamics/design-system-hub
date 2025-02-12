@@ -1,0 +1,23 @@
+{
+  "name": "@design-system-hub/entities",
+  "description": "What contains the entities of the project",
+  "keywords": [
+    "clean-architecture",
+    "entities"
+  ],
+  "type": "module",
+  "main": "./src/index.ts",
+  "version": "0.1.0",
+  "scripts": {},
+  "dependencies": {
+    "typescript": "^5.4.5"
+  },
+  "devDependencies": {
+    "@tsconfig/node20": "^20.1.2",
+    "@tsconfig/strictest": "^2.0.3",
+    "@types/node": "^20.12.12",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.7.1",
+    "@design-system-hub/common-config": "workspace:*"
+  }
+}

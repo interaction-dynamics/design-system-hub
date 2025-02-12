@@ -1,7 +1,7 @@
 import { relative } from 'node:path'
-import { Component } from './entities/component'
+import { Component } from '../entities/component'
 import ts from 'typescript'
-import { Property } from './entities/property'
+import { Property } from '../entities/property'
 
 export async function parseComponents(
   directoryPath: string,
@@ -34,10 +34,7 @@ export async function parseComponents(
   return { components }
 }
 
-export function getDefaultValue(
-  parameter: ts.ParameterDeclaration,
-  name: string,
-) {
+function getDefaultValue(parameter: ts.ParameterDeclaration, name: string) {
   try {
     const elements = parameter.name as ts.ObjectBindingPattern
 

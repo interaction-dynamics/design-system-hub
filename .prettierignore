@@ -8,4 +8,3 @@ playwright-report
 pnpm-lock.yaml
 dist
 templates
-src/__fixtures__/**/*

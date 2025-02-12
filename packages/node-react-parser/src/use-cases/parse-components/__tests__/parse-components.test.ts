@@ -1,8 +1,11 @@
 import path from 'node:path'
-import { parseComponents } from '../react-ast'
+import { parseComponents } from '../parse-components'
 import fs from 'node:fs'
 
-const directoryPath = path.join(__dirname, '../__fixtures__/all-use-cases')
+const directoryPath = path.join(
+  __dirname,
+  '../../../__fixtures__/all-use-cases',
+)
 
 const filePaths = (filenames: string[]) =>
   filenames.map(filename => path.join(directoryPath, filename))

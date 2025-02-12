@@ -1,5 +1,5 @@
 import { listTsxFiles, readTsConfigFile } from './adapters/file-system'
-import { parseComponents } from './react-ast'
+import { parseComponents } from './use-cases/parse-components'
 import { Component } from './entities/component'
 
 export type { Component } from './entities/component'

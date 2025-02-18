@@ -1,7 +1,7 @@
 import { relative } from 'node:path'
-import { Component } from '../entities/component'
+import { Component } from '../../entities/component'
 import ts from 'typescript'
-import { Property } from '../entities/property'
+import { Property } from '../../entities/property'
 
 export async function parseComponents(
   directoryPath: string,
@@ -22,7 +22,7 @@ export async function parseComponents(
       const exports = checker.getExportsOfModule(sourceFileSymbol)
 
       return exports.flatMap(symbol =>
-        getReactComponents(filePath, symbol, checker, sourceFileSymbol),
+        getReactComponents(filePath, symbol, checker),
       )
     })
     .map(component => ({
@@ -120,14 +120,9 @@ function getReactComponents(
   filePath: string,
   symbol: ts.Symbol,
   checker: ts.TypeChecker,
-  sourceFileSymbol: ts.Symbol,
 ): Component[] {
   return symbol.declarations.flatMap(declaration => {
-    const component = findComponentNameAndParameter(
-      declaration,
-      checker,
-      sourceFileSymbol,
-    )
+    const component = findComponentNameAndParameter(declaration, checker)
 
     if (!component) return []
 
@@ -150,7 +145,6 @@ const isPascalCase = (name: string) => /^[A-Z][A-Za-z]+/.test(name)
 function findComponentNameAndParameter(
   declaration: ts.Declaration,
   checker: ts.TypeChecker,
-  sourceFileSymbol: ts.Symbol,
 ) {
   // export function Foo () {
   if (
@@ -160,10 +154,9 @@ function findComponentNameAndParameter(
     return {
       name: declaration.name.getText(),
       parameter: declaration.parameters[0],
-      isDeprecated: checker
-        .getTypeAtLocation(declaration)
-        .symbol.getJsDocTags()
-        .some(tag => tag.name === 'deprecated'),
+      isDeprecated: ts
+        .getJSDocTags(declaration)
+        .some(tag => tag.tagName.text === 'deprecated'),
       description:
         ts.displayPartsToString(
           checker
@@ -182,10 +175,9 @@ function findComponentNameAndParameter(
     return {
       name: declaration.name.getText(),
       parameter: declaration.initializer?.parameters?.[0],
-      isDeprecated: checker
-        .getTypeAtLocation(declaration.initializer)
-        .symbol.getJsDocTags()
-        .some(tag => tag.name === 'deprecated'),
+      isDeprecated: ts
+        .getJSDocTags(declaration)
+        .some(tag => tag.tagName.text === 'deprecated'),
       description:
         ts.displayPartsToString(
           checker
@@ -204,10 +196,9 @@ function findComponentNameAndParameter(
     return {
       name: declaration.name.getText(),
       parameter: declaration.initializer?.parameters?.[0],
-      isDeprecated: checker
-        .getTypeAtLocation(declaration)
-        .symbol.getJsDocTags()
-        .some(tag => tag.name === 'deprecated'),
+      isDeprecated: ts
+        .getJSDocTags(declaration)
+        .some(tag => tag.tagName.text === 'deprecated'),
       description:
         ts.displayPartsToString(
           checker
@@ -222,7 +213,7 @@ function findComponentNameAndParameter(
     ts.isExportAssignment(declaration) &&
     isPascalCase(declaration.expression.getText())
   ) {
-    const declarations = declaration.expression
+    const declarations = declaration
       .getSourceFile()
       .statements.filter(state => ts.isVariableStatement(state))
       .flatMap(state =>
@@ -238,9 +229,7 @@ function findComponentNameAndParameter(
       )
 
     const realComponent = declarations
-      ?.map(({ declaration: d }) =>
-        findComponentNameAndParameter(d, checker, sourceFileSymbol),
-      )
+      ?.map(({ declaration: d }) => findComponentNameAndParameter(d, checker))
       .filter(Boolean)
       .find(({ name }) => name === declaration.expression.getText())
 
@@ -267,9 +256,7 @@ function findComponentNameAndParameter(
       )
 
     const realComponent = declarations
-      ?.map(({ declaration: d }) =>
-        findComponentNameAndParameter(d, checker, sourceFileSymbol),
-      )
+      ?.map(({ declaration: d }) => findComponentNameAndParameter(d, checker))
       .filter(Boolean)
       .find(({ name }) => name === declaration.getText())
 
